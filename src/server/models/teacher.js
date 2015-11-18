@@ -4,7 +4,7 @@ var bcrypt = require('bcryptjs');
 var config = require('../../../_config');
 
 //define users
-var Teacher = new Schema({
+var User = new Schema({
   email: {
     type: String,
     unique: true,
@@ -17,28 +17,13 @@ var Teacher = new Schema({
     type: Schema.Types.ObjectId,
     ref:'students'
   }],
-   gamesPlayed: {
-    type: Number,
-    default: 0
-  },
-  gamesWon: {
-    type: Number,
-    default: 0
-  },
-  gamesLost: {
-    type: Number,
-    default: 0
-  },
-  admin: {
-    type: Boolean,
-    default:false
-  },
-  vocabGames: [{type: Schema.Types.ObjectId, ref:'vocabGames'}]
+  vocabGames: [{type: Schema.Types.ObjectId,
+    ref:'vocabGames'}]
 });
 
 
 // hash before saving to database
-Teacher.pre('save', function(next) {
+User.pre('save', function(next) {
   var user = this;
 
   // only hash if the password is new or modified
@@ -60,10 +45,10 @@ Teacher.pre('save', function(next) {
 });
 
 // verify for plain-text and hashed passwords
-Teacher.methods.comparePassword = function(password, done) {
+User.methods.comparePassword = function(password, done) {
   bcrypt.compare(password, this.password, function(err, isMatch) {
     done(err, isMatch);
   });
 };
 
-module.exports = mongoose.model('teachers', Teacher);
+module.exports = mongoose.model('teachers', User);

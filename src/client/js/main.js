@@ -5,11 +5,17 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/', {
       templateUrl: '/partials/home.html'
     })
-    .when('/login', {
-      templateUrl: '/partials/login.html'
+    .when('/studentLogin', {
+      templateUrl: '/partials/studentLogin.html'
     })
-    .when('/register', {
-      templateUrl: '/partials/register.html'
+    .when('/studentRegister', {
+      templateUrl: '/partials/studentRegister.html'
+    })
+    .when('/teacherLogin', {
+      templateUrl: '/partials/teacherLogin.html'
+    })
+    .when('/teacherRegister', {
+      templateUrl: '/partials/teacherRegister.html'
     })
     .when('/chat', {
       templateUrl: '/partials/chat.html'

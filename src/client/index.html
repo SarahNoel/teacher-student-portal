@@ -36,7 +36,9 @@
 
         <li ng-show= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'active': isActive('/user')}"><a href="/#/user">User Stats</a></li>
 
-        <li ng-hide= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'active': isActive('/login') || isActive('/register')}"><a href="/#/login">User Login</a></li>
+        <li ng-hide= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'active': isActive('/studentLogin') || isActive('/studentRegister')}"><a href="/#/studentLogin">Student Login</a></li>
+
+        <li ng-hide= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'active': isActive('/teacherLogin') || isActive('/teacherRegister')}"><a href="/#/teacherLogin">Teacher Login</a></li>
 
         <li ng-show= 'isLoggedIn()' class='header-text fancy-font' ng-click='logout()'><a>Logout</a></li>
 

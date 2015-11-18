@@ -24,7 +24,30 @@ app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$h
 }]);
 
 
-//--------------LOGIN CONTROLLER-------------------//
+//----------TEACHER REGISTER CONTROLLER--------------//
+app.controller('registerCtrl', ['$scope', '$http', '$auth', '$location', function($scope, $http, $auth, $location) {
+
+  //register user- NOT SAVING NAME
+  $scope.signup = function() {
+    var user = {
+      email: $scope.email,
+      password: $scope.password,
+      callMe: $scope.userName
+    };
+    $auth.signup(user)
+      .then(function(response){
+        $location.path('/login');
+      })
+      .catch(function(response) {
+        console.log(response.data);
+      });
+
+  };
+
+}]);
+
+
+//------------TEACHER LOGIN CONTROLLER---------------//
 
 app.controller('loginCtrl', ['$scope', '$auth', '$rootScope', '$window', '$location', 'UserServices', function($scope, $auth, $rootScope, $window, $location, UserServices) {
 
@@ -50,26 +73,51 @@ app.controller('loginCtrl', ['$scope', '$auth', '$rootScope', '$window', '$locat
 
 }]);
 
+//------------STUDENT LOGIN CONTROLLER---------------//
 
-//--------------REGISTER CONTROLLER-------------------//
-app.controller('registerCtrl', ['$scope', '$http', '$auth', '$location', function($scope, $http, $auth, $location) {
+app.controller('studentLoginCtrl', ['$scope', '$http', '$location', 'UserServices', function($scope, $http, $location, UserServices) {
 
-  //register user- NOT SAVING NAME
-  $scope.signup = function() {
-    var user = {
-      email: $scope.email,
-      password: $scope.password,
-      callMe: $scope.userName
+  //login user
+  $scope.studentLogin = function() {
+    var payload= {
+      name: $scope.studentForm.name,
+      email: $scope.studentForm.email,
+      password: $scope.studentForm.password
     };
-    $auth.signup(user)
-      .then(function(response){
-        $location.path('/login');
-      })
-      .catch(function(response) {
-        console.log(response.data);
-      });
+    $http.post('/studentUsers/login', payload)
+    .then(function(data){
+      console.log('then', data);
+    })
+    .catch(function(data){
+      console.log('catch ', data);
 
+    });
+    console.log('herro');
   };
+
+}]);
+
+
+//----------STUDENT REGISTER CONTROLLER--------------//
+app.controller('studentRegisterCtrl', ['$scope', '$http', 'UserServices', function($scope, $http, UserServices) {
+
+  //register student
+  $scope.studentSignup = function() {
+    var payload= {
+      name: $scope.studentForm.name,
+      email: $scope.studentForm.email,
+      password: $scope.studentForm.password
+    };
+    $http.post('/studentUsers/register', payload)
+    .then(function(data){
+      console.log('then', data);
+    })
+    .catch(function(data){
+      console.log('catch ', data);
+
+    });
+  };
+
 
 }]);
 

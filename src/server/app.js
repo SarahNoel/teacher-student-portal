@@ -1,6 +1,5 @@
 require('./models/teacher.js');
 require('./models/student.js');
-
 require('./models/vocabGameModels.js');
 
 
@@ -26,6 +25,7 @@ mongoose.connect(config.MONGO_URI);
 // *** routes *** //
 var routes = require('./routes/index.js');
 var teacherRoutes = require('./routes/teacherRoutes.js');
+var studentRoutes = require('./routes/studentRoutes.js');
 var vocabGameRoutes = require('./routes/vocabGameRoutes.js');
 
 
@@ -42,6 +42,8 @@ app.use(express.static(path.join(__dirname, '../client')));
 // *** main routes *** //
 app.use('/', routes);
 app.use('/auth/', teacherRoutes);
+app.use('/studentUsers/', studentRoutes);
+
 app.use('/vocab/', vocabGameRoutes);
 
 
