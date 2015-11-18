@@ -1,15 +1,19 @@
+//--------------NAVBAR/ETC CONTROLLER---------------//
+
 app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$http', 'UserServices', function($scope, $location, $window, $auth, $http, UserServices){
 
-
+  //highlights active navbar tab
   $scope.isActive = function (viewLocation) {
     return viewLocation === $location.path();
   };
 
+  //checks if user is authenticated
   $scope.isLoggedIn= function(){
     $scope.showUser = UserServices.getUser();
     return $auth.isAuthenticated();
    };
 
+  //logs out user
   $scope.logout = function() {
     $auth.logout();
     delete $window.localStorage.currentUser;
@@ -19,15 +23,17 @@ app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$h
   $scope.logout();
 }]);
 
+
+//--------------LOGIN CONTROLLER-------------------//
+
 app.controller('loginCtrl', ['$scope', '$auth', '$rootScope', '$window', '$location', 'UserServices', function($scope, $auth, $rootScope, $window, $location, UserServices) {
 
+  //login user
   $scope.login = function() {
-
     var user = {
       email: $scope.email,
       password: $scope.password,
     };
-
     $auth.login(user)
       .then(function(response) {
         console.log(response);
@@ -44,17 +50,17 @@ app.controller('loginCtrl', ['$scope', '$auth', '$rootScope', '$window', '$locat
 
 }]);
 
+
+//--------------REGISTER CONTROLLER-------------------//
 app.controller('registerCtrl', ['$scope', '$http', '$auth', '$location', function($scope, $http, $auth, $location) {
 
+  //register user- NOT SAVING NAME
   $scope.signup = function() {
-
     var user = {
       email: $scope.email,
       password: $scope.password,
       callMe: $scope.userName
     };
-
-    console.log(user);
     $auth.signup(user)
       .then(function(response){
         $location.path('/login');
@@ -66,3 +72,12 @@ app.controller('registerCtrl', ['$scope', '$http', '$auth', '$location', functio
   };
 
 }]);
+
+//--------------CHAT CONTROLLER-------------------//
+
+app.controller('chatCtrl', ['$scope', 'UserServices', 'ChatServices', function($scope, UserServices, ChatServices) {
+
+  $scope.MyData= ChatServices;
+
+
+  }]);

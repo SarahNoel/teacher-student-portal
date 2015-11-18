@@ -1,3 +1,9 @@
+require('./models/teacher.js');
+require('./models/student.js');
+
+require('./models/vocabGameModels.js');
+
+
 // *** main dependencies *** //
 var express = require('express');
 var path = require('path');
@@ -7,18 +13,23 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 
+var server = require('http').Server(app);
+
 // *** config file *** //
 var config = require('../../_config');
 
+// *** mongoose ** //
+mongoose.connect(config.MONGO_URI);
 
 // *** express instance *** //
-var app = express();
 
 // *** routes *** //
 var routes = require('./routes/index.js');
-var authRoutes = require('./routes/userRoutes.js');
+var teacherRoutes = require('./routes/teacherRoutes.js');
+var vocabGameRoutes = require('./routes/vocabGameRoutes.js');
 
 
+var app = express();
 // *** config middleware *** //
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -27,13 +38,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client')));
 
 
-// *** mongoose ** //
-mongoose.connect(config.MONGO_URI);
-
 
 // *** main routes *** //
 app.use('/', routes);
-app.use('/auth/', authRoutes);
+app.use('/auth/', teacherRoutes);
+app.use('/vocab/', vocabGameRoutes);
+
 
 
 // *** error handlers *** //

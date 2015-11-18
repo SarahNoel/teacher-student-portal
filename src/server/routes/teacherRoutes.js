@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var moment = require('moment');
 var jwt = require('jwt-simple');
-
+var mongoose = require('mongoose');
 var config = require('../../../_config');
-var User = require('../models/user.js');
+var User = mongoose.model('teachers');
+// var User = require('../models/user.js');
 
 
 // *** login required *** //

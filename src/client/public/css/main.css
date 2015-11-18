@@ -11,3 +11,8 @@ a {
   display: table;
   margin: auto;
 }
+
+.logo{
+  height: 43px;
+  margin-top: -10px;
+}
