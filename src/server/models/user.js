@@ -1,10 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs');
-
 var config = require('../../../_config');
 
-
+//define users
 var User = new Schema({
   email: {
     type: String,
@@ -14,6 +13,32 @@ var User = new Schema({
   password: {
     type: String,
     select: false
+  },
+  callMe: {
+    type: String,
+    default: "Bobby Student"
+  },
+  teacher:{
+    // type: Schema.Types.ObjectId,
+    // ref:'users',
+    type: String,
+    default: "Miss Teacher"
+  },
+   gamesPlayed: {
+    type: Number,
+    default: 0
+  },
+  gamesWon: {
+    type: Number,
+    default: 0
+  },
+  gamesLost: {
+    type: Number,
+    default: 0
+  },
+  admin: {
+    type: Boolean,
+    default:false
   }
 });
 

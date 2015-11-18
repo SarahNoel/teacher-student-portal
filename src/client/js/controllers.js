@@ -1,11 +1,12 @@
-app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$http', function($scope, $location, $window, $auth, $http){
-  $scope.showUser = '';
+app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$http', 'UserServices', function($scope, $location, $window, $auth, $http, UserServices){
+
 
   $scope.isActive = function (viewLocation) {
     return viewLocation === $location.path();
   };
 
   $scope.isLoggedIn= function(){
+    $scope.showUser = UserServices.getUser();
     return $auth.isAuthenticated();
    };
 
@@ -14,19 +15,17 @@ app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$h
     delete $window.localStorage.currentUser;
   };
 
-  console.log($auth.getPayload());
-  $scope.showUser = '';
-
-
+  //logout on page reload
+  $scope.logout();
 }]);
 
-app.controller('loginCtrl', ['$scope', '$auth', '$rootScope', '$window', '$location', function($scope, $auth, $rootScope, $window, $location) {
+app.controller('loginCtrl', ['$scope', '$auth', '$rootScope', '$window', '$location', 'UserServices', function($scope, $auth, $rootScope, $window, $location, UserServices) {
 
   $scope.login = function() {
 
     var user = {
       email: $scope.email,
-      password: $scope.password
+      password: $scope.password,
     };
 
     $auth.login(user)
@@ -34,7 +33,8 @@ app.controller('loginCtrl', ['$scope', '$auth', '$rootScope', '$window', '$locat
         console.log(response);
         $window.localStorage.currentUser = JSON.stringify(response.data.user);
         $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
-        $scope.showUser = $rootScope.currentUser;
+        UserServices.storeUser($rootScope.currentUser);
+        console.log('atLogin ', $rootScope.currentUser);
         $location.path('/user');
       })
       .catch(function(response) {
@@ -50,9 +50,11 @@ app.controller('registerCtrl', ['$scope', '$http', '$auth', '$location', functio
 
     var user = {
       email: $scope.email,
-      password: $scope.password
+      password: $scope.password,
+      callMe: $scope.userName
     };
 
+    console.log(user);
     $auth.signup(user)
       .then(function(response){
         $location.path('/login');

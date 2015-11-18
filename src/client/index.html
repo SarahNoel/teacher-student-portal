@@ -40,6 +40,8 @@
 
         <li ng-show= 'isLoggedIn()' class='header-text fancy-font' ng-click='logout()'><a>Logout</a></li>
 
+        <li ng-show= 'isLoggedIn()' class='header-text fancy-font'><a>Logged in as {{showUser.email}}</a></li>
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
