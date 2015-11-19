@@ -60,8 +60,10 @@ router.post('/signup', function(req, res) {
       });
     }
     var user = new User({
+      username: req.body.username,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      keyword: req.body.keyword
     });
     user.save(function() {
       var token = createToken(user);

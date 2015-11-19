@@ -23,8 +23,11 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/vocab', {
       templateUrl: '/partials/games.html'
     })
-    .when('/user', {
-      templateUrl: '/partials/userinfo.html'
+    .when('/studentinfo', {
+      templateUrl: '/partials/studentinfo.html'
+    })
+    .when('/teacherinfo', {
+      templateUrl: '/partials/teacherinfo.html'
     })
     .when('/vocabRace', {
       templateUrl: '/mini-games/vocabRace/vocabRace.html'

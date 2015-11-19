@@ -9,9 +9,16 @@ var User = new Schema({
     type: String,
     unique: true,
   },
+  username: {
+    type: String,
+    unique: true,
+  },
   password: {
     type: String,
     select: false
+  },
+  keyword: {
+    type: String,
   },
   students: [{
     type: Schema.Types.ObjectId,
@@ -25,6 +32,7 @@ var User = new Schema({
 // hash before saving to database
 User.pre('save', function(next) {
   var user = this;
+  console.log(user);
 
   // only hash if the password is new or modified
   if (!user.isModified('password')) return next();

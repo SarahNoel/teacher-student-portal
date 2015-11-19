@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 //define users
 var Student = new Schema({
-  name: {
+  username: {
     type: String,
     unique: true,
   },

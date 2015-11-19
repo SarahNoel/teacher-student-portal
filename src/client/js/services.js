@@ -2,10 +2,11 @@
 //--------------USER FACTORY-------------------//
 
 app.factory('UserServices', ['$http', '$q', function($http, $q){
-  var username;
+  var username = '';
   return{
           storeUser: storeUser,
-          getUser: getUser
+          getUser: getUser,
+          logout: logout
         };
 
   //stores user to access from all controllers
@@ -15,8 +16,17 @@ app.factory('UserServices', ['$http', '$q', function($http, $q){
 
   //gets user
   function getUser(){
+    if(username === ''){
+      return false;
+    }
     return username;
   }
+
+  //logout
+  function logout(){
+    username = '';
+  }
+
 }]);
 
 //--------------CHAT FACTORY-------------------//
