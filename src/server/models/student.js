@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var deepPopulate = require("mongoose-deep-populate")(mongoose);
 var Schema = mongoose.Schema;
 
 //define users
@@ -28,5 +29,7 @@ var Student = new Schema({
     default: 0
   }
 });
+
+Student.plugin(deepPopulate);
 
 module.exports = mongoose.model('students', Student);

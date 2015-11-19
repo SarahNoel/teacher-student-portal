@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs');
 var config = require('../../../_config');
+var deepPopulate = require("mongoose-deep-populate")(mongoose);
 
 //define users
 var User = new Schema({
@@ -59,4 +60,7 @@ User.methods.comparePassword = function(password, done) {
   });
 };
 
+
+
+User.plugin(deepPopulate);
 module.exports = mongoose.model('teachers', User);

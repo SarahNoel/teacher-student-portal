@@ -4,11 +4,13 @@ var mongoose = require('mongoose');
 
 var VocabGame = mongoose.model('vocabGames');
 var VocabQuestion = mongoose.model('vocabQuestions');
+var User = mongoose.model('teachers');
+
 
 //get one game
 router.get('/game/:id', function(req, res, next) {
   VocabGame.findById(req.params.id)
-  .populate('questions')
+  .deepPopulate('questions')
   .exec(function(err, data){
     if(err){
       res.json(err);
@@ -17,11 +19,11 @@ router.get('/game/:id', function(req, res, next) {
   });
 });
 
-//get all games
+//get all games- global
 router.get('/games', function(req, res, next) {
   VocabGame.find()
-  .populate('questions')
-  .exec(console.log('poop'), function(err, data){
+  .deepPopulate('questions')
+  .exec(function(err, data){
     if(err){
       res.json(err);
     }
@@ -29,35 +31,71 @@ router.get('/games', function(req, res, next) {
   });
 });
 
-//post-add one game
+//get all games- from user
+router.get('/games/:userID', function(req, res, next) {
+  User.findById(req.params.userID)
+  .populate('vocabGames')
+  .exec(function(err,data){
+     if(err){
+      res.json(err);
+    }
+    res.json(data);
+  });
+});
+
+// //post-add one game -global
+// router.post('/game', function(req, res, next) {
+//   console.log(req.body);
+//   var newGame = new VocabGame(req.body);
+//   newGame.save(function(err, game){
+//      if(err){
+//       res.json(err);
+//     }
+//     res.json(game);
+//   });
+// });
+
+//post-add one game to user
 router.post('/game', function(req, res, next) {
-  console.log(req.body);
   var newGame = new VocabGame(req.body);
   newGame.save(function(err, game){
      if(err){
       res.json(err);
     }
-    res.json(game);
+    var update = {$push:{vocabGames : newGame}};
+    var options = {new:true};
+    var gameID = newGame._id;
+    User.findByIdAndUpdate(req.body.teacherID, update, options)
+    .deepPopulate()
+    .exec(function(err, data){
+      if (err){
+        res.json(err);
+      }
+      else{
+        res.json({game:newGame, gameID:gameID});
+      }
+    });
   });
 });
 
-//post-add one question
+//post-add one question to a game
 router.post('/question', function(req, res, next) {
-  console.log(req.body);
-  var question ={question: req.body.question, answer: req.body.answer};
+  var payload ={question: req.body.question, answer: req.body.answer};
   var id = req.body.id;
-  var newQuestion = new VocabQuestion(question);
+  var newQuestion = new VocabQuestion(payload);
   newQuestion.save(function(err, question){
+    console.log('err ', err, 'question ', question);
      if(err){
       res.json(err);
     }
-    var update = {$push:{questions : question}};
+    var update = {$push:{questions : newQuestion}};
     var options = {new:true};
-    VocabGame.findByIdAndUpdate(id, update, options)
-    .populate('questions')
-    .exec(function(err, data){
-    console.log(data);
-    res.json(data);
+    VocabGame.findByIdAndUpdate(id, update, options, function(err, game){
+      console.log('err2 ', err, 'game ', game);
+      if(err){
+        res.json(err);
+      }
+      res.json(game);
     });
   });
 });

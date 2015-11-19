@@ -6,9 +6,9 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', 'UserServices', fun
     var user = UserServices.getUser();
     $scope.showUser = user;
 
-    //get all vocab games
+    //get all vocab games from user
     $scope.getAllGames = function(){
-      $http.get('/vocab/games')
+      $http.get('/vocab/games/' + user._id)
       .then(function(data){
         console.log(data);
       });
@@ -23,13 +23,14 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', 'UserServices', fun
     };
 
 
-    //create a new game-no questions
+    //save a new game to a user-no questions
     $scope.createGame = function(){
       gameName = $scope.gameForm.gameName;
-      $http.post('/vocab/game', {title:gameName})
+      $http.post('/vocab/game', {title:gameName, teacherID: user._id})
       .then(function(data){
-        $scope.gameName = data.data.title;
-        gameId = data.data._id;
+        $scope.gameName = data.data.game.title;
+        console.log(data.data);
+        gameId = data.data.gameID;
         $scope.gameForm ={};
         $scope.addQuestions = true;
       })
@@ -43,12 +44,15 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', 'UserServices', fun
       var payload = {question: $scope.questionForm.question, answer: $scope.questionForm.answer, id:gameId};
       $http.post('/vocab/question', payload)
       .then(function(data){
+        console.log('then ', data);
         $scope.questionForm = {};
-        $scope.allQuestions = data.data.questions;
+        // $scope.allQuestions = data.data.questions;
         $scope.questionNumber = 0;
       }).catch(function(err){
-        console.log(err);
+        console.log('err ' ,err);
       });
     };
+
+    $scope.getAllGames();
 
 }]);

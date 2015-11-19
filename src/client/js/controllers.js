@@ -77,12 +77,11 @@ app.controller('loginCtrl', ['$scope', '$auth', '$rootScope', '$window', '$locat
     };
     $auth.login(user)
       .then(function(response) {
-        console.log(response);
         $window.localStorage.currentUser = JSON.stringify(response.data.user);
         $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
         UserServices.storeUser($rootScope.currentUser);
         $scope.teacherForm = {};
-        console.log('atLogin ', $rootScope.currentUser);
+        $scope.showUser = UserServices.getUser();
         $location.path('/teacherinfo');
       })
       .catch(function(response) {
@@ -147,6 +146,33 @@ $scope.studentRegister = {};
 
 
 }]);
+
+//--------------TEACHER CONTROLLER-------------------//
+
+app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope, $http, UserServices) {
+
+  //non-populated user
+  var user = UserServices.getUser();
+
+  $scope.getVocabGame = function(id){
+    console.log(id);
+  };
+
+  $scope.allInfo = function(){
+    $http.get('/studentUsers/students/'+ user._id)
+    .then(function(data){
+      console.log('then ', data.data);
+      $scope.showUser = data.data;
+    })
+    .catch(function(data){
+      console.log('catch ', data);
+    });
+  };
+
+  $scope.allInfo();
+
+}]);
+
 
 //--------------CHAT CONTROLLER-------------------//
 

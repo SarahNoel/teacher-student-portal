@@ -18,16 +18,17 @@ router.get('/students', function(req, res, next){
   });
 });
 
-//get all students from a teacher
+//get all students and games from a teacher
 router.get('/students/:teacherID', function(req, res, next){
   Teacher.findById(req.params.teacherID, function(err, teacher){})
-  .populate('students')
-  .exec(function(err, teacher){
+  .deepPopulate('vocabGames students vocabGames.questions')
+  .exec(function(err, data){
     if(err){
       res.json(err);
     }
     else{
-      res.json(teacher);
+      console.log(data)
+      res.json(data);
     }
   });
 });

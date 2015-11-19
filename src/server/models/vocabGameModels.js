@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var deepPopulate = require("mongoose-deep-populate")(mongoose);
 
 //defines vocab games
 var VocabGame = new Schema({
@@ -11,6 +12,10 @@ var VocabQuestion = new Schema({
   question: String,
   answer: String
 });
+
+
+VocabGame.plugin(deepPopulate);
+VocabQuestion.plugin(deepPopulate);
 
 module.exports = mongoose.model('vocabGames', VocabGame);
 module.exports = mongoose.model('vocabQuestions', VocabQuestion);

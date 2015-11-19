@@ -5,6 +5,7 @@ var jwt = require('jwt-simple');
 var mongoose = require('mongoose');
 var config = require('../../../_config');
 var User = mongoose.model('teachers');
+var deepPopulate = require("mongoose-deep-populate")(mongoose);
 // var User = require('../models/user.js');
 
 
