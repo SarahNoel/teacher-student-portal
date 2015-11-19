@@ -1,27 +1,21 @@
 <div ng-controller = 'TeacherCtrl'>
-  {{showUser}}
 
   <h1> Welcome {{showUser.username}} </h1>
 
-
     <ul><h3>Your students</h3>
-      <li ng-repeat='student in showUser.students'> {{student.username}} <button ng-click='getOneStudent(student._id)'>Edit</button></li>
+      <li ng-repeat='student in showUser.students'> {{student.username}} <button ng-click='getOneStudent(student._id)'>See More</button></li>
     </ul>
-
-
-  </div>
-
 
   <ul><h3>Your Games</h3></ul>
     <ul><h4>Vocab Race Games</h4>
-    {{showUser.vocabGames}}
       <li ng-repeat='game in showUser.vocabGames'>
       {{game.title}} <button ng-click='getVocabGame(game._id)'>Edit</button></li>
     </ul>
 
+<!--
     <ul ng-repeat='game in showUser.hangmanGames'>Hangman Games
       <li>{{game.title}} <button ng-click='getHangmanGame(game._id)'>Edit</button></li>
-    </ul>
+    </ul> -->
 
   </div>
 

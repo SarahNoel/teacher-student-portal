@@ -1,18 +1,64 @@
+<div ng-controller = 'playVocabCtrl'>
+  <div ng-hide='playing'>
+    <h3>Vocab Race</h3>
 
-<div ng-hide='playing'>
-  <h3>Vocab Race</h3>
+    <p>You will have a timer to guess the right word and
+    spell it correctly.  It will get faster as you get more right.  Good luck!</p>
 
-  <p>You will have a timer to guess the right word and
-  spell it correctly.  It will get faster as you get more right.  Good luck!</p>
+    <button ng-click= 'startGame()' class='btn btn-success'>Start!</button>
+  </div>
 
-  <button ng-click= 'playing=true' class='btn btn-success'>Start!</button>
-</div>
-
-<div ng-show='playing'>
-
-wee lets play
+  <div ng-show='playing'>
 
 
+    <div class = 'vocabGame-box' id='vocabGame-box'>
+      <div class='inner-vocabGame-box container'>
+        <h1 class='center'>Vocab Racer!</h1>
+        <h2 class='center'>{{currentGame.title}}</h2>
+        <div class = 'vocab-hint-box centered'>
+          <h3> Hint: {{hint}} </h3>
+        </div>
+        <div class ='timer-box'>
+          <h4 class='timer-words'>Time Left: {{timer}}</h4>
+        </div>
+
+        <div ng-show = 'showCorrect' class='centered correct-box'>
+            <br>
+            YOU ARE RIGHT.
+            <br><br>
+            <button ng-click='nextQuestion()' class="btn btn-warning" type="button">Next Question!</button>
+        </div>
+
+        <div ng-show = 'showWrong' class='centered wrong-box'>
+            <br>
+            YOU ARE WRONG.
+            <br><br>
+          <button ng-click='nextQuestion()' class="btn btn-warning" type="button">Next Question!</button>
+        </div>
+
+        <div ng-show = 'endVocabGame === true' class='centered endgame-box'>
+         <button ng-click='endGame()' class="btn btn-primary" type="button">End the Game!</button>
+        </div>
 
 
-</div>
+
+        <form class='form-inline'  ng-submit = 'guessVocab()'>
+          <div class="input-group user-input-box">
+            <input ng-model='vocabGameInput'class='vocabGame-input form-control'>
+            <span class="input-group-btn">
+              <button ng-disabled='timesUp === true' class="btn btn-danger" type="submit">Guess!</button>
+            </span>
+          </div>
+        </form>
+
+
+      </div><!-- end container -->
+    </div><!-- end vocabGame-box -->
+
+
+  </div> <!-- end show onplaying -->
+
+
+
+
+</div> <!-- end playVocabCtrl -->

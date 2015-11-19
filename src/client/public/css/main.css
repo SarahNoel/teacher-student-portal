@@ -7,6 +7,10 @@ a {
   color: #00B7FF;
 }
 
+.center{
+  text-align: center;
+}
+
 .centered{
   display: table;
   margin: auto;
@@ -15,4 +19,65 @@ a {
 .logo{
   height: 43px;
   margin-top: -10px;
+}
+
+
+.vocabGame-box{
+  width: 85%;
+  height: 453px;
+  display: table;
+  margin: auto;
+  background-image: url('../images/race.jpg');
+  background-size: cover;
+}
+
+.user-input-box{
+  margin-bottom: -30%;
+  width: 120%
+}
+
+.timer-box{
+  float: right;
+  margin-right: 25px;
+  border: thick black dashed;
+  height: 100px;
+  width: 150px;
+  text-align: center;
+  background-color: peru;
+}
+
+.timer-words{
+  margin-top: 25%;
+}
+
+.vocab-hint-box{
+  padding: 5px;
+  background-color: beige;
+  width: 75%;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.correct-box{
+  text-align: center;
+  background-color:beige;
+  border: thick green solid;
+  width: 250px;
+  height: 100px;
+}
+
+.wrong-box{
+  text-align: center;
+  background-color:beige;
+  border: thick red solid;
+  width: 250px;
+  height: 100px;
+}
+
+.endgame-box{
+  text-align: center;
+  background-color:beige;
+  border: thick purple solid;
+  width: 250px;
+  height: 100px;
 }

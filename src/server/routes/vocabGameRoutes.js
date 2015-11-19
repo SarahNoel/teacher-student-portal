@@ -7,7 +7,7 @@ var VocabQuestion = mongoose.model('vocabQuestions');
 var User = mongoose.model('teachers');
 
 
-//get one game
+//get one game by id
 router.get('/game/:id', function(req, res, next) {
   VocabGame.findById(req.params.id)
   .deepPopulate('questions')

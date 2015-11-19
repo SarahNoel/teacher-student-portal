@@ -1,12 +1,16 @@
 
 //--------------USER FACTORY-------------------//
 
-app.factory('UserServices', ['$http', '$q', function($http, $q){
+app.factory('UserServices', [function($){
   var username = '';
+  var game = '';
+
   return{
           storeUser: storeUser,
           getUser: getUser,
-          logout: logout
+          logout: logout,
+          storeGame: storeGame,
+          getGame: getGame
         };
 
   //stores user to access from all controllers
@@ -26,6 +30,20 @@ app.factory('UserServices', ['$http', '$q', function($http, $q){
   function logout(){
     username = '';
   }
+
+  //stores current game
+  function storeGame(game){
+    game = game;
+  }
+
+   //gets game
+  function getGame(){
+    if(game === ''){
+      return false;
+    }
+    return game;
+  }
+
 
 }]);
 

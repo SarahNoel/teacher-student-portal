@@ -22,7 +22,6 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', 'UserServices', fun
       });
     };
 
-
     //save a new game to a user-no questions
     $scope.createGame = function(){
       gameName = $scope.gameForm.gameName;
@@ -55,4 +54,114 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', 'UserServices', fun
 
     $scope.getAllGames();
 
+
 }]);
+
+
+app.controller('playVocabCtrl', ['$scope', '$http', '$location','$timeout', 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
+    var user = UserServices.getUser();
+    $scope.showUser = user;
+    var guess;
+    var index = 0;
+    var currentQuestion;
+    var game = UserServices.getGame();
+    var counter = 10;
+    var id = '564e2514ef173b531bc1da34';
+
+    //countdown function
+    var countDowner, countDown = 10;
+    countDowner = function() {
+      if (countDown <= 0) {
+        countDown = 0;
+        $scope.timer = countDown;
+        $scope.timesUp = true;
+        return; // quit
+      } else {
+        $scope.timer = countDown; // update scope
+        countDown--; // -1
+        $timeout(countDowner, 1000); // loop it again
+      }
+    };
+    $scope.timer = countDown;
+
+    //start game
+    $scope.startGame = function(){
+      $scope.timesUp = false;
+      $scope.playing = true;
+      $http.get('/vocab/game/' + id)
+      .then(function(data){
+        //sets current game
+        $scope.currentGame = data.data;
+        //displays first hint
+        currentQuestion = data.data.questions[index];
+        $scope.hint = currentQuestion.question;
+        //starts countdown
+        countDowner();
+      })
+      .catch(function(data){
+        $scope.error = data.data;
+      });
+    };
+
+
+
+    $scope.guessVocab = function(){
+      $scope.showWrong = false;
+      guess = $scope.vocabGameInput;
+      $scope.vocabGameInput = '';
+      if(guess.trim().toLowerCase() === currentQuestion.answer.trim().toLowerCase()){
+        console.log('correct!');
+        $scope.timesUp = true;
+        $scope.showCorrect = true;
+      }
+      else{
+        console.log('wrong!');
+        $scope.showWrong = true;
+
+
+      }
+    };
+
+
+    $scope.nextQuestion = function(){
+      $scope.timesUp = false;
+      $scope.showCorrect = false;
+      $scope.showWrong = false;
+      //goes to next question
+      console.log($scope.currentGame.questions.length)
+      console.log(index);
+      if(index+1 >= $scope.currentGame.questions.length){
+        console.log('it endsssss');
+        $scope.endVocabGame = true;
+      }
+      else{
+        index +=1;
+        console.log('herrr');
+        //decreases time
+        // counter --;
+        currentQuestion = $scope.currentGame.questions[index];
+        $scope.hint = currentQuestion.question;
+        countDown = counter;
+        //starts countdown
+        countDowner();
+      }
+    };
+
+    $scope.endGame = function(){
+      console.log('GAME OVER');
+    };
+
+}]);
+
+
+
+
+
+
+
+
+
+
+
+
+
