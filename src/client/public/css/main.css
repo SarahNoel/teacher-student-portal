@@ -1,13 +1,82 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: url('../images/metal.jpg');
+  /*background-image: url('../images/metal.jpg');*/
 }
 
 a {
-  color: #00B7FF;
+  color: black;
 }
 
+a:active,
+a:active:focus,
+a:focus{
+  text-decoration: none;
+}
+
+.fancy-font{
+  font-family: 'Annie Use Your Telescope', cursive;
+}
+
+.navbar-default .navbar-nav>li>a {
+  font-size: 20px;
+  color: black;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  color: white;
+  font-weight: bold;
+}
+
+.navbar{
+  background-color: #00a0b0;
+  border: none;
+}
+
+.navbar a:hover{
+  color: white;
+}
+
+.sidebar-li a::hover{
+  background-color: black;
+}
+
+.sidebar-li{
+  height: 50px;
+  font-size: 25px;
+}
+
+.sidebar a{
+  margin-top: 10px;
+}
+
+.sidebar a:hover{
+  text-decoration: none;
+  color: white;
+}
+
+.sidebar-nav{
+  list-style: none;
+  padding-top: 20px;
+}
+
+.sidebar{
+  width: 120px;
+  float: left;
+  background-color: #00a0b0;
+  height: 100%;
+  position: fixed;
+  left: 0;
+}
+
+.chosen a{
+  color: white;
+  font-weight: bold;
+}
+
+.body-box{
+  margin-left: 120px;
+}
 .annie-font{
   font-family: 'Annie Use Your Telescope', cursive;
 }
@@ -88,10 +157,9 @@ a {
 }
 
 .score-box{
-  position: absolute;
-  right: 120px;
-  top: 150px;
-  text-align: center;
+  text-align: right;
+  margin-right: 35px;
+  margin-top: 10px;
 }
 
 .login-div{
@@ -110,5 +178,8 @@ a {
   padding: 10px;
   background-color: teal;
   border-radius: 25px;
+}
 
+.vocab-title{
+  margin-bottom: -40px;
 }
