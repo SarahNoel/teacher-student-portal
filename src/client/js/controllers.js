@@ -7,6 +7,10 @@ app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$h
     return viewLocation === $location.path();
   };
 
+  $scope.isTeacher = function(){
+    return UserServices.isTeacher();
+  };
+
   //checks if user is authenticated
   $scope.isLoggedIn= function(){
     $scope.showUser = UserServices.getUser();
@@ -31,6 +35,8 @@ app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$h
 
   //get user
   $scope.getUser();
+  //checks if teacher
+  $scope.isTeacher();
 
 }]);
 
@@ -52,6 +58,7 @@ app.controller('registerCtrl', ['$scope', '$http', '$auth', '$location', 'UserSe
       .then(function(response){
         $auth.login(user);
         UserServices.storeUser(user);
+        UserServices.saveTeacher();
         $scope.teacherForm = {};
         $location.path('/login');
       })
@@ -83,6 +90,8 @@ app.controller('loginCtrl', ['$scope', '$auth', '$rootScope', '$window', '$locat
         $scope.teacherForm = {};
         $scope.showUser = UserServices.getUser();
         $location.path('/teacherinfo');
+        UserServices.saveTeacher();
+
       })
       .catch(function(response) {
         console.log(response);

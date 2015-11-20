@@ -4,13 +4,16 @@
 app.factory('UserServices', [function($){
   var username = '';
   var game = '';
+  var teacher = false;
 
   return{
           storeUser: storeUser,
           getUser: getUser,
           logout: logout,
           storeGame: storeGame,
-          getGame: getGame
+          getGame: getGame,
+          isTeacher: isTeacher,
+          saveTeacher: saveTeacher
         };
 
   //stores user to access from all controllers
@@ -29,6 +32,8 @@ app.factory('UserServices', [function($){
   //logout
   function logout(){
     username = '';
+    game = '';
+    teacher = false;
   }
 
   //stores current game
@@ -44,6 +49,17 @@ app.factory('UserServices', [function($){
     return game;
   }
 
+  function saveTeacher(){
+    teacher = true;
+  }
+
+  //checks if teacher
+  function isTeacher(){
+    if(!teacher){
+      return false;
+    }
+    return true;
+  }
 
 }]);
 

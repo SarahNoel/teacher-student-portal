@@ -61,6 +61,7 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', 'UserServices', fun
 app.controller('playVocabCtrl', ['$scope', '$http', '$location','$timeout', 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
     var user = UserServices.getUser();
     $scope.showUser = user;
+
     var guess;
     var index = 0;
     var currentQuestion;
@@ -71,10 +72,15 @@ app.controller('playVocabCtrl', ['$scope', '$http', '$location','$timeout', 'Use
     //countdown function
     var countDowner, countDown = 10;
     countDowner = function() {
-      if (countDown <= 0) {
+      if (countDown <= 0){
         countDown = 0;
+        $scope.showWrong = false;
         $scope.timer = countDown;
         $scope.timesUp = true;
+        if(!$scope.showCorrect){
+          $scope.showWrongNext = true;
+          $scope.questionsWrong++;
+        }
         return; // quit
       } else {
         $scope.timer = countDown; // update scope
@@ -86,6 +92,8 @@ app.controller('playVocabCtrl', ['$scope', '$http', '$location','$timeout', 'Use
 
     //start game
     $scope.startGame = function(){
+      $scope.questionsWrong = 0;
+      $scope.questionsRight = 0;
       $scope.timesUp = false;
       $scope.playing = true;
       $http.get('/vocab/game/' + id)
@@ -110,9 +118,10 @@ app.controller('playVocabCtrl', ['$scope', '$http', '$location','$timeout', 'Use
       guess = $scope.vocabGameInput;
       $scope.vocabGameInput = '';
       if(guess.trim().toLowerCase() === currentQuestion.answer.trim().toLowerCase()){
-        console.log('correct!');
         $scope.timesUp = true;
         $scope.showCorrect = true;
+        $scope.questionsRight++;
+
       }
       else{
         console.log('wrong!');
@@ -126,20 +135,20 @@ app.controller('playVocabCtrl', ['$scope', '$http', '$location','$timeout', 'Use
     $scope.nextQuestion = function(){
       $scope.timesUp = false;
       $scope.showCorrect = false;
+      $scope.showWrongNext = false;
       $scope.showWrong = false;
+
       //goes to next question
-      console.log($scope.currentGame.questions.length)
-      console.log(index);
       if(index+1 >= $scope.currentGame.questions.length){
-        console.log('it endsssss');
         $scope.endVocabGame = true;
       }
       else{
         index +=1;
-        console.log('herrr');
         //decreases time
         // counter --;
+        // finds next question in array
         currentQuestion = $scope.currentGame.questions[index];
+        //displays next hint
         $scope.hint = currentQuestion.question;
         countDown = counter;
         //starts countdown

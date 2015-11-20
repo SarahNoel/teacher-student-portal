@@ -6,12 +6,13 @@
   <title>Student-Teacher Portal</title>
   <!-- styles -->
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope' rel='stylesheet' type='text/css'>
   <link href="./public/css/main.css" rel="stylesheet">
 
 </head>
 <body ng-controller = 'MainController'>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -26,7 +27,7 @@
         </a>
       </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
+ <!--    Collect the nav links, forms, and other content for toggling -->
     <div ng-class="{collapse: isCollapsed}" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
@@ -34,7 +35,9 @@
 
         <li class='header-text fancy-font' ng-class="{'active': isActive('/vocab')}"><a href="/#/vocab">Games!</a></li>
 
-        <li ng-show= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'active': isActive('/user')}"><a href="/#/user">User Stats</a></li>
+        <li ng-show='isTeacher()' class='header-text fancy-font' ng-class="{'active': isActive('/teacherinfo')}"><a href="/#/teacherinfo">Teacher Info</a></li>
+
+        <li ng-show= 'isLoggedIn()'  class='header-text fancy-font' ng-class="{'active': isActive('/studentinfo')}"><a href="/#/studentinfo">User Stats</a></li>
 
         <li ng-hide= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'active': isActive('/studentLogin') || isActive('/studentRegister')}"><a href="/#/studentLogin">Student Login</a></li>
 
@@ -46,7 +49,7 @@
 
       </ul>
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+  </div> <!-- /.container-fluid -->
 </nav>
 
   <div class="container">
