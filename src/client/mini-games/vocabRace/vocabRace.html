@@ -1,4 +1,4 @@
-<div ng-controller = 'playVocabCtrl' class='container'>
+<div ng-controller = 'vocabCtrl' class='container'>
   <br>  <br>
 
   <div ng-hide='playing' class='center'>
@@ -39,7 +39,7 @@
             <br>
             YOU ARE RIGHT.
             <br>
-            <button ng-click='nextQuestion()' class="btn btn-warning" type="button">Next Question!</button>
+            <button ng-disabled='timesUp === false' ng-click='nextQuestion()' class="btn btn-warning" type="submit">Next Question!</button>
         </div>
 
          <div ng-show = 'showWrong' class='centered wrong-box'>
@@ -52,11 +52,15 @@
             <br>
             YOU RAN OUT OF TIME.
             <br>
-          <button ng-click='nextQuestion()' class="btn btn-warning" type="button">Next Question!</button>
+          <button ng-disabled='timesUp === false' ng-click='nextQuestion()' class="btn btn-warning" type="submit">Next Question!</button>
         </div>
 
         <div ng-show = 'endVocabGame === true' class='centered endgame-box'>
+
+          <h4>Score: <br>
+          Right: {{questionsRight}}     Wrong: {{questionsWrong}}</h4>
          <button ng-click='endGame()' class="btn btn-primary" type="button">End the Game!</button>
+
         </div>
 
         <form class='form-inline'  ng-submit = 'guessVocab()'>

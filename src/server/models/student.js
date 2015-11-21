@@ -27,6 +27,9 @@ var Student = new Schema({
   vocabGamesLost: {
     type: Number,
     default: 0
+  },
+  teacherID:{
+    type: Schema.Types.ObjectId, ref:'teachers'
   }
 });
 

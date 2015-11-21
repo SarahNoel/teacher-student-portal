@@ -12,83 +12,46 @@
 </head>
 <body ng-controller = 'MainController'>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-right">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" ng-init='isCollapsed=true' ng-click="isCollapsed = !isCollapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only fancy-font">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-        <a class="navbar-brand" href = "/#/">
-        <img alt="student" class='logo' src="/public/images/head.gif">
-        </a>
-      </div>
-
- <!--    Collect the nav links, forms, and other content for toggling -->
-    <div ng-class="{collapse: isCollapsed}" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-<!--
-        <li class='header-text fancy-font' ng-class="{'active': isActive('/chat')}"><a href="/#/chat">Chat</a></li>
-
-        <li class='header-text fancy-font' ng-class="{'active': isActive('/vocab')}"><a href="/#/vocab">Games!</a></li> -->
-
-        <!-- <li ng-show='isTeacher()' class='header-text fancy-font' ng-class="{'active': isActive('/teacherinfo')}"><a href="/#/teacherinfo">Teacher Info</a></li>
-
-        <li ng-show= 'isLoggedIn()'  class='header-text fancy-font' ng-class="{'active': isActive('/studentinfo')}"><a href="/#/studentinfo">User Stats</a></li> -->
-
-        <li ng-hide= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'chosen': isActive('/studentLogin') || isActive('/studentRegister')}"><a href="/#/studentLogin">Student Login</a></li>
-
-        <li ng-hide= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'chosen': isActive('/teacherLogin') || isActive('/teacherRegister')}"><a href="/#/teacherLogin">Teacher Login</a></li>
-
-        <li ng-show= 'isLoggedIn()' class='fancy-font'><a>Logged in as {{showUser.username}}</a></li>
-
-        <li ng-show= 'isLoggedIn()' class='header-text fancy-font' ng-click='logout()'><a>Logout</a></li>
-
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div> <!-- /.container-fluid -->
-</nav>
-
-<div class = 'sidebar'>
-  <ul class="sidebar-nav">
-
-    <li class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/chat')}"><a href="/#/chat">Chat</a></li>
-
-    <li class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/vocab')}"><a href="/#/vocab">Games!</a></li>
-
-    <li ng-show='isTeacher()' class='header-text fancy-font sidebar-li' ng-class="{'active': isActive('/teacherinfo')}"><a href="/#/teacherinfo">Teacher</a></li>
-
-    <li ng-show= 'isLoggedIn()'  class='header-text fancy-font sidebar-li' ng-class="{'active': isActive('/studentinfo')}"><a href="/#/studentinfo">Stats</a></li>
-<!--
-    <li ng-hide= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'active': isActive('/studentLogin') || isActive('/studentRegister')}"><a href="/#/studentLogin">Student Login</a></li>
-
-    <li ng-hide= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'active': isActive('/teacherLogin') || isActive('/teacherRegister')}"><a href="/#/teacherLogin">Teacher Login</a></li> -->
-</div>
+<header-info></header-info>
 
 
 <div class = 'body-box'>
+
   <div class="container">
+
     <div ng-view></div>
+
   </div>
+
 </div>
 
- <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+<!-- ///////////////  LIBRARIES  \\\\\\\\\\\\\\\\-->
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
+  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-route.min.js"></script>
   <script src="//cdn.jsdelivr.net/satellizer/0.13.0/satellizer.min.js"></script>
-  <script src="./libraries/ngSocket.js"></script>
+
+<!-- ///////////////  LOCAL JS \\\\\\\\\\\\\\\\-->
+
   <script src="./js/main.js"></script>
   <script src="./js/services.js"></script>
-  <script src="./js/directives.js"></script>
   <script src="./js/filters.js"></script>
   <script src="./js/controllers.js"></script>
+
+<!-- ///////////////  DIRECTIVES  \\\\\\\\\\\\\\\\-->
+
+  <script src="./directives/student-login/student-login-directive.js"></script>
+  <script src="./directives/student-register/student-register-directive.js"></script>
+  <script src="./directives/teacher-login/teacher-login-directive.js"></script>
+  <script src="./directives/teacher-register/teacher-register-directive.js"></script>
+  <script src="./directives/header/header-directive.js"></script>
+
+<!-- ///////////////  MINI-GAMES \\\\\\\\\\\\\\\\-->
+
   <script src="./mini-games/vocabRace/vocabRace.js"></script>
 
 

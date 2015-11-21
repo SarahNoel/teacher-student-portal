@@ -27,12 +27,11 @@ router.get('/students/:teacherID', function(req, res, next){
       res.json(err);
     }
     else{
-      console.log(data)
+      console.log(data);
       res.json(data);
     }
   });
 });
-
 
 //login one student
 router.post('/login', function(req, res, next){
@@ -56,7 +55,6 @@ router.post('/login', function(req, res, next){
 
 //register a new student
 router.post('/register', function(req, res, next){
-  var payload = {email:req.body.email, password:req.body.password, username:req.body.username};
   var query = {keyword: req.body.keyword};
   Teacher.findOne(query, function(err, teacher){
     console.log('err1 ', err);
@@ -64,6 +62,7 @@ router.post('/register', function(req, res, next){
       res.json("Sorry! Inccorect keyword.");
     }
     if(teacher){
+      var payload = {email:req.body.email, password:req.body.password, username:req.body.username, teacherID: teacher._id};
       var newStudent = new Student(payload);
       newStudent.save(function(err, student){
         console.log('err2 ', err);

@@ -69,7 +69,8 @@ a:focus{
   left: 0;
 }
 
-.chosen a{
+.chosen a,
+.consen li{
   color: white;
   font-weight: bold;
 }

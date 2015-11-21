@@ -2,14 +2,11 @@
 <div ng-controller = 'vocabCtrl'>
   <h1>GAMES</h1>
 
+  <h3>Vocab Racer</h3>
+  <ul>
+    <li ng-repeat='game in vocabGames'> {{game.title}} <button class= 'btn btn-success' ng-click="getPlayGame(game._id)"> Play!</button> </li>
+  </ul>
 
-  <a href = '/#/vocabRace'><button class = 'btn btn-primary'>Vocab Racer</button></a>
-
-
-  <a href = '/#/editVocabRace'><button class = 'btn btn-warning'>Edit Vocab Racer</button></a>
-
-
-  <button ng-click='getAllGames()' class = 'btn btn-success'>See all Vocab Games</button>
 
 
 </div>

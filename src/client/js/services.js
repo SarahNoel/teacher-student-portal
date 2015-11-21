@@ -1,10 +1,12 @@
 
 //--------------USER FACTORY-------------------//
 
-app.factory('UserServices', [function($){
+app.factory('UserServices', ['$http', function($http){
   var username = '';
   var game = '';
   var teacher = false;
+  var student = false;
+  var studentTeacher;
 
   return{
           storeUser: storeUser,
@@ -13,7 +15,10 @@ app.factory('UserServices', [function($){
           storeGame: storeGame,
           getGame: getGame,
           isTeacher: isTeacher,
-          saveTeacher: saveTeacher
+          saveTeacher: saveTeacher,
+          isStudent: isStudent,
+          saveStudent: saveStudent,
+          checkforTeacher: checkforTeacher
         };
 
   //stores user to access from all controllers
@@ -49,6 +54,7 @@ app.factory('UserServices', [function($){
     return game;
   }
 
+  //saves user as teacher
   function saveTeacher(){
     teacher = true;
   }
@@ -61,11 +67,38 @@ app.factory('UserServices', [function($){
     return true;
   }
 
+  //saves user as student
+  function saveStudent(){
+    student = true;
+  }
+
+  //checks if student
+  function isStudent(){
+    if(!student){
+      return false;
+    }
+    return true;
+  }
+
+  //if student, return teacher
+  //if teacher, return teacher
+  function checkforTeacher(){
+    console.log("check??")
+    if(student){
+      console.log('student ', username.teacherID);
+      return username.teacherID;
+    }
+    else if(teacher){
+      console.log('teacher ', username._id);
+      return username._id;
+    }
+  }
+
 }]);
 
 //--------------CHAT FACTORY-------------------//
 
-app.factory('ChatServices', ['$websocket', function($websocket) {
+app.factory('ChatServices', [function() {
     // Open a WebSocket connection
     // var dataStream = $websocket('ws://localhost:8080');
 
