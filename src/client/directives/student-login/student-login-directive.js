@@ -3,7 +3,6 @@ app.directive('studentLogin', function(){
       restrict: 'E',
       templateUrl: 'directives/student-login/studentLogin.html',
       controller: ['$scope', 'UserServices', '$http', '$location', function($scope, UserServices, $http, $location) {
-        console.log('heyyy')
         $scope.studentForm = {};
         //login user
         $scope.studentLogin = function() {

@@ -35,6 +35,9 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/editVocabRace', {
       templateUrl: '/mini-games/vocabRace/vocabRaceEdit.html'
     })
+    .when('/createVocabRace', {
+      templateUrl: '/mini-games/vocabRace/createRaceEdit.html'
+    })
     .otherwise({redirectTo: '/'});
 }]);
 

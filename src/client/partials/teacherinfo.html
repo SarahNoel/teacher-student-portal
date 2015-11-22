@@ -8,9 +8,9 @@
 
   <ul><h3>Your Games</h3></ul>
     <ul><h4>Vocab Race Games</h4>
-    <a href= '/#/editVocabRace'<button class = 'btn btn-primary'>Make New Vocab Racer</button></a>
+    <a href= '/#/createVocabRace'><button class = 'btn btn-primary'>Make New Vocab Racer</button></a>
       <li ng-repeat='game in showUser.vocabGames'>
-      {{game.title}} <button ng-click='getVocabGame(game._id)'>Edit</button></li>
+      {{game.title}} <a href= '/#/editVocabRace'><button ng-click='getVocabGame(game._id)'>Edit</button></a></li>
 
     </ul>
 

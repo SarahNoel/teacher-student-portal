@@ -1,55 +1,65 @@
-<div ng-controller= 'vocabCtrl' class='container'>
+<div ng-controller= 'editVocabCtrl' class='container'>
   <br>
-<h1>Make a New Vocab Game</h1>
+<h1>Edit your Vocab Game</h1>
 
- <form name='addGameForm' ng-hide='addQuestions'>
+<div ng-hide = 'editingQuestion'>
+  <form name='editGameForm' ng-hide='addQuestions'>
     <div class="form-group">
       <label>Game Name/Theme</label>
-      <input ng-model='gameForm.gameName' type="text" class="form-control" placeholder="Bio Vocab"required>
+      <input ng-model='editGame.title' type="text" class="form-inline edit-title-input" placeholder="Bio Vocab"required><button class='btn btn-success' ng-click='updateGameTitle(editGame._id)'>Change Title</button> <span class='greenie' ng-show = 'showUpdateMessage'> Title Updated! </span>
     </div>
-    <button ng-click = 'createGame()' class='btn btn-primary'>Add Questions</button>
-</form>
 
-<div ng-show='addQuestions'>
-<h4>Game Title: {{gameName}} </h4>
-  <form name= 'addQuestionForm'>
+    <ul ng-repeat = 'question in editGame.questions'>
+    <button class = 'btn btn-warning' ng-click = 'getEditQuestion(question._id)'>Edit</button>  <button class = 'btn btn-danger' ng-click = 'deleteQuestion(question._id)'>Delete</button>
+      <li> Question: {{question.question}}</li>
+      <li> Answer: {{question.answer}}</li>
+    </ul>
+
+    <button ng-hide = 'addingQuestion' ng-click = 'addQuestionsEditGame()' class='btn btn-primary'>Add Questions</button>
+  </form>
+</div>
+
+
+<div ng-show='editingQuestion'>
+  <h4>Edit Question </h4>
+  <form name= 'editQuestionForm'>
     <div class="form-group">
       <label>Question</label>
-      <input ng-model='questionForm.question' type="text" class="form-control" placeholder="What is the powerhouse of a cell?" required>
+      <input ng-model='editQuestionForm.question' type="text" class="form-control" required>
     </div>
 
     <div class="form-group">
       <label for="hint">Answer</label>
-      <input ng-model='questionForm.answer' type="text" class="form-control" placeholder="Mitochondria" required>
+      <input ng-model='editQuestionForm.answer' type="text" class="form-control" required>
     </div>
   </form>
 
-  <button ng-click = 'addQuestion()' class='btn btn-primary'>Add Question</button>
+  <button ng-click = 'updateQuestion(editQuestionForm._id)' class='btn btn-primary'>Update Question</button>
+</div>
+
+<div ng-show='addingQuestion'>
+  <h4>Add a New Question </h4>
+  <form name= 'editQuestionForm'>
+    <div class="form-group">
+      <label>Question</label>
+      <input ng-model='addQuestionForm.question' type="text" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="hint">Answer</label>
+      <input ng-model='addQuestionForm.answer' type="text" class="form-control" required>
+    </div>
+  </form>
+
+  <button ng-hide = 'addingQuestion' ng-click = 'updateQuestion(editQuestionForm._id)' class='btn btn-primary'>Update Question</button>
+</div>
+
+  <button ng-show = 'addingQuestion' ng-click = 'saveQuestion(editQuestionForm._id)' class='btn btn-primary'>Save Question</button>
   <br>
-  <button ng-click = 'finishGame()' class='btn btn-danger'>Finish Game</button>
+
+  <br><br>
+  <button ng-click = 'cancel()' class='btn btn-danger'>Cancel</button>
 
 
-<div>
-<br>
-<h5>Current questions for this game </h5>
-<ul ng-repeat='question in allQuestions'>
-  <li> Question: {{question.question}}</li>
-  <li> Answer: {{question.answer}}</li>
-</ul>
-
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-</div>
 
 

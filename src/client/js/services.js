@@ -7,6 +7,7 @@ app.factory('UserServices', ['$http', function($http){
   var teacher = false;
   var student = false;
   var studentTeacher;
+  var playGameId;
 
   return{
           storeUser: storeUser,
@@ -18,7 +19,9 @@ app.factory('UserServices', ['$http', function($http){
           saveTeacher: saveTeacher,
           isStudent: isStudent,
           saveStudent: saveStudent,
-          checkforTeacher: checkforTeacher
+          checkforTeacher: checkforTeacher,
+          storePlayGame: storePlayGame,
+          getPlayGame: getPlayGame
         };
 
   //stores user to access from all controllers
@@ -42,8 +45,8 @@ app.factory('UserServices', ['$http', function($http){
   }
 
   //stores current game
-  function storeGame(game){
-    game = game;
+  function storeGame(saveGame){
+    game = saveGame;
   }
 
    //gets game
@@ -83,7 +86,7 @@ app.factory('UserServices', ['$http', function($http){
   //if student, return teacher
   //if teacher, return teacher
   function checkforTeacher(){
-    console.log("check??")
+    console.log(username);
     if(student){
       console.log('student ', username.teacherID);
       return username.teacherID;
@@ -93,6 +96,16 @@ app.factory('UserServices', ['$http', function($http){
       return username._id;
     }
   }
+
+  function storePlayGame(id){
+    playGameId = id;
+  }
+
+  function getPlayGame(){
+    return playGameId;
+  }
+
+
 
 }]);
 

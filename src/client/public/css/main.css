@@ -184,3 +184,13 @@ a:focus{
 .vocab-title{
   margin-bottom: -40px;
 }
+
+.edit-title-input{
+  height: 32px;
+  border-radius: 5px;
+}
+
+.greenie{
+  margin-left: 10px;
+  color: green;
+}

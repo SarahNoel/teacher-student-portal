@@ -48,7 +48,7 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
   var user = UserServices.getUser();
 
   $scope.getVocabGame = function(id){
-    console.log(id);
+    UserServices.storeGame(id);
   };
 
   $scope.allInfo = function(){

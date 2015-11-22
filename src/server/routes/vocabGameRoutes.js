@@ -15,9 +15,52 @@ router.get('/game/:id', function(req, res, next) {
     if(err){
       res.json(err);
     }
-    res.json(data);
+    else{
+      res.json(data);
+    }
   });
 });
+
+
+//get one question by id
+router.get('/question/:id', function(req, res, next) {
+  VocabQuestion.findById(req.params.id, function(err, data){
+    if(err){
+      res.json(err);
+    }
+    else{
+      res.json(data);
+    }
+  });
+});
+
+//PUT-update one question by id
+router.put('/question/:id', function(req, res, next) {
+  var options = {new:true};
+  VocabQuestion.findByIdAndUpdate(req.params.id, req.body, options, function(err, data){
+    if(err){
+      res.json(err);
+    }
+    else{
+      res.json(data);
+    }
+  });
+});
+
+//PUT-update one game by id
+router.put('/game/:id', function(req, res, next) {
+  var options = {new:true};
+  var update = {title: req.body.title};
+  VocabGame.findByIdAndUpdate(req.params.id, update, options, function(err, data){
+    if(err){
+      res.json(err);
+    }
+    else{
+      res.json(data);
+    }
+  });
+});
+
 
 //get all games- global
 router.get('/games', function(req, res, next) {
@@ -27,7 +70,9 @@ router.get('/games', function(req, res, next) {
     if(err){
       res.json(err);
     }
-    res.json(data);
+    else{
+      res.json(data);
+    }
   });
 });
 
@@ -39,7 +84,9 @@ router.get('/games/:userID', function(req, res, next) {
      if(err){
       res.json(err);
     }
-    res.json(data);
+    else{
+      res.json(data);
+    }
   });
 });
 
@@ -57,21 +104,24 @@ router.get('/games/:userID', function(req, res, next) {
 
 //post-add one game to user
 router.post('/game', function(req, res, next) {
+  var error;
   var newGame = new VocabGame(req.body);
   newGame.save(function(err, game){
      if(err){
-      res.json(err);
+      error = err;
     }
     var update = {$push:{vocabGames : newGame}};
     var options = {new:true};
     var gameID = newGame._id;
     User.findByIdAndUpdate(req.body.teacherID, update, options)
-    .deepPopulate()
+    .deepPopulate('questions')
     .exec(function(err, data){
       if (err){
-        res.json(err);
+        error = err;
+        res.json(error);
       }
       else{
+        console.log({game:newGame, gameID:gameID});
         res.json({game:newGame, gameID:gameID});
       }
     });
@@ -90,13 +140,29 @@ router.post('/question', function(req, res, next) {
     }
     var update = {$push:{questions : newQuestion}};
     var options = {new:true};
-    VocabGame.findByIdAndUpdate(id, update, options, function(err, game){
-      console.log('err2 ', err, 'game ', game);
-      if(err){
+    VocabGame.findByIdAndUpdate(id, update, options)
+    .deepPopulate('questions')
+    .exec(function(err, data){
+      if (err){
         res.json(err);
       }
-      res.json(game);
+      else{
+        res.json(data);
+      }
     });
+  });
+});
+
+
+//delete question
+router.delete('/question/:id', function(req, res, next) {
+  VocabQuestion.findByIdAndRemove(req.params.id, function(err, data){
+     if(err){
+      res.json(err);
+    }
+    else{
+      res.json(data);
+    }
   });
 });
 
