@@ -121,7 +121,6 @@ router.post('/game', function(req, res, next) {
         res.json(error);
       }
       else{
-        console.log({game:newGame, gameID:gameID});
         res.json({game:newGame, gameID:gameID});
       }
     });
@@ -134,7 +133,6 @@ router.post('/question', function(req, res, next) {
   var id = req.body.id;
   var newQuestion = new VocabQuestion(payload);
   newQuestion.save(function(err, question){
-    console.log('err ', err, 'question ', question);
      if(err){
       res.json(err);
     }

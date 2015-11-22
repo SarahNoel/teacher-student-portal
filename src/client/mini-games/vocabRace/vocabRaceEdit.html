@@ -35,6 +35,9 @@
   </form>
 
   <button ng-click = 'updateQuestion(editQuestionForm._id)' class='btn btn-primary'>Update Question</button>
+
+  <br>
+  <button ng-click = 'cancel()' class='btn btn-danger'>Cancel</button>
 </div>
 
 <div ng-show='addingQuestion'>
@@ -49,16 +52,19 @@
       <label for="hint">Answer</label>
       <input ng-model='addQuestionForm.answer' type="text" class="form-control" required>
     </div>
+
   </form>
 
   <button ng-hide = 'addingQuestion' ng-click = 'updateQuestion(editQuestionForm._id)' class='btn btn-primary'>Update Question</button>
+  <br>
+  <button ng-click = 'cancel()' class='btn btn-danger'>Cancel</button>
 </div>
 
   <button ng-show = 'addingQuestion' ng-click = 'saveQuestion(editQuestionForm._id)' class='btn btn-primary'>Save Question</button>
   <br>
 
   <br><br>
-  <button ng-click = 'cancel()' class='btn btn-danger'>Cancel</button>
+  <a href = '/#/teacherinfo'><button class='btn btn-success'>Return to Games</button></a>
 
 
 
