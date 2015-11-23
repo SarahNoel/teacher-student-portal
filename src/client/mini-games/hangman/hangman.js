@@ -1,4 +1,4 @@
-app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
+app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
     var gameId;
     var gameName;
     var currentGameId;
@@ -13,22 +13,23 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
     $scope.showUser = user;
 
 
-// <--------------------- ADD GAMES/ETC  ----------------->
+// <------------------ ADD GAMES/ETC  ----------------->
 
-    //get all vocab games from teacher
+    //get all hangman games from teacher
     $scope.getAllGames = function(){
-      $http.get('/vocab/games/' + teacherID)
+      $http.get('/hangman/games/' + teacherID)
       .then(function(data){
-        $scope.vocabGames = data.data.vocabGames;
+        console.log(data);
+        $scope.hangmanGames = data.data.hangmanGames;
       });
     };
 
-    //save a new game to a user-no questions
+    //save a new game to a user
     $scope.createGame = function(){
       gameName = $scope.gameForm.gameName;
-      $http.post('/vocab/game', {title:gameName, teacherID: teacherID})
+      $http.post('/hangman/game', {theme:gameName, teacherID: teacherID})
       .then(function(data){
-        $scope.gameName = data.data.title;
+        $scope.gameName = data.data.theme;
         gameId = data.data.gameID;
         $scope.gameForm ={};
         $scope.addQuestions = true;
@@ -37,55 +38,38 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
       });
     };
 
-    //add question to game
-    $scope.addQuestion = function(){
-      var payload = {question: $scope.questionForm.question, answer: $scope.questionForm.answer, id:gameId};
-      $http.post('/vocab/question', payload)
-      .then(function(data){
-        $scope.questionForm = {};
-        // $scope.questionNumber = 0;
-      }).catch(function(err){
-      });
-    };
-
-
-
-// <---------------------  GAME PLAY  ----------------->
+// <-------------------  GAME PLAY  ----------------->
 
     //get game id to play current game
     $scope.getPlayGame = function(id){
       UserServices.storePlayGame(id);
     };
 
+   $scope.hangmanGallows = '../../public/images/gallows1.gif';
     //gameplay variables
     var guess;
     var index = 0;
-    var currentQuestion;
+    var currentWord;
     var game = UserServices.getGame();
     var counter = 10;
+    var gallowCount = 1;
+    var picked = [];
 
 
-    //countdown function
-    var countDowner, countDown = 10;
-    countDowner = function() {
-      if (countDown <= 0){
-        countDown = 0;
-        $scope.showWrong = false;
-        $scope.timer = countDown;
-        $scope.timesUp = true;
-        if(!$scope.showCorrect && !$scope.endVocabGame){
-          $scope.showWrongNext = true;
-          $scope.questionsWrong++;
-        }
-        return; // quit
-      } else {
-        $scope.timer = countDown; // update scope
-        countDown--; // -1
-        $timeout(countDowner, 1000); // loop it again
-      }
+    $scope.guessLetter = function(letter){
+      letter.addClass('picked');
+      picked.push(letter);
+      console.log(letter);
     };
-    $scope.timer = countDown;
 
+    $scope.disable = function(letter){
+
+    };
+
+    $scope.killGuy = function(){
+      gallowCount++;
+      $scope.hangmanGallows = '../../public/images/gallows' + gallowCount +'.gif';
+    };
 
     //start game
     $scope.startGame = function(){
@@ -94,13 +78,14 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
       $scope.questionsRight = 0;
       $scope.timesUp = false;
       $scope.playing = true;
-      $http.get('/vocab/game/' + gameId)
+      $http.get('/hangman/game/' + gameId)
       .then(function(data){
+        console.log(data);
         //sets current game
         $scope.currentGame = data.data;
-        //displays first hint
-        currentQuestion = data.data.questions[index];
-        $scope.hint = currentQuestion.question;
+        //displays first word
+        currentWord = data.data.words[index];
+        $scope.hint = currentWord.question;
         //starts countdown
         countDowner();
       })
@@ -110,10 +95,10 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
     };
 
     //user guess
-    $scope.guessVocab = function(){
+    $scope.guesshangman = function(){
       $scope.showWrong = false;
-      guess = $scope.vocabGameInput.trim();
-      $scope.vocabGameInput = '';
+      guess = $scope.hangmanGameInput.trim();
+      $scope.hangmanGameInput = '';
       //if blank
       if(guess === ''){
         $scope.showWrong = true;
@@ -141,7 +126,7 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
 
       //if last question, show end game message
       if(index+1 >= $scope.currentGame.questions.length){
-        $scope.endVocabGame = true;
+        $scope.endhangmanGame = true;
       }
       //goes to next question
       else{
@@ -169,8 +154,8 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
 
 }]);
 
-// <-----------------------  EDIT GAME  ----------------->
-app.controller('editVocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
+// <--------------------  EDIT GAME  ----------------->
+app.controller('editHangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
     //blank objects for forms
     $scope.editGame = {};
     $scope.editQuestionForm = {};
@@ -180,7 +165,7 @@ app.controller('editVocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
     //get one game by id
     $scope.getOneGame = function(){
       var id = UserServices.getGame();
-      $http.get('/vocab/game/' + id)
+      $http.get('/hangman/game/' + id)
       .then(function(data){
         $scope.editGame = data.data;
       });
@@ -189,7 +174,7 @@ app.controller('editVocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
     //edit questions
     $scope.getEditQuestion = function(questionID){
       $scope.editingQuestion = true;
-      $http.get('/vocab/question/' + questionID)
+      $http.get('/hangman/question/' + questionID)
       .then(function(data){
         $scope.editQuestionForm = data.data;
       })
@@ -199,7 +184,7 @@ app.controller('editVocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
     };
 
     $scope.updateGameTitle = function(gameID){
-      var getUrl = '/vocab/game/'+ gameID;
+      var getUrl = '/hangman/game/'+ gameID;
       $http.put(getUrl, {title:$scope.editGame.title})
       .then(function(data){
         console.log(data);
@@ -215,7 +200,7 @@ app.controller('editVocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
 
     //update question
     $scope.updateQuestion = function(questionID){
-      $http.put('/vocab/question/' + questionID, $scope.editQuestionForm)
+      $http.put('/hangman/question/' + questionID, $scope.editQuestionForm)
       .then(function(data){
         $scope.editQuestionForm = {};
         $scope.getOneGame();
@@ -230,7 +215,7 @@ app.controller('editVocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
 
     //delete question
     $scope.deleteQuestion = function(questionID){
-      $http.delete('/vocab/question/' + questionID)
+      $http.delete('/hangman/question/' + questionID)
       .then(function(data){
         $scope.getOneGame();
       })
@@ -244,7 +229,7 @@ app.controller('editVocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
       var id = UserServices.getGame();
       var hint = $scope.addQuestionForm;
       var payload = {id:id, question: hint.question, answer: hint.answer};
-      $http.post('/vocab/question', payload)
+      $http.post('/hangman/question', payload)
       .then(function(data){
         console.log(data);
         $scope.editGame = data.data;

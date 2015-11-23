@@ -62,6 +62,10 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
     });
   };
 
+  $scope.getOneStudent = function(id){
+    console.log(id);
+  };
+
   $scope.allInfo();
 
 }]);

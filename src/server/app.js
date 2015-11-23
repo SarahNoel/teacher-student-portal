@@ -1,6 +1,7 @@
 require('./models/teacher.js');
 require('./models/student.js');
 require('./models/vocabGameModels.js');
+require('./models/hangmanGameModel.js');
 
 
 // *** main dependencies *** //
@@ -27,6 +28,7 @@ var routes = require('./routes/index.js');
 var teacherRoutes = require('./routes/teacherRoutes.js');
 var studentRoutes = require('./routes/studentRoutes.js');
 var vocabGameRoutes = require('./routes/vocabGameRoutes.js');
+var hangmanGameRoutes = require('./routes/hangmanGameRoutes.js');
 
 
 var app = express();
@@ -44,7 +46,10 @@ app.use('/', routes);
 app.use('/auth/', teacherRoutes);
 app.use('/studentUsers/', studentRoutes);
 
+// *** mini-game routes *** //
 app.use('/vocab/', vocabGameRoutes);
+app.use('/hangman/', hangmanGameRoutes);
+
 
 
 

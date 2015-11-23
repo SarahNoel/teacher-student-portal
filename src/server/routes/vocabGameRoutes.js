@@ -90,18 +90,6 @@ router.get('/games/:userID', function(req, res, next) {
   });
 });
 
-// //post-add one game -global
-// router.post('/game', function(req, res, next) {
-//   console.log(req.body);
-//   var newGame = new VocabGame(req.body);
-//   newGame.save(function(err, game){
-//      if(err){
-//       res.json(err);
-//     }
-//     res.json(game);
-//   });
-// });
-
 //post-add one game to user
 router.post('/game', function(req, res, next) {
   var error;

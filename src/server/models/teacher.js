@@ -26,7 +26,9 @@ var User = new Schema({
     ref:'students'
   }],
   vocabGames: [{type: Schema.Types.ObjectId,
-    ref:'vocabGames'}]
+    ref:'vocabGames'}],
+  hangmanGames: [{type: Schema.Types.ObjectId,
+    ref:'hangmanGames'}]
 });
 
 

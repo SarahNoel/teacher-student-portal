@@ -1,0 +1,44 @@
+<div ng-controller = 'hangmanCtrl' class='container'>
+  <br>  <br>
+
+  <div class='center'>
+    <h3>Hangman</h3>
+  </div>
+
+  <div class='annie-font'>
+
+<button ng-click='killGuy()'> KIll </button>
+    <div class = 'hangman-game-box' >
+      <div class='inner-hangman-box'>
+        <div class = 'score-box'>
+          <h4>Score: <br>
+          Right: {{questionsRight}}     Wrong: {{questionsWrong}}</h4>
+
+        </div>
+
+        <div class = 'alphabet-box'>
+        <br><br>
+        <h4> Letters! </h4>
+          <button id='a' class = 'letter' ng-click='guessLetter("a")'>A</button>
+          <button class = 'letter' ng-click='guessLetter("b")'>B</button>
+          <button class = 'letter' ng-click='guessLetter("c")'>C</button>
+          <button class = 'letter' ng-click='guessLetter("d")'>D</button>
+          <button class = 'letter' ng-click='guessLetter("e")'>E</button>
+        </div>
+
+        <h2 class='center'>{{currentGame.title}}</h2>
+
+        <img class = 'gallows' src ='{{hangmanGallows}}'>
+
+
+
+
+    </div><!-- end vocabGame-box -->
+
+
+  </div> <!-- end show onplaying -->
+
+
+
+
+</div> <!-- end playVocabCtrl -->

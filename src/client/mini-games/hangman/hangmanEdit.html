@@ -1,0 +1,71 @@
+<div ng-controller= 'editHangmanCtrl' class='container'>
+  <br>
+<h1>Edit your Hangman Game</h1>
+
+<div ng-hide = 'editingQuestion'>
+  <form name='editGameForm' ng-hide='addQuestions'>
+    <div class="form-group">
+      <label>Game Name/Theme</label>
+      <input ng-model='editGame.title' type="text" class="form-inline edit-title-input" placeholder="Bio Vocab"required><button class='btn btn-success' ng-click='updateGameTitle(editGame._id)'>Change Title</button> <span class='greenie' ng-show = 'showUpdateMessage'> Title Updated! </span>
+    </div>
+
+    <ul ng-repeat = 'question in editGame.questions'>
+    <button class = 'btn btn-warning' ng-click = 'getEditQuestion(question._id)'>Edit</button>  <button class = 'btn btn-danger' ng-click = 'deleteQuestion(question._id)'>Delete</button>
+      <li> Question: {{question.question}}</li>
+      <li> Answer: {{question.answer}}</li>
+    </ul>
+
+    <button ng-hide = 'addingQuestion' ng-click = 'addQuestionsEditGame()' class='btn btn-primary'>Add Questions</button>
+  </form>
+</div>
+
+
+<div ng-show='editingQuestion'>
+  <h4>Edit Question </h4>
+  <form name= 'editQuestionForm'>
+    <div class="form-group">
+      <label>Question</label>
+      <input ng-model='editQuestionForm.question' type="text" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="hint">Answer</label>
+      <input ng-model='editQuestionForm.answer' type="text" class="form-control" required>
+    </div>
+  </form>
+
+  <button ng-click = 'updateQuestion(editQuestionForm._id)' class='btn btn-primary'>Update Question</button>
+
+  <br>
+  <button ng-click = 'cancel()' class='btn btn-danger'>Cancel</button>
+</div>
+
+<div ng-show='addingQuestion'>
+  <h4>Add a New Question </h4>
+  <form name= 'editQuestionForm'>
+    <div class="form-group">
+      <label>Question</label>
+      <input ng-model='addQuestionForm.question' type="text" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="hint">Answer</label>
+      <input ng-model='addQuestionForm.answer' type="text" class="form-control" required>
+    </div>
+
+  </form>
+
+  <button ng-hide = 'addingQuestion' ng-click = 'updateQuestion(editQuestionForm._id)' class='btn btn-primary'>Update Question</button>
+  <br>
+  <button ng-click = 'cancel()' class='btn btn-danger'>Cancel</button>
+</div>
+
+  <button ng-show = 'addingQuestion' ng-click = 'saveQuestion(editQuestionForm._id)' class='btn btn-primary'>Save Question</button>
+  <br>
+
+  <br><br>
+  <a href = '/#/teacherinfo'><button class='btn btn-success'>Return to Games</button></a>
+
+
+
+

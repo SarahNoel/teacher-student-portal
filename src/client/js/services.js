@@ -91,7 +91,7 @@ app.factory('UserServices', ['$http', function($http){
       console.log('student ', username.teacherID);
       return username.teacherID;
     }
-    else if(teacher){
+    if(teacher){
       console.log('teacher ', username._id);
       return username._id;
     }

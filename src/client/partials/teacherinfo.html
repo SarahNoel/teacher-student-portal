@@ -1,19 +1,23 @@
-<div ng-controller = 'TeacherCtrl'>
+<div ng-controller = 'TeacherCtrl' class= 'center centered'>
 
-  <h1> Welcome {{showUser.username}} </h1>
+  <ul><h1> Welcome, {{showUser.username}} </h1></ul>
 
-    <ul><h3>Your students</h3>
-      <li ng-repeat='student in showUser.students'> {{student.username}} <button ng-click='getOneStudent(student._id)'>See More</button></li>
+    <ul><h3>Your Students</h3>
+      <li ng-repeat='student in showUser.students'>
+        <span class = 'hover-icon' ng-click='getOneStudent(student._id)'>
+        {{student.username}} </span>
+      </li>
     </ul>
 
   <ul><h3>Your Games</h3></ul>
     <ul><h4>Vocab Race Games</h4>
-    <a href= '/#/createVocabRace'><button class = 'btn btn-primary'>Make New Vocab Racer</button></a>
       <li ng-repeat='game in showUser.vocabGames'>
-      {{game.title}} <a href= '/#/editVocabRace'><button ng-click='getVocabGame(game._id)'>Edit</button></a></li>
-
+        <a ng-click='getVocabGame(game._id)' class = 'hover-icon' href= '/#/editVocabRace'>
+        {{game.title}}</a>
+      </li>
     </ul>
-
+    <br>
+    <ul><a href= '/#/createVocabRace'><button class = 'btn btn-primary'>Make New Vocab Racer</button></a></ul>
 <!--
     <ul ng-repeat='game in showUser.hangmanGames'>Hangman Games
       <li>{{game.title}} <button ng-click='getHangmanGame(game._id)'>Edit</button></li>

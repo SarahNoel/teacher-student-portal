@@ -38,6 +38,15 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/createVocabRace', {
       templateUrl: '/mini-games/vocabRace/createRaceEdit.html'
     })
+    .when('/createHangman', {
+      templateUrl: '/mini-games/hangman/hangmanCreate.html'
+    })
+      .when('/hangman', {
+      templateUrl: '/mini-games/hangman/hangman.html'
+    })
+    .when('/editHangman', {
+      templateUrl: '/mini-games/hangman/hangmanEdit.html'
+    })
     .otherwise({redirectTo: '/'});
 }]);
 

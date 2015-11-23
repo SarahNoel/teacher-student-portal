@@ -21,13 +21,12 @@ router.get('/students', function(req, res, next){
 //get all students and games from a teacher
 router.get('/students/:teacherID', function(req, res, next){
   Teacher.findById(req.params.teacherID, function(err, teacher){})
-  .deepPopulate('vocabGames students vocabGames.questions')
+  .deepPopulate('vocabGames students vocabGames.questions hangmanGames')
   .exec(function(err, data){
     if(err){
       res.json(err);
     }
     else{
-      console.log(data);
       res.json(data);
     }
   });
@@ -37,7 +36,6 @@ router.get('/students/:teacherID', function(req, res, next){
 router.post('/login', function(req, res, next){
   var query = {email:req.body.email};
   Student.findOne(query,{'email':1, 'password':1, 'username':1, 'vocabGamesPlayed':1, 'vocabGamesWon':1, 'vocabGamesLost':1, 'teacherID':1}, function(err, student){
-    console.log(student);
     if(err){
       res.json(err);
     }
@@ -57,7 +55,6 @@ router.post('/login', function(req, res, next){
 router.post('/register', function(req, res, next){
   var query = {keyword: req.body.keyword};
   Teacher.findOne(query, function(err, teacher){
-    console.log('err1 ', err);
     if(err){
       res.json("Sorry! Inccorect keyword.");
     }
@@ -65,8 +62,6 @@ router.post('/register', function(req, res, next){
       var payload = {email:req.body.email, password:req.body.password, username:req.body.username, teacherID: teacher._id};
       var newStudent = new Student(payload);
       newStudent.save(function(err, student){
-        console.log('err2 ', err);
-        console.log('student2 ', student);
         if(err){
           res.json('Sorry! That email is already registered.');
         }
