@@ -1,16 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-
+var deepPopulate = require("mongoose-deep-populate")(mongoose);
 var HangmanGame = mongoose.model('hangmanGames');
 var User = mongoose.model('teachers');
 
 
 //get one game by id
 router.get('/game/:id', function(req, res, next) {
-  HangmanGame.findById(req.params.id)
-  .deepPopulate('questions')
-  .exec(function(err, data){
+  HangmanGame.findById(req.params.id, function(err, data){
     if(err){
       res.json(err);
     }
@@ -23,7 +21,7 @@ router.get('/game/:id', function(req, res, next) {
 //PUT-update one game by id
 router.put('/game/:id', function(req, res, next) {
   var options = {new:true};
-  var update = {title: req.body.title};
+  var update = {theme: req.body.theme, words: req.body.words};
   HangmanGame.findByIdAndUpdate(req.params.id, update, options, function(err, data){
     if(err){
       res.json(err);
@@ -37,9 +35,7 @@ router.put('/game/:id', function(req, res, next) {
 
 //get all games- global
 router.get('/games', function(req, res, next) {
-  HangmanGame.find()
-  .deepPopulate('questions')
-  .exec(function(err, data){
+  HangmanGame.find(function(err, data){
     if(err){
       res.json(err);
     }
@@ -51,9 +47,7 @@ router.get('/games', function(req, res, next) {
 
 //get all games- from user
 router.get('/games/:userID', function(req, res, next) {
-  User.findById(req.params.userID)
-  .populate('hangmanGames')
-  .exec(function(err,data){
+  User.findById(req.params.userID, function(err,data){
      if(err){
       res.json(err);
     }

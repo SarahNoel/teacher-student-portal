@@ -51,6 +51,10 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
     UserServices.storeGame(id);
   };
 
+  $scope.getHangmanGame = function(id){
+    UserServices.storeGame(id);
+  };
+
   $scope.allInfo = function(){
     $http.get('/studentUsers/students/'+ user._id)
     .then(function(data){

@@ -1,0 +1,19 @@
+<br><br>
+<h4> Letters! </h4>
+<!-- <div ng-repeat = 'letter in letters'>
+  <button ng-disabled = "{{letter}}Disable"  class = 'letter' ng-click='guessLetter(letter)' >{{letter}}
+  </button> -->
+
+  <button ng-disabled = 'aDisable' ng-class = "{'picked': aDisable}" class = 'letter' ng-click='guessLetter("a"); aDisable = true'>B
+  </button>
+  <button ng-disabled = 'bDisable' ng-class = "{'picked': bDisable}" class = 'letter' ng-click='guessLetter("b"); bDisable = true'>B
+  </button>
+  <button ng-disabled = 'cDisable' ng-class = "{'picked': cDisable}" class = 'letter' ng-click='guessLetter("c"); cDisable = true'>C
+  </button>
+  <button ng-disabled = 'dDisable' ng-class = "{'picked': dDisable}" class = 'letter' ng-click='guessLetter("d"); dDisable = true'>D
+  </button>
+  <button ng-disabled = 'eDisable' ng-class = "{'picked': eDisable}" class = 'letter' ng-click='guessLetter("e"); eDisable = true'>E
+  </button>
+  <button ng-disabled = 'fDisable' ng-class = "{'picked': fDisable}" class = 'letter' ng-click='guessLetter("f"); fDisable = true'>F
+  </button>
+

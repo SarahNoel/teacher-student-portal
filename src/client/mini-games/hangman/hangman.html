@@ -7,7 +7,7 @@
 
   <div class='annie-font'>
 
-<button ng-click='killGuy()'> KIll </button>
+<button ng-click='killGuy()'> Kill </button>
     <div class = 'hangman-game-box' >
       <div class='inner-hangman-box'>
         <div class = 'score-box'>
@@ -17,13 +17,9 @@
         </div>
 
         <div class = 'alphabet-box'>
-        <br><br>
-        <h4> Letters! </h4>
-          <button id='a' class = 'letter' ng-click='guessLetter("a")'>A</button>
-          <button class = 'letter' ng-click='guessLetter("b")'>B</button>
-          <button class = 'letter' ng-click='guessLetter("c")'>C</button>
-          <button class = 'letter' ng-click='guessLetter("d")'>D</button>
-          <button class = 'letter' ng-click='guessLetter("e")'>E</button>
+
+          <ng-include src="'mini-games/hangman/letterBox.html'"></ng-include>
+
         </div>
 
         <h2 class='center'>{{currentGame.title}}</h2>

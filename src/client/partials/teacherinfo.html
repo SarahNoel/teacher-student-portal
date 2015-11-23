@@ -18,10 +18,15 @@
     </ul>
     <br>
     <ul><a href= '/#/createVocabRace'><button class = 'btn btn-primary'>Make New Vocab Racer</button></a></ul>
-<!--
-    <ul ng-repeat='game in showUser.hangmanGames'>Hangman Games
-      <li>{{game.title}} <button ng-click='getHangmanGame(game._id)'>Edit</button></li>
-    </ul> -->
+    <br><br>
+    <ul><h4>Hangman Games</h4>
+      <li ng-repeat='game in showUser.hangmanGames'>
+        <a ng-click='getHangmanGame(game._id)' class = 'hover-icon' href= '/#/editHangman'> {{game.theme}}</button></a>
+      </li>
+    </ul>
+
+    <ul><a href= '/#/createHangman'><button class = 'btn btn-primary'>Make New Hangman Game</button></a></ul>
+
 
   </div>
 

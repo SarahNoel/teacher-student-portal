@@ -26,13 +26,11 @@ app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'Use
 
     //save a new game to a user
     $scope.createGame = function(){
-      gameName = $scope.gameForm.gameName;
-      $http.post('/hangman/game', {theme:gameName, teacherID: teacherID})
+      var game = $scope.gameForm;
+      $http.post('/hangman/game', {theme:game.theme, words:game.words, teacherID: teacherID})
       .then(function(data){
-        $scope.gameName = data.data.theme;
-        gameId = data.data.gameID;
+        console.log(data);
         $scope.gameForm ={};
-        $scope.addQuestions = true;
       })
       .catch(function(err){
       });
@@ -55,16 +53,16 @@ app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'Use
     var gallowCount = 1;
     var picked = [];
 
+    $scope.letters = ['a', 'b', 'c'];
 
     $scope.guessLetter = function(letter){
-      letter.addClass('picked');
+      // var die = "$scope." + letter + 'Disable';
+      // console.log(die);
+      // die = true;
       picked.push(letter);
       console.log(letter);
     };
 
-    $scope.disable = function(letter){
-
-    };
 
     $scope.killGuy = function(){
       gallowCount++;
@@ -157,17 +155,17 @@ app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'Use
 // <--------------------  EDIT GAME  ----------------->
 app.controller('editHangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
     //blank objects for forms
-    $scope.editGame = {};
-    $scope.editQuestionForm = {};
-    $scope.addQuestionForm = {};
+    $scope.editGameForm = {};
 
 
     //get one game by id
     $scope.getOneGame = function(){
       var id = UserServices.getGame();
+      console.log(id);
       $http.get('/hangman/game/' + id)
       .then(function(data){
-        $scope.editGame = data.data;
+        console.log(data);
+        $scope.editGameForm = data.data;
       });
     };
 
@@ -183,15 +181,13 @@ app.controller('editHangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 
       });
     };
 
-    $scope.updateGameTitle = function(gameID){
+    $scope.updateGame = function(gameID){
+      console.log(gameID);
       var getUrl = '/hangman/game/'+ gameID;
-      $http.put(getUrl, {title:$scope.editGame.title})
+      $http.put(getUrl, {theme:$scope.editGameForm.theme, words: $scope.editGameForm.words})
       .then(function(data){
         console.log(data);
-        $scope.getOneGame();
-        $scope.showUpdateMessage = true;
-        $timeout(function () { $scope.showUpdateMessage = false; }, 3000);
-
+        $location.path('/teacherinfo');
       })
       .catch(function(err){
         console.log(err);
