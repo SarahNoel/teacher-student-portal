@@ -232,7 +232,7 @@ ul{
 .letter{
   width: 24px;
   border: thin black solid;
-  background-color: red;
+  background-color: #d15a38;
   font-size: 20px;
   margin-right: 6px;
 }
@@ -243,7 +243,8 @@ ul{
 }
 
 .picked{
-  background-color: black;
+  background-color: #363636;
+  color: black;
 }
 
 .game-title{
@@ -256,5 +257,26 @@ ul{
 
 .all-letters{
   margin-top: 30px;
+}
+
+.right-box{
+  background: beige;
+  float: right;
+  clear: both;
+  margin-right: 30px;
+  padding: 10px;
+  border: thick green solid;
+  margin-top: 10px;
+  height: 115px;
+}
+
+.wrong-box{
+  background: beige;
+  float: right;
+  clear: both;
+  margin-right: 30px;
+  border: thick #c11e1e solid;
+  margin-top: 10px;
+  height: 115px;
 }
 

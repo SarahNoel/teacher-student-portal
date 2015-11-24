@@ -2,7 +2,7 @@
   <br>  <br>
 
   <div class='center'>
-    <h1>Hangman</h1
+    <h1 class='annie-font'>Hangman</h1>
     <br>
   </div>
 
@@ -22,19 +22,22 @@
 
 
         <img class = 'gallows' src ='{{hangmanGallows}}'>
+          <br>
 
-        <div ng-show = 'gameOver'>
-        IT'S ALL OVER
+        <div ng-show = 'rightWord' class = 'right-box'>
+          <h3> Correct!  The word was "{{guessWord}}".</h3>
+          <button ng-hide = 'gameOver' class = 'btn btn-warning centered' ng-click = 'nextWord()'>Next Word</button>
+
+          <button ng-show = 'gameOver' class = 'btn btn-success centered' ng-click = 'endGame()'>Game over!</button>
+          <br><br>
         </div>
 
-        <div ng-show = 'rightWord'>
-          <h3> Correct!  The word was {{guessWord}}.</h3>
-          <button ng-show = 'moveToNext' class = 'btn btn-primary' ng-click = 'nextWord()'>Next Word</button>
-        </div>
+        <div ng-show = 'wrongWord' class = 'wrong-box'>
+          <h3> Sorry, the word was "{{guessWord}}".</h3>
+          <button ng-hide = 'gameOver' class = 'btn btn-warning centered' ng-click = 'nextWord()'>Next Word</button>
 
-        <div ng-show = 'wrongWord'>
-          <h3> Sorry, the word was {{guessWord}}.</h3>
-          <button ng-show = 'moveToNext' class = 'btn btn-primary' ng-click = 'nextWord()'>Next Word</button>
+          <button ng-show = 'gameOver' class = 'btn btn-primary centered' ng-click = 'endGame()'>Game over!</button>
+          <br><br>
         </div>
 
 

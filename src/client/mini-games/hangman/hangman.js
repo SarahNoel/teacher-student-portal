@@ -63,13 +63,13 @@ app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'Use
 
     //start game
     $scope.playGame = function(){
+      $scope.gameOver= false;
       $scope.hangmanGallows = '../../public/images/gallows' + gallowCount + '.gif';
       $scope.wordSpot = wordArray;
-      var gameId = UserServices.getPlayGame();
+      var gameID = UserServices.getPlayGame();
       $scope.questionsWrong = 0;
       $scope.questionsRight = 0;
-      // $http.get('/hangman/game/' + gameID)
-      $http.get('/hangman/game/5653e9e8017f3449b48b09ee')
+      $http.get('/hangman/game/' + gameID)
       .then(function(data){
         words = data.data.words;
         words = words.join(',').split(',');
@@ -179,7 +179,7 @@ app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'Use
           //if still words left
           else{
             index++;
-            //displays correct message
+            //displays proper message
             if(correct){
               $scope.rightWord = true;
             }
