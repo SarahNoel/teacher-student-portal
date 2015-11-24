@@ -1,85 +1,30 @@
-<br><br>
-<!-- <div ng-repeat = 'letter in letters'>
-  <button ng-disabled = "{{letter}}Disable"  class = 'letter' ng-click='guessLetter(letter)' >{{letter}}
-  </button>
- -->
- <br>
-  <button ng-disabled = 'aDisable' ng-class = "{'picked': aDisable}" class = 'letter' ng-click='guessLetter("a"); aDisable = true'>A
-  </button>
-  <button ng-disabled = 'bDisable' ng-class = "{'picked': bDisable}" class = 'letter' ng-click='guessLetter("b"); bDisable = true'>B
-  </button>
-  <button ng-disabled = 'cDisable' ng-class = "{'picked': cDisable}" class = 'letter' ng-click='guessLetter("c"); cDisable = true'>C
-  </button>
-  <button ng-disabled = 'dDisable' ng-class = "{'picked': dDisable}" class = 'letter' ng-click='guessLetter("d"); dDisable = true'>D
-  </button>
-  <button ng-disabled = 'eDisable' ng-class = "{'picked': eDisable}" class = 'letter' ng-click='guessLetter("e"); eDisable = true'>E
-  </button>
-  <button ng-disabled = 'fDisable' ng-class = "{'picked': fDisable}" class = 'letter' ng-click='guessLetter("f"); fDisable = true'>F
-  </button>
-
-  <button ng-disabled = 'gDisable' ng-class = "{'picked': gDisable}" class = 'letter' ng-click='guessLetter("a"); gDisable = true'>G
-  </button>
-
-<br> <br>
-
-  <button ng-disabled = 'hDisable' ng-class = "{'picked': hDisable}" class = 'letter' ng-click='guessLetter("h"); hDisable = true'>H
-  </button>
-
-  <button ng-disabled = 'iDisable' ng-class = "{'picked': iDisable}" class = 'letter' ng-click='guessLetter("i"); iDisable = true'>I
-  </button>
-
-  <button ng-disabled = 'jDisable' ng-class = "{'picked': jDisable}" class = 'letter' ng-click='guessLetter("j"); jDisable = true'>J
-  </button>
-
-  <button ng-disabled = 'kDisable' ng-class = "{'picked': kDisable}" class = 'letter' ng-click='guessLetter("k"); kDisable = true'>K
-  </button>
-
-  <button ng-disabled = 'lDisable' ng-class = "{'picked': lDisable}" class = 'letter' ng-click='guessLetter("l"); lDisable = true'>L
-  </button>
-
-  <button ng-disabled = 'mDisable' ng-class = "{'picked': mDisable}" class = 'letter' ng-click='guessLetter("m"); mDisable = true'>M
-  </button>
-
-  <button ng-disabled = 'nDisable' ng-class = "{'picked': nDisable}" class = 'letter' ng-click='guessLetter("n"); nDisable = true'>N
-  </button>
-
-<br> <br>
-
-  <button ng-disabled = 'oDisable' ng-class = "{'picked': oDisable}" class = 'letter' ng-click='guessLetter("o"); oDisable = true'>O
-  </button>
-
-  <button ng-disabled = 'pDisable' ng-class = "{'picked': pDisable}" class = 'letter' ng-click='guessLetter("p"); pDisable = true'>P
-  </button>
-
-  <button ng-disabled = 'qDisable' ng-class = "{'picked': qDisable}" class = 'letter' ng-click='guessLetter("q"); qDisable = true'>Q
-  </button>
-
-  <button ng-disabled = 'rDisable' ng-class = "{'picked': rDisable}" class = 'letter' ng-click='guessLetter("r"); rDisable = true'>R
-  </button>
-
-  <button ng-disabled = 'sDisable' ng-class = "{'picked': sDisable}" class = 'letter' ng-click='guessLetter("s"); sDisable = true'>S
-  </button>
-
-  <button ng-disabled = 'tDisable' ng-class = "{'picked': tDisable}" class = 'letter' ng-click='guessLetter("t"); tDisable = true'>T
-  </button>
-
-  <br><br>
-
-  <button ng-disabled = 'uDisable' ng-class = "{'picked': uDisable}" class = 'letter' ng-click='guessLetter("u"); uDisable = true'>U
-  </button>
-
-
-  <button ng-disabled = 'vDisable' ng-class = "{'picked': vDisable}" class = 'letter' ng-click='guessLetter("v"); vDisable = true'>V
-  </button>
-
-  <button ng-disabled = 'wDisable' ng-class = "{'picked': wDisable}" class = 'letter' ng-click='guessLetter("w"); wDisable = true'>W
-  </button>
-
-  <button ng-disabled = 'xDisable' ng-class = "{'picked': xDisable}" class = 'letter' ng-click='guessLetter("x"); xDisable = true'>X
-  </button>
-
-  <button ng-disabled = 'yDisable' ng-class = "{'picked': yDisable}" class = 'letter' ng-click='guessLetter("y"); yDisable = true'>Y
-  </button>
-
-  <button ng-disabled = 'zDisable' ng-class = "{'picked': zDisable}" class = 'letter' ng-click='guessLetter("z"); zDisable = true'>Z
-  </button>
+ <div class = 'alphabet-box'>
+  <div ng-repeat = 'letter in letterRow1'>
+    <button id = '{{letter}}'  class = 'letter' ng-click='guessLetter(letter)' >{{letter}}
+    </button>
+  </div>
+</div>
+<br>
+<br>
+<div class = 'alphabet-box'>
+  <div ng-repeat = 'letter in letterRow2'>
+    <button id = '{{letter}}'  class = 'letter' ng-click='guessLetter(letter)' >{{letter}}
+    </button>
+  </div>
+</div>
+<br>
+<br>
+<div class = 'alphabet-box'>
+  <div ng-repeat = 'letter in letterRow3'>
+    <button id = '{{letter}}'  class = 'letter' ng-click='guessLetter(letter)' >{{letter}}
+    </button>
+  </div>
+</div>
+<br>
+<br>
+<div class = 'alphabet-box'>
+  <div ng-repeat = 'letter in letterRow4'>
+    <button id = '{{letter}}'  class = 'letter' ng-click='guessLetter(letter)' >{{letter}}
+    </button>
+  </div>
+</div>

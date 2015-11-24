@@ -218,14 +218,15 @@ ul{
 .gallows{
   margin-left: 100px;
   position: absolute;
-  margin-top: -280px;
+  margin-top: -136px;
 }
 
 
 .alphabet-box{
   text-align: right;
-  margin-right: 87px;
-  margin-top: 10px;
+  display: flex;
+  float: right;
+  margin-right: 35px;
 }
 
 .letter{
@@ -233,6 +234,7 @@ ul{
   border: thin black solid;
   background-color: red;
   font-size: 20px;
+  margin-right: 6px;
 }
 
 .letter:hover{
@@ -252,4 +254,7 @@ ul{
   margin-left: 120px;
 }
 
+.all-letters{
+  margin-top: 30px;
+}
 

@@ -2,9 +2,9 @@
   <br>  <br>
 
   <div class='center'>
-    <h3>Hangman</h3>
+    <h1>Hangman</h1
+    <br>
   </div>
-
 
   <div class = 'hangman-game-box annie-font' >
 
@@ -16,20 +16,35 @@
           Right: {{questionsRight}}     Wrong: {{questionsWrong}}</h4>
         </div>
 
-        <div class = 'alphabet-box'>
+        <div class='all-letters'>
           <ng-include src="'mini-games/hangman/letterBox.html'"></ng-include>
         </div>
 
 
         <img class = 'gallows' src ='{{hangmanGallows}}'>
 
+        <div ng-show = 'gameOver'>
+        IT'S ALL OVER
+        </div>
+
+        <div ng-show = 'rightWord'>
+          <h3> Correct!  The word was {{guessWord}}.</h3>
+          <button ng-show = 'moveToNext' class = 'btn btn-primary' ng-click = 'nextWord()'>Next Word</button>
+        </div>
+
+        <div ng-show = 'wrongWord'>
+          <h3> Sorry, the word was {{guessWord}}.</h3>
+          <button ng-show = 'moveToNext' class = 'btn btn-primary' ng-click = 'nextWord()'>Next Word</button>
+        </div>
+
+
 
     </div><!-- end inner box -->
 
   </div> <!-- end game-box -->
-
-        <h1 class = 'annie-font hangman-word'> Word: {{wordSpot | arrayToString}} </h1>
-
+  <div class = 'centered'>
+    <h1 class = 'annie-font hangman-word'> Word: {{wordSpot | arrayToString}} </h1>
+  </div>
 
 
 </div> <!-- end hangmanCtrl -->

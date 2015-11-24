@@ -21,7 +21,8 @@ app.factory('UserServices', ['$http', function($http){
           saveStudent: saveStudent,
           checkforTeacher: checkforTeacher,
           storePlayGame: storePlayGame,
-          getPlayGame: getPlayGame
+          getPlayGame: getPlayGame,
+          enableAll: enableAll
         };
 
   //stores user to access from all controllers
@@ -104,6 +105,17 @@ app.factory('UserServices', ['$http', function($http){
   function getPlayGame(){
     return playGameId;
   }
+
+
+  function enableAll(picked){
+    for (var i = 0; i < picked.length; i++) {
+      var element = document.getElementById(picked[i]);
+      var angElement = angular.element(element);
+      angElement.removeClass('picked');
+    }
+    picked = [];
+  }
+
 
 
 
