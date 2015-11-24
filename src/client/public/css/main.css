@@ -217,19 +217,19 @@ ul{
 
 .gallows{
   margin-left: 100px;
-  margin-top: 41px;
+  position: absolute;
+  margin-top: -280px;
 }
 
 
 .alphabet-box{
   text-align: right;
-  margin-right: 145px;
+  margin-right: 87px;
   margin-top: 10px;
 }
 
 .letter{
-  padding-left: 5px;
-  padding-right: 5px;
+  width: 24px;
   border: thin black solid;
   background-color: red;
   font-size: 20px;
@@ -242,6 +242,14 @@ ul{
 
 .picked{
   background-color: black;
+}
+
+.game-title{
+  color: white;
+}
+
+.hangman-word{
+  margin-left: 120px;
 }
 
 

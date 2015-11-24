@@ -21,7 +21,7 @@ router.get('/game/:id', function(req, res, next) {
 //PUT-update one game by id
 router.put('/game/:id', function(req, res, next) {
   var options = {new:true};
-  var update = {theme: req.body.theme, words: req.body.words};
+  var update = {title: req.body.title, words: req.body.words};
   HangmanGame.findByIdAndUpdate(req.params.id, update, options, function(err, data){
     if(err){
       res.json(err);
@@ -61,6 +61,7 @@ router.get('/games/:userID', function(req, res, next) {
 router.post('/game', function(req, res, next) {
   var error;
   var newGame = new HangmanGame(req.body);
+  console.log('game ', newGame);
   newGame.save(function(err, game){
      if(err){
       error = err;

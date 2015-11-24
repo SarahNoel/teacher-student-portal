@@ -5,36 +5,31 @@
     <h3>Hangman</h3>
   </div>
 
-  <div class='annie-font'>
 
-<button ng-click='killGuy()'> Kill </button>
-    <div class = 'hangman-game-box' >
+  <div class = 'hangman-game-box annie-font' >
+
+    <h2 class='center game-title'> {{currentGame.title}}</h2>
       <div class='inner-hangman-box'>
+
         <div class = 'score-box'>
           <h4>Score: <br>
           Right: {{questionsRight}}     Wrong: {{questionsWrong}}</h4>
-
         </div>
 
         <div class = 'alphabet-box'>
-
           <ng-include src="'mini-games/hangman/letterBox.html'"></ng-include>
-
         </div>
 
-        <h2 class='center'>{{currentGame.title}}</h2>
 
         <img class = 'gallows' src ='{{hangmanGallows}}'>
 
 
+    </div><!-- end inner box -->
 
+  </div> <!-- end game-box -->
 
-    </div><!-- end vocabGame-box -->
-
-
-  </div> <!-- end show onplaying -->
-
+        <h1 class = 'annie-font hangman-word'> Word: {{wordSpot | arrayToString}} </h1>
 
 
 
-</div> <!-- end playVocabCtrl -->
+</div> <!-- end hangmanCtrl -->

@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var deepPopulate = require("mongoose-deep-populate")(mongoose);
 var config = require('../../../_config');
 var Student = mongoose.model('students');
 var Teacher = mongoose.model('teachers');
+var HangmanGame = mongoose.model('hangmanGames');
+
 
 
 //get all students
@@ -21,7 +24,7 @@ router.get('/students', function(req, res, next){
 //get all students and games from a teacher
 router.get('/students/:teacherID', function(req, res, next){
   Teacher.findById(req.params.teacherID, function(err, teacher){})
-  .deepPopulate('vocabGames students vocabGames.questions hangmanGames')
+  .deepPopulate('hangmanGames vocabGames students')
   .exec(function(err, data){
     if(err){
       res.json(err);

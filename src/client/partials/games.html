@@ -1,18 +1,14 @@
-  <h1>GAMES</h1>
+<h1>GAMES</h1>
 
-<div ng-controller = 'vocabCtrl'>
-
+<div ng-controller = 'GameCtrl'>
   <h3>Vocab Racer</h3>
   <ul>
-    <li ng-repeat='game in vocabGames'> {{game.title}} <a href = '/#/vocabRace'><button class= 'btn btn-success' ng-click="getPlayGame(game._id)"> Play!</button> </li>
+    <li ng-repeat='game in games.vocabGames'> {{game.title}} <a href = '/#/vocabRace'><button class= 'btn btn-success' ng-click="getPlayGame(game._id)"> Play!</button></a></li>
   </ul>
 
-</div>
-
-<div ng-controller = 'vocabCtrl'>
   <h3>Hangman</h3>
   <ul>
-    <li ng-repeat='game in hangmanGames'> {{game.theme}} <a href = '/#/hangman'><button class= 'btn btn-success' ng-click="getPlayGame(game._id)"> Play!</button> </li>
+    <li ng-repeat='hangman in games.hangmanGames'> {{hangman.title}} <a href = '/#/hangman'><button class= 'btn btn-success' ng-click="getPlayGame(hangman._id)"> Play!</button></a></li>
   </ul>
 
 </div>

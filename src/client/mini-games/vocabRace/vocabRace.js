@@ -19,7 +19,8 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
     $scope.getAllGames = function(){
       $http.get('/vocab/games/' + teacherID)
       .then(function(data){
-        $scope.vocabGames = data.data.vocabGames;
+        console.log('all ', data.data);
+        $scope.games = data.data;
       });
     };
 
@@ -52,10 +53,6 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
 
 // <---------------------  GAME PLAY  ----------------->
 
-    //get game id to play current game
-    $scope.getPlayGame = function(id){
-      UserServices.storePlayGame(id);
-    };
 
     //gameplay variables
     var guess;

@@ -6,9 +6,8 @@ app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'Use
     var user = UserServices.getUser();
     //sets teacherID
     var teacherID =  UserServices.checkforTeacher();
-    //blank objects for forms
+    //blank object for form
     $scope.gameForm = {};
-    $scope.questionForm = {};
     //displays user
     $scope.showUser = user;
 
@@ -19,7 +18,6 @@ app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'Use
     $scope.getAllGames = function(){
       $http.get('/hangman/games/' + teacherID)
       .then(function(data){
-        console.log(data);
         $scope.hangmanGames = data.data.hangmanGames;
       });
     };
@@ -27,12 +25,13 @@ app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'Use
     //save a new game to a user
     $scope.createGame = function(){
       var game = $scope.gameForm;
-      $http.post('/hangman/game', {theme:game.theme, words:game.words, teacherID: teacherID})
+      $http.post('/hangman/game', {title:game.title, words:game.words, teacherID: teacherID})
       .then(function(data){
-        console.log(data);
         $scope.gameForm ={};
+        $location.path('/#/teacherinfo');
       })
       .catch(function(err){
+        $scope.error = err;
       });
     };
 
@@ -43,112 +42,98 @@ app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'Use
       UserServices.storePlayGame(id);
     };
 
-   $scope.hangmanGallows = '../../public/images/gallows1.gif';
     //gameplay variables
-    var guess;
+    var words;
+    var wordArr;
+    var wordArray =[];
     var index = 0;
+    var guessedRight = 0;
     var currentWord;
     var game = UserServices.getGame();
     var counter = 10;
     var gallowCount = 1;
     var picked = [];
+    var pickedWrong = 0;
+    $scope.questionsWrong = 0;
+    $scope.questionsRight = 0;
+    $scope.wordSpot = wordArray;
 
-    $scope.letters = ['a', 'b', 'c'];
-
-    $scope.guessLetter = function(letter){
-      // var die = "$scope." + letter + 'Disable';
-      // console.log(die);
-      // die = true;
-      picked.push(letter);
-      console.log(letter);
-    };
-
-
-    $scope.killGuy = function(){
-      gallowCount++;
-      $scope.hangmanGallows = '../../public/images/gallows' + gallowCount +'.gif';
-    };
+    $scope.hangmanGallows = '../../public/images/gallows' + gallowCount + '.gif';
 
     //start game
-    $scope.startGame = function(){
+    $scope.playGame = function(){
       var gameId = UserServices.getPlayGame();
       $scope.questionsWrong = 0;
       $scope.questionsRight = 0;
-      $scope.timesUp = false;
-      $scope.playing = true;
-      $http.get('/hangman/game/' + gameId)
+      // $http.get('/hangman/game/' + gameID)
+      $http.get('/hangman/game/5653e9e8017f3449b48b09ee')
       .then(function(data){
-        console.log(data);
+        words = data.data.words;
+        words = words.join(',').split(',');
         //sets current game
         $scope.currentGame = data.data;
         //displays first word
-        currentWord = data.data.words[index];
-        $scope.hint = currentWord.question;
+        currentWord = words[index].trim().toLowerCase();
+        wordArr = currentWord.split('');
         //starts countdown
-        countDowner();
+        for (var i = 0; i < currentWord.length; i++) {
+          wordArray.push('_');
+         }
       })
       .catch(function(data){
         $scope.error = data.data;
       });
     };
 
-    //user guess
-    $scope.guesshangman = function(){
-      $scope.showWrong = false;
-      guess = $scope.hangmanGameInput.trim();
-      $scope.hangmanGameInput = '';
-      //if blank
-      if(guess === ''){
-        $scope.showWrong = true;
-      }
-      //if matches
-      else if(guess.toLowerCase() === currentQuestion.answer.trim().toLowerCase()){
-        //end question, show correct. update score
-        $scope.timesUp = true;
-        $scope.showCorrect = true;
-        $scope.questionsRight++;
-      }
-      //if wrong, show wrong error
-      else{
-        $scope.showWrong = true;
-      }
-    };
-
-    //move on to next question
     $scope.nextQuestion = function(){
-      //reset all messages
-      $scope.timesUp = false;
-      $scope.showCorrect = false;
-      $scope.showWrongNext = false;
-      $scope.showWrong = false;
 
-      //if last question, show end game message
-      if(index+1 >= $scope.currentGame.questions.length){
-        $scope.endhangmanGame = true;
-      }
-      //goes to next question
-      else{
-        index +=1;
-        //decreases time DO I WANT THIS???  FIX MEEEEE
-        // counter --;
-
-        // finds next question in array
-        currentQuestion = $scope.currentGame.questions[index];
-        //displays next hint
-        $scope.hint = currentQuestion.question;
-        countDown = counter;
-        //starts countdown
-        countDowner();
-      }
     };
+
+    $scope.guessLetter = function(letter){
+      if(wordArr.indexOf(letter) === -1){
+        pickedWrong++;
+        gallowCount++;
+        $scope.hangmanGallows = '../../public/images/gallows' + gallowCount + '.gif';
+      }
+      else{
+        for (var i = 0; i < wordArr.length; i++) {
+          if(wordArr[i]===letter){
+            guessedRight++;
+            $scope.wordSpot.splice(i, 1, letter);
+            console.log('wooo');
+          }
+        }
+      }
+      if(guessedRight === wordArr.length){
+        $scope.rightWord = true;
+        console.log('its overr');
+      }
+      else if(pickedWrong >=6){
+        console.log("game overrr");
+        gallowCount++;
+        $scope.wordOver = true;
+        $scope.questionsWrong++;
+        if(index + 1 === words.length -1){
+          console.log('end of everythibnnngggg');
+          $scope.gameOver = true;
+        }
+        else{
+          console.log("Next question!");
+          index++;
+          $scope.moveToNext = true;
+        }
+      }
+
+    };
+
 
     //ends game
     $scope.endGame = function(){
       console.log('GAME OVER');
     };
 
-    //gets all games on page load
-    $scope.getAllGames();
+    //start game on page load
+    $scope.playGame();
 
 }]);
 
@@ -184,7 +169,7 @@ app.controller('editHangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 
     $scope.updateGame = function(gameID){
       console.log(gameID);
       var getUrl = '/hangman/game/'+ gameID;
-      $http.put(getUrl, {theme:$scope.editGameForm.theme, words: $scope.editGameForm.words})
+      $http.put(getUrl, {title:$scope.editGameForm.title, words: $scope.editGameForm.words})
       .then(function(data){
         console.log(data);
         $location.path('/teacherinfo');
