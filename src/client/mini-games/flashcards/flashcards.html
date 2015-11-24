@@ -1,0 +1,13 @@
+<br>
+<div ng-controller = 'flashcardCtrl' class='container'>
+  <ul><h1 class ='center'>Flashcards</h1></ul>
+
+  <ul><h3 class = 'center'>Your Sets</h3>
+    <li class = 'center' ng-repeat = 'set in showUser.flashcardSets'> <a href = '/#/editflashcards' ng-click='storeSetId(set._id)'>{{set.title}}</a></li>
+  </ul>
+
+
+
+
+  <a href = '/#/createflashcards'><button>Create new Set </button></a>
+</div> <!-- end flashcardCtrl -->

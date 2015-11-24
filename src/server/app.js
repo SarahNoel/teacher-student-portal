@@ -2,6 +2,7 @@ require('./models/teacher.js');
 require('./models/student.js');
 require('./models/vocabGameModels.js');
 require('./models/hangmanGameModel.js');
+require('./models/flashcardModel.js');
 
 
 // *** main dependencies *** //
@@ -29,7 +30,7 @@ var teacherRoutes = require('./routes/teacherRoutes.js');
 var studentRoutes = require('./routes/studentRoutes.js');
 var vocabGameRoutes = require('./routes/vocabGameRoutes.js');
 var hangmanGameRoutes = require('./routes/hangmanGameRoutes.js');
-
+var flashcardRoutes = require('./routes/flashcardRoutes.js');
 
 var app = express();
 // *** config middleware *** //
@@ -49,9 +50,7 @@ app.use('/studentUsers/', studentRoutes);
 // *** mini-game routes *** //
 app.use('/vocab/', vocabGameRoutes);
 app.use('/hangman/', hangmanGameRoutes);
-
-
-
+app.use('/flashcards/', flashcardRoutes);
 
 // *** error handlers *** //
 

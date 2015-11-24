@@ -1,0 +1,47 @@
+<div ng-controller= 'flashcardCtrl' class='container'>
+
+<br>
+<h1>Make a New Flashcard Set</h1>
+
+ <form name='addflashcardForm' ng-hide='addQuestions'>
+    <div class="form-group">
+
+      <label>Set Name/Theme</label>
+      <input ng-model='flashcardTitle' type="text" class="form-control" placeholder="Bio Vocab"required>
+
+    </div>
+
+    <div class="form-group">
+      <label>Question</label>
+      <input ng-model='flashcardForm.question' type="text" class="form-control" placeholder="What is the powerhouse of a cell?" >
+    </div>
+
+    <div class="form-group">
+      <label for="hint">Answer</label>
+      <input ng-model='flashcardForm.answer' type="text" class="form-control" placeholder="Mitochondria" >
+    </div>
+
+    <button type = 'button' ng-click = 'addMoreQuestions()' class='btn btn-primary'>Add More</button>
+</form>
+
+<button ng-click = 'finishSet()' class='btn btn-success'>Finish Set</button>
+
+<div>
+  <br>
+  <h5>Current questions for this set: </h5>
+  <ul ng-repeat='(question, answer) in newSetObject.words'>
+    <li> Question: {{question}}</li>
+    <li> Answer: {{answer}}</li>
+  </ul>
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+

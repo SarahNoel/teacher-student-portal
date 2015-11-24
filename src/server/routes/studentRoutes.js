@@ -24,7 +24,7 @@ router.get('/students', function(req, res, next){
 //get all students and games from a teacher
 router.get('/students/:teacherID', function(req, res, next){
   Teacher.findById(req.params.teacherID, function(err, teacher){})
-  .deepPopulate('hangmanGames vocabGames students')
+  .deepPopulate('hangmanGames vocabGames students flashcardSets')
   .exec(function(err, data){
     if(err){
       res.json(err);

@@ -28,7 +28,9 @@ var User = new Schema({
   vocabGames: [{type: Schema.Types.ObjectId,
     ref:'vocabGames'}],
   hangmanGames: [{type: Schema.Types.ObjectId,
-    ref:'hangmanGames'}]
+    ref:'hangmanGames'}],
+  flashcardSets: [{type: Schema.Types.ObjectId,
+    ref:'flashcardSets'}]
 });
 
 

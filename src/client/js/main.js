@@ -36,16 +36,25 @@ app.config(['$routeProvider', function ($routeProvider) {
       templateUrl: '/mini-games/vocabRace/vocabRaceEdit.html'
     })
     .when('/createVocabRace', {
-      templateUrl: '/mini-games/vocabRace/createRaceEdit.html'
+      templateUrl: '/mini-games/vocabRace/vocabRaceCreate.html'
     })
     .when('/createHangman', {
       templateUrl: '/mini-games/hangman/hangmanCreate.html'
     })
-      .when('/hangman', {
+    .when('/hangman', {
       templateUrl: '/mini-games/hangman/hangman.html'
     })
     .when('/editHangman', {
       templateUrl: '/mini-games/hangman/hangmanEdit.html'
+    })
+    .when('/flashcards', {
+      templateUrl: '/mini-games/flashcards/flashcards.html'
+    })
+    .when('/editflashcards', {
+      templateUrl: '/mini-games/flashcards/flashcardsEdit.html'
+    })
+    .when('/createflashcards', {
+      templateUrl: '/mini-games/flashcards/flashcardsCreate.html'
     })
     .otherwise({redirectTo: '/'});
 }]);
