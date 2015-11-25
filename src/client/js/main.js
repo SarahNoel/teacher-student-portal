@@ -56,6 +56,9 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/createflashcards', {
       templateUrl: '/mini-games/flashcards/flashcardsCreate.html'
     })
+    .when('/playflashcards', {
+      templateUrl: '/mini-games/flashcards/flashcardsPlay.html'
+    })
     .otherwise({redirectTo: '/'});
 }]);
 

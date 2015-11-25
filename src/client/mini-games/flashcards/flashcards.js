@@ -158,6 +158,33 @@ app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
 
 
 
+// <------------------  EDIT SET  ----------------->
+app.controller('playFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
+    //blank objects for forms
+    $scope.editGame = {};
+    $scope.editQuestionForm = {};
+    $scope.addQuestionForm = {};
+
+
+    //get one set by id
+    $scope.getOneSet = function(){
+      var id = UserServices.getGame();
+      $http.get('/flashcards/set/' + id)
+      .then(function(data){
+        $scope.editSet = data.data;
+      });
+    };
+
+    //cancels, resets to see questions
+    $scope.cancel = function(){
+      $scope.editingQuestion = false;
+      $scope.addingQuestion = false;
+      $scope.editQuestionForm = {};
+    };
+
+    $scope.getOneSet();
+
+}]);
 
 
 

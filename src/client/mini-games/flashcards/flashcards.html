@@ -3,7 +3,11 @@
   <div class = 'edit-div'>
   <ul><h1 class ='center'>Flashcards</h1></ul>
 
-  <ul><h3 class = 'center'>Your Sets</h3>
+  <ul><h3 class = 'center'>Practice Your Sets</h3>
+    <li class = 'center' ng-repeat = 'set in showUser.flashcardSets'> <a href = '/#/playflashcards' ng-click='storeSetId(set._id)'>{{set.title}}</a></li>
+  </ul>
+
+  <ul><h3 class = 'center'>Edit Your Sets</h3>
     <li class = 'center' ng-repeat = 'set in showUser.flashcardSets'> <a href = '/#/editflashcards' ng-click='storeSetId(set._id)'>{{set.title}}</a></li>
   </ul>
 
