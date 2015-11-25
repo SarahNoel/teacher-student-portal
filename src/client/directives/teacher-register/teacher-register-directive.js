@@ -23,7 +23,7 @@ app.directive('teacherRegister', function(){
               $location.path('/login');
             })
             .catch(function(response) {
-              console.log(response.data);
+              $scope.errorMessage = response.data.message;
             });
 
         };

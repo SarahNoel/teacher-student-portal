@@ -283,3 +283,7 @@ ul{
 .edit-div{
   width: 300px;
 }
+
+.button-box{
+  display: flex;
+}

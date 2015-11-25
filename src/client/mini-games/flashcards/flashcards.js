@@ -20,7 +20,6 @@ app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
     $scope.getAllSets = function(){
       $http.get('/flashcards/sets/' + user._id)
       .then(function(data){
-        console.log('all ', data.data);
         $scope.showUser = data.data;
       });
     };
@@ -119,7 +118,7 @@ app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
     };
 
     //update question
-    $scope.updateQuestion = function(question, answer,cardID){
+    $scope.updateCard = function(question, answer,cardID){
       var payload = {question: question, answer:answer};
       $http.put('/flashcards/card/' + cardID, payload)
       .then(function(data){
@@ -128,34 +127,21 @@ app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
       });
     };
 
-    //adds questions to existing game
-    $scope.addQuestionsEditGame = function(){
-      $scope.addingQuestion = true;
-    };
-
-    //delete question
-    $scope.deleteQuestion = function(questionID){
-      $http.delete('/vocab/question/' + questionID)
+    //delete set
+    $scope.deleteSet = function(setID){
+      $http.delete('/flashcards/set/' + setID)
       .then(function(data){
-        $scope.getOneGame();
-      })
-      .catch(function(err){
-        console.log(err);
+        $scope.getOneSet();
+        $location.path('/flashcards');
       });
     };
 
-    //save question to game
-    $scope.saveQuestion = function(){
-      var id = UserServices.getGame();
-      var hint = $scope.addQuestionForm;
-      var payload = {id:id, question: hint.question, answer: hint.answer};
-      $http.post('/vocab/question', payload)
+    //delete card
+    $scope.deleteCard = function(cardID){
+      $http.delete('/flashcards/card/' + cardID)
       .then(function(data){
-        console.log(data);
-        $scope.editGame = data.data;
-      })
-      .catch(function(err){
-        console.log('err ', err);
+        $scope.getOneSet();
+
       });
     };
 

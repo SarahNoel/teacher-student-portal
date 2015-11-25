@@ -7,6 +7,8 @@ app.directive('teacherLogin', function(){
         $scope.teacherLogin = {};
         //login user
         $scope.login = function() {
+          $scope.errorMessage = '';
+          $scope.secondErrorMessage = '';
           var user = {
             email: $scope.teacherLogin.email,
             password: $scope.teacherLogin.password,
@@ -20,10 +22,14 @@ app.directive('teacherLogin', function(){
               $scope.showUser = UserServices.getUser();
               $location.path('/teacherinfo');
               UserServices.saveTeacher();
-
             })
             .catch(function(response) {
-              console.log(response);
+              if(response.data.message.email){
+              $scope.errorMessage = 'Sorry, that email is not registered.';
+              }
+              else{
+              $scope.errorMessage = 'Sorry, incorrect password.';
+              }
             });
         };
     }]

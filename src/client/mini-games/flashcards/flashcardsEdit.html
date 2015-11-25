@@ -1,18 +1,21 @@
 <div ng-controller= 'editFlashcardCtrl' class='container'>
   <br>
 <h1>Edit your Flashcard Set</h1>
+<div class = 'edit-div'>
 <div class='greenie' ng-show='showCardUpdateMessage'>
 <h4> Question Updated!</h4>
       <br>
 </div>
-<div class = 'edit-div'>
   <form name='editSetForm' ng-hide='addQuestions'>
     <div class="form-group">
       <label>Set Name/Theme</label>
       <input ng-model='editSet.title' type="text" class="form-control" placeholder="Bio Vocab"required>
       <p class='greenie centered' ng-show = 'showUpdateMessage'> Title Updated! </p>
       <br>
+      <div class = 'button-box'>
       <button class='btn btn-success centered' ng-click='updateSetTitle(editSet._id)'>Change Title</button>
+      <button class='btn btn-danger centered' ng-click='deleteSet(editSet._id)'>Delete Set</button>
+      </div>
   </form>
     </div>
 
@@ -23,7 +26,11 @@
         <label>Answer:</label>
         <input class = 'form-control' ng-model= 'flashcard.answer'>
         <br>
-      <button ng-hide = 'addingQuestion' ng-click = 'updateQuestion(flashcard._id, flashcard.question, flashcard.answer)' class='centered btn btn-primary'>Update</button>
+      <div class = 'button-box centered'>
+        <button ng-hide = 'addingQuestion' ng-click = 'updateCard(flashcard._id, flashcard.question, flashcard.answer)' class='centered btn btn-primary'>Update</button>
+
+        <button ng-hide = 'addingQuestion' ng-click = 'deleteCard(flashcard._id)' class='centered btn btn-danger'>Delete</button>
+      </div>
       </form>
     </div>
 

@@ -32,14 +32,14 @@
 <div class = 'sidebar'>
   <ul class="sidebar-nav">
 
-    <li class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/chat')}"><a href="/#/chat">Chat</a></li>
+    <li ng-show= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/chat')}"><a href="/#/chat">Chat</a></li>
 
-    <li class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/vocab')}"><a href="/#/vocab">Games!</a></li>
+    <li ng-show= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/vocab')}"><a href="/#/vocab">Games!</a></li>
 
     <li ng-show='isTeacher()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/teacherinfo')}"><a href="/#/teacherinfo">Teacher</a></li>
 
     <li ng-show= 'isStudent()'  class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/studentinfo')}"><a href="/#/studentinfo">Stats</a></li>
 
-    <li ng-show= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/flashcards') || isActive('/editflashcards')|| isActive('/createflashcards')}"><a href="/#/flashcards">Flashcards</a></li>
+    <li ng-show= 'isStudent()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/flashcards') || isActive('/editflashcards')|| isActive('/createflashcards')}"><a href="/#/flashcards">Flashcards</a></li>
 
 </div>

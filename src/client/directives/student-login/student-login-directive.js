@@ -6,6 +6,7 @@ app.directive('studentLogin', function(){
         $scope.studentForm = {};
         //login user
         $scope.studentLogin = function() {
+          $scope.errorMessage = '';
           var payload= {
             email: $scope.studentForm.email,
             password: $scope.studentForm.password
@@ -13,15 +14,14 @@ app.directive('studentLogin', function(){
           console.log(payload);
           $http.post('/studentUsers/login', payload)
           .then(function(data){
-            console.log('then', data);
+            if(data.data.err){
+              $scope.errorMessage = data.data.err;
+            }
+            else{
             UserServices.storeUser(data.data);
             UserServices.saveStudent();
             $location.path('/studentinfo');
-
-          })
-          .catch(function(data){
-            console.log('catch ', data);
-
+            }
           });
         };
     }]

@@ -28,16 +28,13 @@ var User = new Schema({
   vocabGames: [{type: Schema.Types.ObjectId,
     ref:'vocabGames'}],
   hangmanGames: [{type: Schema.Types.ObjectId,
-    ref:'hangmanGames'}],
-  flashcardSets: [{type: Schema.Types.ObjectId,
-    ref:'flashcardSets'}]
+    ref:'hangmanGames'}]
 });
 
 
 // hash before saving to database
 User.pre('save', function(next) {
   var user = this;
-  console.log(user);
 
   // only hash if the password is new or modified
   if (!user.isModified('password')) return next();

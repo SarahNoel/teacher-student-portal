@@ -110,7 +110,6 @@ router.post('/card', function(req, res, next) {
   var newCard = new Flashcard({question:req.body.question, answer:req.body.answer});
   newCard.save(function(err, card){
     if(card){
-    console.log('card ', card);
     var update = {$push:{flashcards : newCard}};
     var options = {new:true};
     FlashcardSet.findByIdAndUpdate(req.body.setID, update, options)
