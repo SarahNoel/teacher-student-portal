@@ -87,13 +87,10 @@ app.factory('UserServices', ['$http', function($http){
   //if student, return teacher
   //if teacher, return teacher
   function checkforTeacher(){
-    console.log(username);
     if(student){
-      console.log('student ', username.teacherID);
       return username.teacherID;
     }
     if(teacher){
-      console.log('teacher ', username._id);
       return username._id;
     }
   }
@@ -106,7 +103,7 @@ app.factory('UserServices', ['$http', function($http){
     return playGameId;
   }
 
-
+  //enables all hangman letters
   function enableAll(picked){
     for (var i = 0; i < picked.length; i++) {
       var element = document.getElementById(picked[i]);

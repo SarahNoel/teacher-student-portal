@@ -1,10 +1,11 @@
 app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
     //sets current user
     var user = UserServices.getUser();
-
     //sets teacherID
     var teacherID =  UserServices.checkforTeacher();
     //blank objects for forms
+    var setID;
+    var setTitle;
     $scope.flashcardForm = {};
     //blank object for new set
     $scope.newSetObject = {words:{}};
@@ -24,42 +25,41 @@ app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
       });
     };
 
-    //save a new set to a user
-    $scope.finishSet = function(){
-      $scope.newSetObject.title = $scope.flashcardTitle;
-      console.log($scope.newSetObject);
-      var payload = {set:$scope.newSetObject, id:user._id};
-      $http.post('/flashcards/set', payload)
+    //create a set- title only
+    $scope.createSet = function(){
+      $http.post('/flashcards/set', {title:$scope.flashcardTitle.trim(), id:user._id})
       .then(function(data){
-        console.log(data);
-        $scope.flashcardTitle = '';
-        $scope.flashcardForm = {};
-        $scope.newSetObject = {words:{}};
-      })
-      .catch(function(data){
-        console.log(data);
-      });
-    };
-
-    //store questions pre-save
-    $scope.addMoreQuestions = function(){
-      $scope.newSetObject.words[$scope.flashcardForm.question] = $scope.flashcardForm.answer;
-      $scope.flashcardForm = {};
-      console.log($scope.newSetObject);
-    };
-
-    $scope.createGame = function(){
-      gameName = $scope.gameForm.gameName;
-      $http.post('/vocab/game', {title:gameName, teacherID: teacherID})
-      .then(function(data){
-        $scope.gameName = data.data.title;
-        gameId = data.data.gameID;
-        $scope.gameForm ={};
-        $scope.addQuestions = true;
-        $location.path('/#/flashcards');
+        setID = data.data.setID;
+        setTitle = data.data.title;
+        $scope.flashcardForm ={};
+        $scope.addingQuestions = true;
       })
       .catch(function(err){
       });
+    };
+
+
+    //store questions pre-save
+    $scope.addMoreQuestions = function(){
+      var payload = {question: $scope.flashcardForm.question, answer:$scope.flashcardForm.answer, setID:setID};
+      $http.post('/flashcards/card', payload)
+      .then(function(data){
+        $scope.allFlashcards = data.data.flashcards;
+        $scope.flashcardForm = {};
+      });
+    };
+
+    //save a new set to a user
+    $scope.finishSet = function(){
+      if(setTitle != $scope.flashcardTitle.trim()){
+        var payload = {title:$scope.flashcardTitle.trim()};
+        $http.put('/flashcards/set/' + setID, payload);
+      }
+      $scope.flashcardTitle = '';
+      $scope.flashcardForm = {};
+      $location.path('/flashcards');
+
+
     };
 
     //add question to game
@@ -96,7 +96,6 @@ app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
       $http.get('/flashcards/set/' + id)
       .then(function(data){
         $scope.editSet = data.data;
-        console.log(data.data);
       });
     };
 
@@ -106,31 +105,27 @@ app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
       $http.get('/vocab/question/' + questionID)
       .then(function(data){
         $scope.editQuestionForm = data.data;
-      })
-      .catch(function(err){
-        console.log('catch ', err);
       });
     };
 
-    $scope.updateGameTitle = function(gameID){
-      var getUrl = '/vocab/game/'+ gameID;
-      $http.put(getUrl, {title:$scope.editGame.title})
+    $scope.updateSetTitle = function(gameID){
+      var getUrl = '/flashcards/set/'+ gameID;
+      $http.put(getUrl, {title:$scope.editSet.title})
       .then(function(data){
-        console.log(data);
-        $scope.getOneGame();
+        $scope.getOneSet();
         $scope.showUpdateMessage = true;
-        $timeout(function () { $scope.showUpdateMessage = false; }, 3000);
-
-      })
-      .catch(function(err){
-        console.log(err);
+        $timeout(function () { $scope.showUpdateMessage = false; }, 2500);
       });
     };
 
     //update question
-    $scope.updateQuestion = function(question, answer){
-      console.log(question, answer);
-      console.log(this);
+    $scope.updateQuestion = function(question, answer,cardID){
+      var payload = {question: question, answer:answer};
+      $http.put('/flashcards/card/' + cardID, payload)
+      .then(function(data){
+        $scope.showCardUpdateMessage = true;
+        $timeout(function () { $scope.showCardUpdateMessage = false; }, 2500);
+      });
     };
 
     //adds questions to existing game
