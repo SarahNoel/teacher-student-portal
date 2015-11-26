@@ -164,6 +164,7 @@ app.controller('playFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
     $scope.editGame = {};
     $scope.editQuestionForm = {};
     $scope.addQuestionForm = {};
+    var index = 0;
 
 
     //get one set by id
@@ -172,6 +173,7 @@ app.controller('playFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
       $http.get('/flashcards/set/' + id)
       .then(function(data){
         $scope.editSet = data.data;
+        $scope.current = data.data.flashcards[index];
       });
     };
 

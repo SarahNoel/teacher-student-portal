@@ -287,3 +287,18 @@ ul{
 .button-box{
   display: flex;
 }
+
+.flex{
+  display: flex;
+}
+
+.flashcard-btns{
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.flashcard-front{
+  height: 300px;
+  width: 200px;
+  border: thick black solid;
+}
