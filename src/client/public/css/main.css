@@ -301,4 +301,16 @@ ul{
   height: 300px;
   width: 200px;
   border: thick black solid;
+  background-color: white;
+}
+
+.flashcard-back{
+  height: 300px;
+  width: 200px;
+  border: thick black solid;
+  background-color: gray;
+}
+
+.mid-card{
+  margin-top: 60%;
 }

@@ -7,12 +7,17 @@
 
   <br>
 
-  <div class = 'centered'>
-    <div class = 'flashcard-front'>
-      <h3>{{current.question}}</h3>
+  <div class = 'centered' ng-hide='backside'>
+    <div class = 'flashcard-front' ng-click='guessCard()'>
+      <h3 class='center mid-card'>{{current.question}}</h3>
     </div>
   </div>
 
+  <div class = 'centered' ng-show='backside'>
+    <div class = 'flashcard-back' ng-click='nextCard()'>
+      <h3 class='center mid-card'>{{current.answer}}</h3>
+    </div>
+  </div>
 
 
 

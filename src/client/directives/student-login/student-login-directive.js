@@ -11,7 +11,6 @@ app.directive('studentLogin', function(){
             email: $scope.studentForm.email,
             password: $scope.studentForm.password
           };
-          console.log(payload);
           $http.post('/studentUsers/login', payload)
           .then(function(data){
             if(data.data.err){

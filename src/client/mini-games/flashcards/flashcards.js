@@ -165,6 +165,7 @@ app.controller('playFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
     $scope.editQuestionForm = {};
     $scope.addQuestionForm = {};
     var index = 0;
+    var current;
 
 
     //get one set by id
@@ -172,9 +173,27 @@ app.controller('playFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
       var id = UserServices.getGame();
       $http.get('/flashcards/set/' + id)
       .then(function(data){
-        $scope.editSet = data.data;
-        $scope.current = data.data.flashcards[index];
+        current = data.data;
+        $scope.editSet = current;
+        $scope.current = current.flashcards[index];
       });
+    };
+
+    //guess card answer
+    $scope.guessCard = function(){
+      $scope.backside = true;
+    };
+
+    //move to next card
+    $scope.nextCard = function(){
+      if(index+1 >= current.flashcards.length){
+        console.log('last card!');
+      }
+      else{
+        index++;
+        $scope.current = current.flashcards[index];
+        $scope.backside = false;
+      }
     };
 
     //cancels, resets to see questions
