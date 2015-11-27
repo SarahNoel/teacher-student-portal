@@ -1,4 +1,4 @@
-var app = angular.module('studentApp', ['ngRoute', 'satellizer']);
+var app = angular.module('studentApp', ['ngRoute', 'satellizer', 'btford.socket-io']);
 
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
