@@ -15,7 +15,6 @@ var mongoose = require('mongoose');
 
 
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
 
 // *** config file *** //
 var config = require('../../_config');
@@ -97,16 +96,7 @@ app.all('*', function(req, res, next) {
 });
 
 
-//socketttssss
-io.on('connection', function(socket) {
-  console.log("connected!");
 
-  socket.on('test', function(){
-    io.emit("sup");
-  });
-
-
-});
 
 
 

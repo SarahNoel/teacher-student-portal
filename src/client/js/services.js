@@ -120,9 +120,6 @@ app.factory('UserServices', ['$http', function($http){
 
 //--------------CHAT FACTORIES-------------------//
 
-app.factory('mySocket', function (socketFactory) {
-  return socketFactory();
-});
 
 app.factory('ChatServices', [function() {
     // Open a WebSocket connection

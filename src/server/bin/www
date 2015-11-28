@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+console.log('heeeyyyyopppp')
 
 /**
  * Module dependencies.
@@ -19,6 +20,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+var io = require('socket.io')(server);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -31,6 +33,9 @@ server.on('listening', onListening);
 /**
  * Normalize a port into a number, string, or false.
  */
+
+
+
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
@@ -88,3 +93,19 @@ function onListening() {
   debug('Listening on ' + bind);
   console.log('Listening on ' + bind);
 }
+
+
+
+//socketttssss
+io.on('connection', function(socket) {
+  console.log("connected!");
+
+  socket.on('test', function(){
+    io.emit("sup");
+  });
+
+
+});
+
+
+
