@@ -92,22 +92,25 @@ function onListening() {
   console.log('Listening on ' + bind);
 }
 
-
 var users = ['bobby', 'you', 'test', 'student', 'poop', 'more', 'lots', 'class', 'woo'];
+
 //sockets
 io.on('connection', function(socket) {
   console.log("connected!");
   socket.on('user', function(user){
-    if(users.indexOf(user) === -1){
-      users.push(user);
-    }
+    users.push(user);
+    socket.user = user;
     socket.emit('online-users', users);
   });
 
   socket.on('message-sent', function(message){
-    io.emit('message-received', message);
+    io.emit('message-received', {message:message, user:socket.user});
   });
 
+  socket.on('disconnect', function(username){
+    var index = users.indexOf(username);
+    users.splice(index, 1);
+  });
 
 });
 

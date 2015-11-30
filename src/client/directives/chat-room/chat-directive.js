@@ -3,14 +3,15 @@ app.directive('chatRoom', function(){
       restrict: 'E',
       templateUrl: 'directives/chat-room/chat-room.html',
       controller: ['$scope', 'UserServices', '$http', function($scope, UserServices, $http) {
-  //ONLY FOR TESTING, DELETE ME
-        UserServices.storeUser({username: 'test'});
+  // //ONLY FOR TESTING, DELETE ME
+  //       UserServices.storeUser({username: 'test'});
         //start socket
         var socket = io.connect();
-
-        //get user, add to online users
         var user = UserServices.getUser();
-        socket.emit('user', user.username);
+        //get user, add to online users
+        function begin (){
+          socket.emit('user', user.username);
+        }
 
         //wrap elements in angular
         var chatUl = angular.element(document.querySelector('#chat-ul'));
@@ -24,7 +25,7 @@ app.directive('chatRoom', function(){
 
         //append message after hitting socket
         socket.on('message-received', function(message){
-          chatUl.append('<li>&nbsp' + user.username + ': ' + message + '</li>');
+          chatUl.append('<li>&nbsp' + message.user + ': ' + message.message + '</li>');
         });
 
         socket.on('online-users', function(users){
@@ -35,7 +36,7 @@ app.directive('chatRoom', function(){
 
 
 
-
+        begin();
     }]
   };
 
