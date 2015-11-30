@@ -23,6 +23,8 @@ app.directive('teacherLogin', function(){
               $location.path('/teacherinfo');
               UserServices.saveTeacher();
               var room = response.data.user._id;
+              var socket = io.connect();
+              socket.emit('login', room);
             })
             .catch(function(response) {
               if(response.data.message.email){

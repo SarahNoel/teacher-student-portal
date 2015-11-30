@@ -96,13 +96,11 @@ io.on('connection', function(socket) {
   console.log("connected!");
 
   socket.on('login', function(room){
-    console.log(room);
     if(rooms.indexOf(room)===-1){
       rooms.push(room);
     }
     socket.room = room;
     socket.join(room);
-    console.log(room);
   });
 
   socket.on('entered', function(user){

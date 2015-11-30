@@ -23,7 +23,9 @@ app.directive('studentRegister', function(){
             else{
               $scope.studentRegister = {};
               UserServices.storeUser(data.data);
-              room = data.data.teacherID;
+              var room = data.data.teacherID;
+              var socket = io.connect();
+              socket.emit('login', room);
               UserServices.saveStudent();
               $location.path('/studentinfo');
             }
