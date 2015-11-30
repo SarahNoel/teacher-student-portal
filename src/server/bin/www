@@ -94,11 +94,12 @@ function onListening() {
 
 
 
-//socketttssss
+//sockets
 io.on('connection', function(socket) {
   console.log("connected!");
 
   socket.on('test', function(){
+    console.log("made it here");
     io.emit("sup");
   });
 
