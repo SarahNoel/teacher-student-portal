@@ -314,3 +314,70 @@ ul{
 .mid-card{
   margin-top: 60%;
 }
+
+.chat-room{
+  width: 85%;
+
+}
+
+
+.outer-chat-box{
+  height: 500px;
+  border: thick black solid;
+  width: 80%;
+  background-color: gray;
+  float: left;
+}
+
+.inner-chat-box{
+  height: 85%;
+  border: thick red solid;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.chat-input{
+  height: 73px;
+  border: thick green solid;
+  font-size: x-large;
+  width: 80%
+}
+
+.chat-submit{
+  margin-left: 0;
+  width: 16%;
+  border: none;
+  height: 63px;
+  font-size: xx-large;
+  background-color: gray;
+}
+
+.striped-ul{
+  margin-left: -40px;
+  font-size: 20px;
+}
+
+.striped-ul li:nth-child(odd) {
+  background: #eee;
+}
+
+.online-user-box{
+  width: 18%;
+  height: 200px;
+  border: thin black solid;
+  float: left;
+  margin-left: 10px;
+  overflow-y:auto;
+
+}
+
+.users-title{
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.user-ul{
+  font-size: 20px;
+  margin-top: -10px;
+  margin-left: -25px;
+}

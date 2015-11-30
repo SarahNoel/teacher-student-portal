@@ -93,14 +93,19 @@ function onListening() {
 }
 
 
-
+var users = ['bobby', 'you', 'test', 'student', 'poop', 'more', 'lots', 'class', 'woo'];
 //sockets
 io.on('connection', function(socket) {
   console.log("connected!");
+  socket.on('user', function(user){
+    if(users.indexOf(user) === -1){
+      users.push(user);
+    }
+    socket.emit('online-users', users);
+  });
 
-  socket.on('test', function(){
-    console.log("made it here");
-    io.emit("sup");
+  socket.on('message-sent', function(message){
+    io.emit('message-received', message);
   });
 
 
