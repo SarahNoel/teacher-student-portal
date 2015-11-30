@@ -92,13 +92,27 @@ function onListening() {
   console.log('Listening on ' + bind);
 }
 
-var users = ['bobby', 'you', 'test', 'student', 'poop', 'more', 'lots', 'class', 'woo'];
-
+var users = [];
+// var rooms = [];
+var currentRoom;
 //sockets
 io.on('connection', function(socket) {
   console.log("connected!");
-  socket.on('user', function(user){
-    users.push(user);
+
+  socket.on('login', function(room){
+    console.log(room);
+    // if(rooms.indexOf(room)===-1){
+    //   rooms.push(room);
+    // }
+    // socket.room = room;
+    // currentRoom = room;
+    // socket.join(room);
+  });
+
+  socket.on('entered', function(user){
+    if(users.indexOf(user) === -1){
+      users.push(user);
+    }
     socket.user = user;
     socket.emit('online-users', users);
   });
@@ -110,6 +124,7 @@ io.on('connection', function(socket) {
   socket.on('disconnect', function(username){
     var index = users.indexOf(username);
     users.splice(index, 1);
+    io.emit('user left', {user:socket.user, users:users});
   });
 
 });

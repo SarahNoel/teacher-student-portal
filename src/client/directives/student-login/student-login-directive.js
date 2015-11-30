@@ -6,6 +6,7 @@ app.directive('studentLogin', function(){
         $scope.studentForm = {};
         //login user
         $scope.studentLogin = function() {
+          var room;
           $scope.errorMessage = '';
           var payload= {
             email: $scope.studentForm.email,
@@ -18,6 +19,7 @@ app.directive('studentLogin', function(){
             }
             else{
             UserServices.storeUser(data.data);
+            room = data.data.teacherID;
             UserServices.saveStudent();
             $location.path('/studentinfo');
             }

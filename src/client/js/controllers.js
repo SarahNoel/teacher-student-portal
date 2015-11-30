@@ -75,11 +75,4 @@ app.controller('GameCtrl', ['$scope', '$http', 'UserServices',function($scope, $
 
 
 }]);
-//--------------CHAT CONTROLLER-------------------//
 
-app.controller('chatCtrl', ['$scope', 'UserServices', 'ChatServices', function($scope, UserServices, ChatServices) {
-
-  $scope.MyData= ChatServices;
-
-
-}]);

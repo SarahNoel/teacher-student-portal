@@ -7,6 +7,7 @@ app.directive('studentRegister', function(){
 
         //register student
         $scope.studentSignup = function() {
+          var room;
           $scope.errorMessage = '';
           var payload= {
             username: $scope.studentRegister.username,
@@ -22,6 +23,7 @@ app.directive('studentRegister', function(){
             else{
               $scope.studentRegister = {};
               UserServices.storeUser(data.data);
+              room = data.data.teacherID;
               UserServices.saveStudent();
               $location.path('/studentinfo');
             }

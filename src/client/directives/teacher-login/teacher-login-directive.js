@@ -22,6 +22,7 @@ app.directive('teacherLogin', function(){
               $scope.showUser = UserServices.getUser();
               $location.path('/teacherinfo');
               UserServices.saveTeacher();
+              var room = response.data.user._id;
             })
             .catch(function(response) {
               if(response.data.message.email){

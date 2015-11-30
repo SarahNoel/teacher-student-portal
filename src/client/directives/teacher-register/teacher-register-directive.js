@@ -19,6 +19,7 @@ app.directive('teacherRegister', function(){
               $auth.login(user);
               UserServices.storeUser(user);
               UserServices.saveTeacher();
+              var room  = user._id;
               $scope.teacherForm = {};
               $location.path('/login');
             })

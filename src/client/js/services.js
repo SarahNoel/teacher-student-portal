@@ -113,9 +113,6 @@ app.factory('UserServices', ['$http', function($http){
     picked = [];
   }
 
-
-
-
 }]);
 
 //--------------CHAT FACTORIES-------------------//
