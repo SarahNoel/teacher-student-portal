@@ -118,7 +118,8 @@ app.factory('UserServices', ['$http', function($http){
 
 }]);
 
-//--------------CHAT FACTORY-------------------//
+//--------------CHAT FACTORIES-------------------//
+
 
 app.factory('ChatServices', [function() {
     // Open a WebSocket connection

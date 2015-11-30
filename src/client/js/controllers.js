@@ -2,42 +2,6 @@
 
 app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$http', 'UserServices', function($scope, $location, $window, $auth, $http, UserServices){
 
-//   //highlights active navbar tab
-//   $scope.isActive = function (viewLocation) {
-//     return viewLocation === $location.path();
-//   };
-
-//   $scope.isTeacher = function(){
-//     return UserServices.isTeacher();
-//   };
-
-//   //checks if user is authenticated
-//   $scope.isLoggedIn= function(){
-//     $scope.showUser = UserServices.getUser();
-//     if($auth.isAuthenticated() || UserServices.getUser()){
-//       return true;
-//     }
-//     return false;
-//   };
-
-//   //logs out user
-//   $scope.logout = function() {
-//     console.log('gone!');
-//     $auth.logout();
-//     delete $window.localStorage.currentUser;
-//     UserServices.logout();
-//     $location.path('/');
-//   };
-
-//   $scope.getUser = function(){
-//     $scope.showUser = UserServices.getUser();
-//   };
-
-//   //get user
-//   $scope.getUser();
-//   //checks if teacher
-//   $scope.isTeacher();
-
 }]);
 
 //--------------TEACHER CONTROLLER-------------------//
