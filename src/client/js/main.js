@@ -1,4 +1,4 @@
-var app = angular.module('studentApp', ['ngRoute', 'satellizer']);
+var app = angular.module('studentApp', ['ngRoute', 'satellizer']).service(WebSocket.name, WebSocket);
 
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider

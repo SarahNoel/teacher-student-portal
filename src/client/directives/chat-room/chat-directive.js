@@ -6,6 +6,8 @@ app.directive('chatRoom', function(){
 
         $scope.message = "HEYYYY";
 
+        var socket = io.connect();
+        console.log('whattttg')
 
         // socket.emit('test');
 
