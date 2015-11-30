@@ -32,9 +32,6 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 
-
-
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 
@@ -93,20 +90,19 @@ function onListening() {
 }
 
 var users = [];
-// var rooms = [];
-var currentRoom;
+var rooms = [];
 //sockets
 io.on('connection', function(socket) {
   console.log("connected!");
 
   socket.on('login', function(room){
     console.log(room);
-    // if(rooms.indexOf(room)===-1){
-    //   rooms.push(room);
-    // }
-    // socket.room = room;
-    // currentRoom = room;
-    // socket.join(room);
+    if(rooms.indexOf(room)===-1){
+      rooms.push(room);
+    }
+    socket.room = room;
+    socket.join(room);
+    console.log(room);
   });
 
   socket.on('entered', function(user){
@@ -114,11 +110,11 @@ io.on('connection', function(socket) {
       users.push(user);
     }
     socket.user = user;
-    socket.emit('online-users', users);
+    io.to(socket.room).emit('online-users', users);
   });
 
   socket.on('message-sent', function(message){
-    io.emit('message-received', {message:message, user:socket.user});
+    io.to(socket.room).emit('message-received', {message:message, user:socket.user});
   });
 
   socket.on('disconnect', function(username){
