@@ -92,9 +92,6 @@ ul{
   font-weight: bold;
 }
 
-.body-box{
-  margin-left: 120px;
-}
 .annie-font{
   font-family: 'Annie Use Your Telescope', cursive;
 }
@@ -181,21 +178,23 @@ ul{
 }
 
 .login-div{
-  width: 50%;
+  width: 60%;
   margin: auto;
   display: table;
-  padding: 10px;
-  background-color: #F5F5DC;
+  padding: 15px;
+  background-color: #eb6841;
   border-radius: 25px;
+  border: thick black solid;
 }
 
 .register-div{
-  width: 50%;
+  width: 60%;
   margin: auto;
   display: table;
-  padding: 10px;
-  background-color: teal;
+  padding: 15px;
+  background-color: #edc951;
   border-radius: 25px;
+  border: thick black solid;
 }
 
 .vocab-title{

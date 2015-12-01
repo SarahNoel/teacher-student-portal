@@ -37,6 +37,7 @@ app.factory('UserServices', [function(){
     username = '';
     game = '';
     teacher = false;
+    student = false;
   }
 
   //stores current game
