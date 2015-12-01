@@ -2,11 +2,11 @@
   <br>  <br>
 
   <div ng-hide='playing' class='center'>
-    <h3>Vocab Race</h3>
+    <h1>Vocab Race</h1>
 
-    <p>You will have a timer to guess the right word and
+    <h3>You will have a timer to guess the right word and
     spell it correctly.
-    <br>It will get faster as you get more right.  Good luck!</p>
+    <br>It will get faster as you get more right.  Good luck!</h3>
 
     <button ng-click= 'startGame()' class='btn btn-success'>Start!</button>
   </div>
@@ -42,13 +42,13 @@
             <button ng-disabled='timesUp === false' ng-click='nextQuestion()' class="btn btn-warning" type="submit">Next Question!</button>
         </div>
 
-         <div ng-show = 'showWrong' class='centered wrong-box'>
+         <div ng-show = 'showWrong' class='centered wrong-vocab-box'>
             <br>
             YOU ARE WRONG.
             <br><br>
         </div>
 
-        <div ng-show = 'showWrongNext' class='centered wrong-box'>
+        <div ng-show = 'showWrongNext' class='centered wrong-vocab-box'>
             <br>
             YOU RAN OUT OF TIME.
             <br>

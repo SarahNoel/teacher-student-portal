@@ -19,8 +19,8 @@ app.directive('headerInfo', function(){
 
         //checks if user is authenticated
         $scope.isLoggedIn= function(){
-          $scope.showUser = UserServices.getUser();
-          if($auth.isAuthenticated() || UserServices.getUser()){
+          if(UserServices.isLoggedIn()){
+            $scope.showUser = UserServices.getUser();
             return true;
           }
           return false;
@@ -41,8 +41,6 @@ app.directive('headerInfo', function(){
 
         //get user
         $scope.getUser();
-        //checks if teacher
-        $scope.isTeacher();
 
     }]
   };

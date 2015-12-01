@@ -1,7 +1,7 @@
 
 //--------------USER FACTORY-------------------//
 
-app.factory('UserServices', ['$http', function($http){
+app.factory('UserServices', [function(){
   var username = '';
   var game = '';
   var teacher = false;
@@ -9,24 +9,7 @@ app.factory('UserServices', ['$http', function($http){
   var studentTeacher;
   var playGameId;
 
-  return{
-          isLoggedIn: isLoggedIn,
-          storeUser: storeUser,
-          getUser: getUser,
-          logout: logout,
-          storeGame: storeGame,
-          getGame: getGame,
-          isTeacher: isTeacher,
-          saveTeacher: saveTeacher,
-          isStudent: isStudent,
-          saveStudent: saveStudent,
-          checkforTeacher: checkforTeacher,
-          storePlayGame: storePlayGame,
-          getPlayGame: getPlayGame,
-          enableAll: enableAll,
-          languageFilter: languageFilter
-        };
-
+  //checks for logged in user
   function isLoggedIn(){
     if(username === ''){
       return false;
@@ -61,7 +44,7 @@ app.factory('UserServices', ['$http', function($http){
     game = saveGame;
   }
 
-   //gets game
+  //gets game
   function getGame(){
     if(game === ''){
       return false;
@@ -95,8 +78,7 @@ app.factory('UserServices', ['$http', function($http){
     return true;
   }
 
-  //if student, return teacher
-  //if teacher, return teacher
+  //get teacher id
   function checkforTeacher(){
     if(student){
       return username.teacherID;
@@ -106,10 +88,12 @@ app.factory('UserServices', ['$http', function($http){
     }
   }
 
+  //store current game
   function storePlayGame(id){
     playGameId = id;
   }
 
+  //get current game
   function getPlayGame(){
     return playGameId;
   }
@@ -125,11 +109,11 @@ app.factory('UserServices', ['$http', function($http){
   }
 
 
-
+  //filters out vulgar language
   function languageFilter(str){
     var profanities = ['shit', 'fuck', 'ass', 'bastard', 'bitch', 'cock', 'cunt', 'kunt', 'dick', 'dyke', 'dike', 'fag', 'faggit', 'faggot', 'damn', 'dammit', 'asshole', 'whore', 'homo', 'nigga', 'nigger', 'pussy', 'queer', 'slut', 'whore', 'tit', 'titty', 'twat', 'fucka', 'retard', 'scrote', 'scrotum', 'titties', 'fucker', 'penis', 'vagina', 'shithead', 'blowjob', 'cum', 'buttplug', 'buttplugs', 'dipshit', 'queef', 'bitches', 'bitchy'];
 
-    var symbols = '!@#$%^&*';
+    var symbols = '!@#$%^&*©æ®√∞Ω∫∆¥ƒ∂ß';
     var arr = str.split(' ');
     for (var i = 0; i < arr.length; i++) {
       var word = arr[i].toLowerCase();
@@ -145,6 +129,26 @@ app.factory('UserServices', ['$http', function($http){
     }
     return arr.join(' ');
   }
+
+
+
+  return{
+          isLoggedIn: isLoggedIn,
+          storeUser: storeUser,
+          getUser: getUser,
+          logout: logout,
+          storeGame: storeGame,
+          getGame: getGame,
+          isTeacher: isTeacher,
+          saveTeacher: saveTeacher,
+          isStudent: isStudent,
+          saveStudent: saveStudent,
+          checkforTeacher: checkforTeacher,
+          storePlayGame: storePlayGame,
+          getPlayGame: getPlayGame,
+          enableAll: enableAll,
+          languageFilter: languageFilter
+        };
 }]);
 
 
