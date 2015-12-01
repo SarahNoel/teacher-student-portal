@@ -3,9 +3,7 @@ app.directive('chatRoom', function(){
       restrict: 'E',
       templateUrl: 'directives/chat-room/chat-room.html',
       controller: ['$scope', 'UserServices', '$http', function($scope, UserServices, $http) {
-// //ONLY FOR TESTING, DELETE ME
-        // UserServices.storeUser({username: 'test'});
-        //start socket
+        //connect to socket
         var socket = io.connect();
         var user = UserServices.getUser();
         //get user, add to online users

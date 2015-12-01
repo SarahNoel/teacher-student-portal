@@ -6,8 +6,9 @@
   <form name='editGameForm' ng-hide='addQuestions'>
     <div class="form-group">
       <label><h3>Game Name/Theme</h3></label>
-      <input ng-model='editGame.title' type="text" class="form-inline edit-title-input" placeholder="Bio Vocab"required><button class='btn btn-success' ng-click='updateGameTitle(editGame._id)'>Change Title</button> <span class='greenie' ng-show = 'showUpdateMessage'> Title Updated! </span>
+      <input ng-model='editGame.title' type="text" class="form-inline edit-title-input" placeholder="Bio Vocab"required><button type='button' class='btn btn-success' ng-click='updateGameTitle(editGame._id)'>Change Title</button> <span class='greenie' ng-show = 'showUpdateMessage'> Title Updated! </span>
     </div>
+  </form>
 
 <div ng-show='addingQuestion'>
   <h4>Add a New Question </h4>

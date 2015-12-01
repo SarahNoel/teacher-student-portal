@@ -1,14 +1,27 @@
-<h1>GAMES</h1>
 
-<div ng-controller = 'GameCtrl'>
-  <h3>Vocab Racer</h3>
-  <ul>
-    <li class='game-li' ng-repeat='game in games.vocabGames'> {{game.title}} <a href = '/#/vocabRace'><button class= 'btn btn-success' ng-click="getPlayGame(game._id)"> Play!</button></a></li>
-  </ul>
+<h1>Let's Play.</h1>
+<div class= 'container-fluid' ng-controller = 'GameCtrl'>
 
-  <h3>Hangman</h3>
-  <ul>
-    <li class = 'game-li' ng-repeat='hangman in games.hangmanGames'> {{hangman.title}} <a href = '/#/hangman'><button class= 'btn btn-success' ng-click="getPlayGame(hangman._id)"> Play!</button></a></li>
-  </ul>
+  <div class="col-md-5">
+    <h3>Vocab Racer</h3>
+    <ul>
+      <li class='game-li' ng-repeat='game in games.vocabGames'> {{game.title}} <a href = '/#/vocabRace'><button class= 'btn btn-success' ng-click="getPlayGame(game._id)"> Play!</button></a></li>
+    </ul>
+
+    <h3>Hangman</h3>
+    <ul>
+      <li class = 'game-li' ng-repeat='hangman in games.hangmanGames'> {{hangman.title}} <a href = '/#/hangman'><button class= 'btn btn-success' ng-click="getPlayGame(hangman._id)"> Play!</button></a></li>
+    </ul>
+
+  </div>
+  <div class="col-md-5">
+    <div class = 'game-pic-box centered'>
+      <img class ='game-pic' src = '../public/images/racer.png'>
+    </div>
+    <div class = 'game-pic-box centered'>
+      <img class ='game-pic' src = '../public/images/hangman.png'>
+    </div>
+  </div>
+
 
 </div>

@@ -1,3 +1,4 @@
+<div class='less-wide'>
 <div ng-controller = 'TeacherCtrl' class= 'center centered'>
 
   <ul><h1> Welcome, {{showUser.username}} </h1></ul>
@@ -17,12 +18,14 @@
         </a>
       </li>
     </ul>
-    <br>
     <ul><a href= '/#/createVocabRace'><button class = 'btn btn-primary'>Make New Vocab Racer</button></a></ul>
     <br><br>
     <ul><h2>Hangman Games</h2>
-      <li ng-repeat='game in showUser.hangmanGames'>
-        <a ng-click='getHangmanGame(game._id)' class = 'hover-icon game-li' href= '/#/editHangman'> {{game.title}}</button></a>
+      <li class = 'game-li' ng-repeat='game in showUser.hangmanGames'>
+        {{game.title}}
+         <a ng-click='getHangmanGame(game._id)' href= '/#/editHangman'><span class = 'glyphicon glyphicon-pencil edit-icon'></span>
+        </a>
+        <a ng-click='deleteHangmanGame(game._id)'  href= '/#/teacherinfo'><span class = 'glyphicon glyphicon-trash delete-icon'></span>
       </li>
     </ul>
 

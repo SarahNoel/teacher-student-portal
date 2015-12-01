@@ -91,10 +91,13 @@ function onListening() {
 
 //-------------- SOCKETS --------------\\
 
+
 var users = [];
 
 io.on('connection', function(socket) {
   console.log("connected!");
+
+  //******  CHAT SOCKET  ******\\
 
   socket.on('login', function(room){
     socket.room = room;
@@ -119,7 +122,18 @@ io.on('connection', function(socket) {
     io.emit('user left', {user:socket.user, users:users});
   });
 
+  //******  GAME SOCKET  ******\\
+
+  socket.on('game-challenge', function(gameRoom){
+    socket.join(gameRoom);
+    io.to(gameRoom).emit('game-challenge-received', gameRoom);
+  });
+
+
+
+
 });
+
 
 
 

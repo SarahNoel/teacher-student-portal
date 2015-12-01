@@ -11,7 +11,7 @@
 </form>
 
 <div ng-show='addQuestions'>
-<h4>Game Title: {{gameName}} </h4>
+<h2>Game Title: {{gameName}} </h2>
   <form name= 'addQuestionForm'>
     <div class="form-group">
       <label>Question</label>
@@ -25,16 +25,16 @@
   </form>
 
   <button ng-click = 'addQuestion()' class='btn btn-primary'>Add Question</button>
-  <br>
-  <button ng-click = 'finishGame()' class='btn btn-danger'>Finish Game</button>
+  <br> <br>
+  <a href = '/#/teacherinfo'><button ng-click = 'finishGame()' class='btn btn-danger'>Finish Game</button></a>
 
 
 <div>
 <br>
-<h5>Current questions for this game </h5>
-<ul ng-repeat='question in allQuestions'>
-  <li> Question: {{question.question}}</li>
-  <li> Answer: {{question.answer}}</li>
+<h3>Current questions for this game </h3>
+<ul class ='move-left' ng-repeat='question in allQuestions'>
+  <li> <h4>Question: {{question.question}}</h4></li>
+  <li> <h4>Answer: {{question.answer}}</h4></li>
 </ul>
 
 

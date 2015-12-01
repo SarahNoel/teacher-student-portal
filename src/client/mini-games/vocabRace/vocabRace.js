@@ -2,6 +2,8 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
     var gameId;
     var gameName;
     var currentGameId;
+    //connect to socket
+    var socket = io.connect();
     //sets current user
     var user = UserServices.getUser();
     //sets teacherID
@@ -19,7 +21,6 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
     $scope.getAllGames = function(){
       $http.get('/vocab/games/' + teacherID)
       .then(function(data){
-        console.log('all ', data.data);
         $scope.games = data.data;
       });
     };
@@ -29,12 +30,10 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
       gameName = $scope.gameForm.gameName;
       $http.post('/vocab/game', {title:gameName, teacherID: teacherID})
       .then(function(data){
-        $scope.gameName = data.data.title;
+        $scope.gameName = data.data.game.title;
         gameId = data.data.gameID;
         $scope.gameForm ={};
         $scope.addQuestions = true;
-      })
-      .catch(function(err){
       });
     };
 
@@ -43,15 +42,29 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
       var payload = {question: $scope.questionForm.question, answer: $scope.questionForm.answer, id:gameId};
       $http.post('/vocab/question', payload)
       .then(function(data){
+        $scope.allQuestions = data.data.questions;
         $scope.questionForm = {};
-        // $scope.questionNumber = 0;
-      }).catch(function(err){
       });
     };
 
 
+// <---------------------  LIVE GAME PLAY  ----------------->
+    $scope.challengeGame = function(roomID){
+      socket.emit('game-challenge', roomID);
+    };
 
-// <---------------------  GAME PLAY  ----------------->
+
+    //socket listeners
+    socket.on('game-challenge-received', function(roomID){
+      console.log(roomID);
+    });
+
+
+
+
+
+
+// <---------------------  SOLO GAME PLAY  ----------------->
 
 
     //gameplay variables
@@ -166,6 +179,11 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
 
 }]);
 
+
+
+
+
+
 // <-----------------------  EDIT GAME  ----------------->
 app.controller('editVocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
     //blank objects for forms
@@ -245,6 +263,8 @@ app.controller('editVocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
       .then(function(data){
         console.log(data);
         $scope.editGame = data.data;
+        $scope.addQuestionForm = {};
+
       })
       .catch(function(err){
         console.log('err ', err);

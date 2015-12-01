@@ -30,9 +30,16 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
     console.log(id);
   };
 
-  //delete game
+  //delete vocab game
   $scope.deleteVocabGame = function(gameID){
     $http.delete('/vocab/game/' + gameID)
+    .then(function(){
+      $scope.allInfo();
+    });
+  };
+
+  $scope.deleteHangmanGame = function(gameID){
+    $http.delete('/hangman/game/' + gameID)
     .then(function(){
       $scope.allInfo();
     });
