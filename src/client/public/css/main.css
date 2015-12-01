@@ -131,7 +131,7 @@ ul{
 
 .vocab-hint-box{
   padding: 5px;
-  background-color: beige;
+  background-color: #F5F5DC;
   width: 75%;
   border-radius: 25px;
   text-align: center;
@@ -139,7 +139,7 @@ ul{
 
 .correct-box{
   text-align: center;
-  background-color:beige;
+  background-color:#F5F5DC;
   border: thick green solid;
   width: 250px;
   height: 100px;
@@ -147,7 +147,7 @@ ul{
 
 .wrong-box{
   text-align: center;
-  background-color:beige;
+  background-color:#F5F5DC;
   border: thick red solid;
   width: 250px;
   height: 100px;
@@ -155,7 +155,7 @@ ul{
 
 .endgame-box{
   text-align: center;
-  background-color:beige;
+  background-color:#F5F5DC;
   border: thick purple solid;
   width: 250px;
   height: 100px;
@@ -172,7 +172,7 @@ ul{
   margin: auto;
   display: table;
   padding: 10px;
-  background-color: beige;
+  background-color: #F5F5DC;
   border-radius: 25px;
 }
 
@@ -260,7 +260,7 @@ ul{
 }
 
 .right-box{
-  background: beige;
+  background: #F5F5DC;
   float: right;
   clear: both;
   margin-right: 30px;
@@ -271,7 +271,7 @@ ul{
 }
 
 .wrong-box{
-  background: beige;
+  background: #F5F5DC;
   float: right;
   clear: both;
   margin-right: 30px;
@@ -325,22 +325,22 @@ ul{
   height: 500px;
   border: thick black solid;
   width: 80%;
-  background-color: gray;
+  background-color: #bb3737;
   float: left;
 }
 
 .inner-chat-box{
   height: 85%;
-  border: thick red solid;
-  background-color: white;
+  border-bottom: thick black solid;
+  background-color: #F5F5DC;
   overflow-y: auto;
 }
 
 .chat-input{
   height: 73px;
-  border: thick green solid;
   font-size: x-large;
-  width: 80%
+  width: 80%;
+  border-right: thick black solid;
 }
 
 .chat-submit{
@@ -349,7 +349,7 @@ ul{
   border: none;
   height: 63px;
   font-size: xx-large;
-  background-color: gray;
+  background-color: #bb3737;
 }
 
 .striped-ul{
@@ -358,16 +358,17 @@ ul{
 }
 
 .striped-ul li:nth-child(odd) {
-  background: #eee;
+  background: #DCDCDC;
 }
 
 .online-user-box{
   width: 18%;
   height: 200px;
-  border: thin black solid;
+  border: thick black solid;
   float: left;
   margin-left: 10px;
   overflow-y:auto;
+  background: #DCDCDC;
 
 }
 
@@ -380,4 +381,8 @@ ul{
   font-size: 20px;
   margin-top: -10px;
   margin-left: -25px;
+}
+
+.game-li{
+  font-size: 20px;
 }

@@ -3,12 +3,12 @@
 <div ng-controller = 'GameCtrl'>
   <h3>Vocab Racer</h3>
   <ul>
-    <li ng-repeat='game in games.vocabGames'> {{game.title}} <a href = '/#/vocabRace'><button class= 'btn btn-success' ng-click="getPlayGame(game._id)"> Play!</button></a></li>
+    <li class='game-li' ng-repeat='game in games.vocabGames'> {{game.title}} <a href = '/#/vocabRace'><button class= 'btn btn-success' ng-click="getPlayGame(game._id)"> Play!</button></a></li>
   </ul>
 
   <h3>Hangman</h3>
   <ul>
-    <li ng-repeat='hangman in games.hangmanGames'> {{hangman.title}} <a href = '/#/hangman'><button class= 'btn btn-success' ng-click="getPlayGame(hangman._id)"> Play!</button></a></li>
+    <li class = 'game-li' ng-repeat='hangman in games.hangmanGames'> {{hangman.title}} <a href = '/#/hangman'><button class= 'btn btn-success' ng-click="getPlayGame(hangman._id)"> Play!</button></a></li>
   </ul>
 
 </div>

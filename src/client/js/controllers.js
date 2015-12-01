@@ -1,9 +1,3 @@
-//--------------NAVBAR/ETC CONTROLLER---------------//
-
-app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$http', 'UserServices', function($scope, $location, $window, $auth, $http, UserServices){
-
-}]);
-
 //--------------TEACHER CONTROLLER-------------------//
 
 app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope, $http, UserServices) {
@@ -22,11 +16,7 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
   $scope.allInfo = function(){
     $http.get('/studentUsers/students/'+ user._id)
     .then(function(data){
-      console.log('then ', data.data);
       $scope.showUser = data.data;
-    })
-    .catch(function(data){
-      console.log('catch ', data);
     });
   };
 
@@ -62,13 +52,6 @@ app.controller('GameCtrl', ['$scope', '$http', 'UserServices',function($scope, $
   $scope.getPlayGame = function(id){
     UserServices.storePlayGame(id);
   };
-
-
-
-
-
-
-
 
   //get all games on load
   $scope.allInfo();

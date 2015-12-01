@@ -89,25 +89,24 @@ function onListening() {
   console.log('Listening on ' + bind);
 }
 
+//-------------- SOCKETS --------------\\
+
 var users = [];
-var rooms = [];
-//sockets
+
 io.on('connection', function(socket) {
   console.log("connected!");
 
   socket.on('login', function(room){
-    if(rooms.indexOf(room)===-1){
-      rooms.push(room);
-    }
     socket.room = room;
     socket.join(room);
   });
 
   socket.on('entered', function(user){
-    if(users.indexOf(user) === -1){
-      users.push(user);
+    console.log('user', user);
+    if(users.indexOf(user.username) === -1 && user !== false){
+      users.push(user.username);
     }
-    socket.user = user;
+    socket.user = user.username;
     io.to(socket.room).emit('online-users', users);
   });
 

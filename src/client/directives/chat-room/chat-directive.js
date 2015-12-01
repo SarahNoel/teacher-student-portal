@@ -9,7 +9,7 @@ app.directive('chatRoom', function(){
         var socket = io.connect();
         var user = UserServices.getUser();
         //get user, add to online users
-        socket.emit('entered', user.username);
+        socket.emit('entered', user);
 
 
         //wrap elements in angular
@@ -24,7 +24,8 @@ app.directive('chatRoom', function(){
 
         //append message after hitting socket
         socket.on('message-received', function(message){
-          chatUl.append('<li>&nbsp' + message.user + ': ' + message.message + '</li>');
+          var newMessage = UserServices.languageFilter(message.message);
+          chatUl.append('<li>&nbsp' + message.user + ': ' + newMessage + '</li>');
         });
 
         socket.on('online-users', function(users){

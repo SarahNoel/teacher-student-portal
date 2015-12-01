@@ -22,7 +22,8 @@ app.factory('UserServices', ['$http', function($http){
           checkforTeacher: checkforTeacher,
           storePlayGame: storePlayGame,
           getPlayGame: getPlayGame,
-          enableAll: enableAll
+          enableAll: enableAll,
+          languageFilter: languageFilter
         };
 
   //stores user to access from all controllers
@@ -113,27 +114,24 @@ app.factory('UserServices', ['$http', function($http){
     picked = [];
   }
 
+
+
+  function languageFilter(str){
+    var profanities = ['shit', 'fuck', 'ass', 'bastard', 'bitch', 'cock', 'cunt', 'dick', 'dyke', 'fag', 'faggit', 'faggot', 'damn', 'dammit', 'asshole', 'homo', 'nigga', 'nigger', 'pussy', 'queer', 'slut', 'whore', 'tit', 'twat', 'fucka', 'retard', 'scrote', 'scrotum', 'titties' ];
+
+    for (var i = 0; i < profanities.length; i++) {
+      var lower = str.toLowerCase();
+      var word = profanities[i];
+      if(lower.indexOf(word) >= 0){
+        var asterisks = '';
+        for (var j = 0; j <= word.length; j++) {
+          asterisks += "*";
+          j++;
+        }
+        str = lower.replace(word, asterisks);
+      }
+    }
+    return str;
+  }
 }]);
 
-//--------------CHAT FACTORIES-------------------//
-
-
-app.factory('ChatServices', [function() {
-    // Open a WebSocket connection
-    // var dataStream = $websocket('ws://localhost:8080');
-
-    // var collection = [];
-
-    // dataStream.onMessage(function(message) {
-    //   collection.push(JSON.parse(message.data));
-    // });
-
-    var methods = {
-    //   collection: collection,
-    //   get: function() {
-    //     dataStream.send(JSON.stringify({ action: 'get' }));
-    //   }
-    };
-
-    return methods;
-}]);
