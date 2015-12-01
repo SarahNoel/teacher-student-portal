@@ -1,3 +1,9 @@
+//--------------NAVBAR/ETC CONTROLLER---------------//
+
+app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$http', 'UserServices', function($scope, $location, $window, $auth, $http, UserServices){
+
+}]);
+
 //--------------TEACHER CONTROLLER-------------------//
 
 app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope, $http, UserServices) {
@@ -22,6 +28,14 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
 
   $scope.getOneStudent = function(id){
     console.log(id);
+  };
+
+  //delete game
+  $scope.deleteVocabGame = function(gameID){
+    $http.delete('/vocab/game/' + gameID)
+    .then(function(){
+      $scope.allInfo();
+    });
   };
 
   $scope.allInfo();

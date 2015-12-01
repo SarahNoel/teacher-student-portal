@@ -117,21 +117,47 @@ app.factory('UserServices', ['$http', function($http){
 
 
   function languageFilter(str){
-    var profanities = ['shit', 'fuck', 'ass', 'bastard', 'bitch', 'cock', 'cunt', 'dick', 'dyke', 'fag', 'faggit', 'faggot', 'damn', 'dammit', 'asshole', 'homo', 'nigga', 'nigger', 'pussy', 'queer', 'slut', 'whore', 'tit', 'twat', 'fucka', 'retard', 'scrote', 'scrotum', 'titties' ];
+    var profanities = ['shit', 'fuck', 'ass', 'bastard', 'bitch', 'cock', 'cunt', 'kunt', 'dick', 'dyke', 'dike', 'fag', 'faggit', 'faggot', 'damn', 'dammit', 'asshole', 'whore', 'homo', 'nigga', 'nigger', 'pussy', 'queer', 'slut', 'whore', 'tit', 'titty', 'twat', 'fucka', 'retard', 'scrote', 'scrotum', 'titties', 'fucker', 'penis', 'vagina', 'shithead', 'blowjob', 'cum', 'buttplug', 'buttplugs', 'dipshit', 'queef'];
 
-    for (var i = 0; i < profanities.length; i++) {
-      var lower = str.toLowerCase();
-      var word = profanities[i];
-      if(lower.indexOf(word) >= 0){
-        var asterisks = '';
-        for (var j = 0; j <= word.length; j++) {
-          asterisks += "*";
+    var symbols = '!@#$%^&*';
+    var arr = str.split(' ');
+    for (var i = 0; i < arr.length; i++) {
+      var word = arr[i].toLowerCase();
+      if(profanities.indexOf(word) != -1){
+        var replace = '';
+        for (var j = 0; j <= word.length+2; j++) {
+          var index = Math.floor(Math.random() * symbols.length);
+          replace += symbols[index];
           j++;
         }
-        str = lower.replace(word, asterisks);
+        arr.splice(i, 1, replace);
       }
     }
-    return str;
+    return arr.join(' ');
   }
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

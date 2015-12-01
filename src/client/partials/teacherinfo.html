@@ -2,26 +2,27 @@
 
   <ul><h1> Welcome, {{showUser.username}} </h1></ul>
 
-    <ul><h3>Your Students</h3>
-      <li ng-repeat='student in showUser.students'>
+    <ul><h2>Your Students</h2>
+      <li class ='game-li' ng-repeat='student in showUser.students'>
         <span class = 'hover-icon' ng-click='getOneStudent(student._id)'>
         {{student.username}} </span>
       </li>
     </ul>
 
-  <ul><h3>Your Games</h3></ul>
-    <ul><h4>Vocab Race Games</h4>
-      <li ng-repeat='game in showUser.vocabGames'>
-        <a ng-click='getVocabGame(game._id)' class = 'hover-icon' href= '/#/editVocabRace'>
-        {{game.title}}</a>
+    <ul><h2>Vocab Race Games</h2>
+      <li class= 'game-li' ng-repeat='game in showUser.vocabGames'> {{game.title}}
+        <a ng-click='getVocabGame(game._id)' href= '/#/editVocabRace'><span class = 'glyphicon glyphicon-pencil edit-icon'></span>
+        </a>
+        <a ng-click='deleteVocabGame(game._id)'  href= '/#/teacherinfo'><span class = 'glyphicon glyphicon-trash delete-icon'></span>
+        </a>
       </li>
     </ul>
     <br>
     <ul><a href= '/#/createVocabRace'><button class = 'btn btn-primary'>Make New Vocab Racer</button></a></ul>
     <br><br>
-    <ul><h4>Hangman Games</h4>
+    <ul><h2>Hangman Games</h2>
       <li ng-repeat='game in showUser.hangmanGames'>
-        <a ng-click='getHangmanGame(game._id)' class = 'hover-icon' href= '/#/editHangman'> {{game.title}}</button></a>
+        <a ng-click='getHangmanGame(game._id)' class = 'hover-icon game-li' href= '/#/editHangman'> {{game.title}}</button></a>
       </li>
     </ul>
 

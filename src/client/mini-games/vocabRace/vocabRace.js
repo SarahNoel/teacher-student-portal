@@ -251,6 +251,16 @@ app.controller('editVocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
       });
     };
 
+    //delete game
+    $scope.deleteGame = function(gameID){
+      $http.delete('/vocab/game/' + gameID)
+      .then(function(){
+        $scope.editingQuestion = false;
+        $scope.addingQuestion = false;
+        $location.path('/teacherinfo');
+      });
+    };
+
     //cancels, resets to see questions
     $scope.cancel = function(){
       $scope.editingQuestion = false;

@@ -18,6 +18,8 @@ ul{
   list-style: none;
 }
 
+
+
 .fancy-font{
   font-family: 'Annie Use Your Telescope', cursive;
 }
@@ -190,8 +192,9 @@ ul{
 }
 
 .edit-title-input{
-  height: 32px;
+  height: 35px;
   border-radius: 5px;
+  width: 250px;
 }
 
 .greenie{
@@ -384,5 +387,31 @@ ul{
 }
 
 .game-li{
-  font-size: 20px;
+  font-size: 24px;
+}
+
+.edit-icon{
+  font-size: 17px;
+  color: green;
+}
+
+.delete-icon{
+  font-size: 17px;
+  color: red;
+}
+
+.answer-li{
+  margin-top: -10px;
+}
+
+.move-up{
+  margin-top: -31px;
+}
+
+input{
+  font-size: 19px;
+}
+
+.form-control{
+  font-size: 19px;
 }

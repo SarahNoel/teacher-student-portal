@@ -71,7 +71,6 @@ router.post('/register', function(req, res, next){
     }
     else{
       var payload = {email:req.body.email, password:req.body.password, username:req.body.username, teacherID: teacherID};
-      console.log(payload);
       var newStudent = new Student(payload);
       newStudent.save(function(err, student){
         if(err){

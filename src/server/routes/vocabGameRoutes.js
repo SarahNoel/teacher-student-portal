@@ -139,6 +139,17 @@ router.post('/question', function(req, res, next) {
   });
 });
 
+//delete Game
+router.delete('/game/:id', function(req, res, next) {
+  VocabGame.findByIdAndRemove(req.params.id, function(err, data){
+     if(err){
+      res.json(err);
+    }
+    else{
+      res.json(data);
+    }
+  });
+});
 
 //delete question
 router.delete('/question/:id', function(req, res, next) {

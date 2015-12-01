@@ -61,7 +61,6 @@ router.get('/games/:userID', function(req, res, next) {
 router.post('/game', function(req, res, next) {
   var error;
   var newGame = new HangmanGame(req.body);
-  console.log('game ', newGame);
   newGame.save(function(err, game){
      if(err){
       error = err;
