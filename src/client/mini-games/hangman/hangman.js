@@ -1,7 +1,5 @@
-app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
-    var gameId;
-    var gameName;
-    var currentGameId;
+app.controller('createHangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
+// <------------------ ADD GAMES/ETC  ----------------->
     //sets current user
     var user = UserServices.getUser();
     //sets teacherID
@@ -11,29 +9,32 @@ app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'Use
     //displays user
     $scope.showUser = user;
 
-
-// <------------------ ADD GAMES/ETC  ----------------->
-
-    //get all hangman games from teacher
-    $scope.getAllGames = function(){
-      $http.get('/hangman/games/' + teacherID)
-      .then(function(data){
-        $scope.hangmanGames = data.data.hangmanGames;
-      });
-    };
-
     //save a new game to a user
     $scope.createGame = function(){
       var game = $scope.gameForm;
       $http.post('/hangman/game', {title:game.title, words:game.words, teacherID: teacherID})
       .then(function(data){
         $scope.gameForm ={};
-        $location.path('/#/teacherinfo');
+        $location.path('/teacherinfo');
       })
       .catch(function(err){
         $scope.error = err;
       });
     };
+}]);
+
+app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
+    var gameId;
+    var gameName;
+    var currentGameId;
+    //sets current user
+    var user = UserServices.getUser();
+    //sets teacherID
+    var teacherID =  UserServices.checkforTeacher();
+    //displays user
+    $scope.showUser = user;
+
+
 
 // <-------------------  GAME PLAY  ----------------->
 

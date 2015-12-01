@@ -1,4 +1,4 @@
-<div ng-controller= 'hangmanCtrl' class='container'>
+<div ng-controller= 'createHangmanCtrl' class='container'>
   <br>
 <h1>Make a New Hangman Game</h1>
 
@@ -10,7 +10,7 @@
 
     <div class="form-group">
       <label>Words, separated by commas</label>
-      <input placeholder="science, life, biology" ng-model = 'gameForm.words'>
+      <input class='form-control' type="text" placeholder="science, life, biology" ng-model = 'gameForm.words'>
     </div>
 
     <button ng-click = 'createGame()' class='btn btn-primary'>Create Game</button>
