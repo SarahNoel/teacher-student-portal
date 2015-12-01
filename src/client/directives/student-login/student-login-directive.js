@@ -22,7 +22,7 @@ app.directive('studentLogin', function(){
             var socket = io.connect();
             socket.emit('login', room);
             UserServices.saveStudent();
-            $location.path('/studentinfo');
+            $location.path('/chat');
             }
           });
         };
