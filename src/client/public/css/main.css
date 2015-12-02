@@ -29,22 +29,23 @@ ul{
   color: black;
 }
 
-.navbar-default .navbar-nav>li>a:hover {
+.navbar-default .navbar-nav .headerA:hover {
   color: white;
   font-weight: bold;
 }
+
+.navbar-default .navbar-nav .nada:hover {
+  color: black;
+}
+
 
 .navbar{
   background-color: #00a0b0;
   border: thick black solid;
 }
 
-.navbar a:hover{
+.headerA a:hover{
   color: white;
-}
-
-.sidebar-li a::hover{
-  background-color: black;
 }
 
 .sidebar-li{
@@ -331,9 +332,7 @@ ul{
 
 .chat-room{
   width: 85%;
-
 }
-
 
 .outer-chat-box{
   height: 500px;
@@ -437,6 +436,8 @@ input{
 
 .game-pic-box{
   height: 200px;
+  border: thick black solid;
+
 }
 
 .game-pic{
@@ -456,6 +457,7 @@ input{
 
 .main-pic{
   width: 100%;
+  border: thick black solid;
 }
 
 .title-box{
@@ -472,3 +474,17 @@ input{
 .big-title{
   font-size: 52px;
 }
+
+.uppy{
+  margin-top: -28px;
+}
+
+.logo-title{
+  margin-right: 10px;
+  border-right: thick black solid;
+}
+
+.nada:hover{
+  color: black;
+}
+

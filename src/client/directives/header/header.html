@@ -16,15 +16,18 @@
  <!--    Collect the nav links, forms, and other content for toggling -->
     <div ng-class="{collapse: isCollapsed}" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li ng-hide= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'chosen': isActive('/studentLogin') || isActive('/studentRegister')}"><a href="/#/studentLogin">Student Login</a></li>
+          <li class='header-text fancy-font bold'><a class='nada' href = '/#/'>Student Space</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'chosen': isActive('/studentLogin') || isActive('/studentRegister')}"><a class = 'headerA' href="/#/studentLogin">Student Login</a></li>
 
-        <li ng-hide= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'chosen': isActive('/teacherLogin') || isActive('/teacherRegister')}"><a href="/#/teacherLogin">Teacher Login</a></li>
+        <li ng-hide= 'isLoggedIn()' class='header-text fancy-font logo-title' ng-class="{'chosen': isActive('/teacherLogin') || isActive('/teacherRegister')}"><a class = 'headerA' href="/#/teacherLogin">Teacher Login</a></li>
 
         <li ng-show= 'isLoggedIn()' class='fancy-font'><a>Logged in as {{showUser.username}}</a></li>
 
-        <li ng-show= 'isLoggedIn()' class='header-text fancy-font' ng-click='logout()'><a>Logout</a></li>
-
+        <li ng-show= 'isLoggedIn()' class='header-text fancy-font logo-title headerA' ng-click='logout()'><a>Logout</a></li>
       </ul>
+
     </div><!-- /.navbar-collapse -->
   </div> <!-- /.container-fluid -->
 </nav>
@@ -32,15 +35,15 @@
 <div class = 'sidebar'>
   <ul class="sidebar-nav">
 
-    <li ng-show= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/chat')}"><a href="/#/chat">Chat</a></li>
+    <li ng-show= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/chat')}"><a class = 'headerA' href="/#/chat">Chat</a></li>
 
-    <li ng-show= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/vocab')}"><a href="/#/vocab">Games!</a></li>
+    <li ng-show= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/vocab')}"><a class = 'headerA' href="/#/vocab">Games!</a></li>
 
-    <li ng-show='isTeacher()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/teacherinfo')}"><a href="/#/teacherinfo">Teacher</a></li>
+    <li ng-show='isTeacher()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/teacherinfo')}"><a class = 'headerA' href="/#/teacherinfo">Teacher</a></li>
 
    <!--  <li ng-show= 'isStudent()'  class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/studentinfo')}"><a href="/#/studentinfo">Stats</a></li> -->
 
-    <li ng-show= 'isStudent()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/flashcards') || isActive('/editflashcards')|| isActive('/createflashcards')}"><a href="/#/flashcards">Flashcards</a></li>
+    <li ng-show= 'isStudent()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/flashcards') || isActive('/editflashcards')|| isActive('/createflashcards')}"><a class = 'headerA' href="/#/flashcards">Flashcards</a></li>
 
 </div>
 <div class = 'sidebar-right'>
