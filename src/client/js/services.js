@@ -111,7 +111,7 @@ app.factory('UserServices', [function(){
 
 
   //filters out vulgar language
-  function languageFilter(str){
+  function languageFilter(str, teacher){
     var profanities = ['shit', 'fuck', 'ass', 'bastard', 'bitch', 'cock', 'cunt', 'kunt', 'dick', 'dyke', 'dike', 'fag', 'faggit', 'faggot', 'damn', 'dammit', 'asshole', 'whore', 'homo', 'nigga', 'nigger', 'pussy', 'queer', 'slut', 'whore', 'tit', 'titty', 'twat', 'fucka', 'retard', 'scrote', 'scrotum', 'titties', 'fucker', 'penis', 'vagina', 'shithead', 'blowjob', 'cum', 'buttplug', 'buttplugs', 'dipshit', 'queef', 'bitches', 'bitchy'];
 
     var symbols = '!@#$%^&*©æ®√∞Ω∫∆¥ƒ∂ß';
@@ -120,10 +120,15 @@ app.factory('UserServices', [function(){
       var word = arr[i].toLowerCase();
       if(profanities.indexOf(word) != -1){
         var replace = '';
-        for (var j = 0; j <= word.length+2; j++) {
-          var index = Math.floor(Math.random() * symbols.length);
-          replace += symbols[index];
-          j++;
+        if(teacher){
+          replace = word.strike();
+        }
+        else{
+          for (var j = 0; j <= word.length+2; j++) {
+            var index = Math.floor(Math.random() * symbols.length);
+            replace += symbols[index];
+            j++;
+          }
         }
         arr.splice(i, 1, replace);
       }

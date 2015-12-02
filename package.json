@@ -6,6 +6,7 @@
     "start": "node ./src/server/bin/www"
   },
   "dependencies": {
+    "angularjs-scroll-glue": "^2.0.4",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.14.1",
     "connect": "^3.4.0",

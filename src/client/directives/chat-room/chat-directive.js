@@ -7,7 +7,7 @@ app.directive('chatRoom', function(){
         var socket = io.connect();
         var user = UserServices.getUser();
         var teacherID = UserServices.checkforTeacher();
-
+        var student = UserServices.isStudent();
         //get user, add to online users
         function userEntered(){
           socket.emit('entered', user);
@@ -16,11 +16,22 @@ app.directive('chatRoom', function(){
             var messages = data.data.chatMessages;
             for (var i = 0; i < 100; i++) {
               if(messages[i]){
-                chatUl.append('<li>&nbsp' + messages[i].user + ': ' + UserServices.languageFilter(messages[i].message) + '</li>');
+                var append;
+                if(student){
+                  append = UserServices.languageFilter(messages[i].message);
+                }
+                else{
+                  append = UserServices.languageFilter(messages[i].message, 'teacher');
+                }
+              chatUl.append('<li>&nbsp' + messages[i].user + ': ' + append + '</li>');
               }
             }
           });
         }
+
+        $scope.isTeacher = function(){
+          return UserServices.isTeacher();
+        };
 
         //wrap elements in angular
         var chatUl = angular.element(document.querySelector('#chat-ul'));
@@ -35,8 +46,15 @@ app.directive('chatRoom', function(){
 
         //append message after hitting socket
         socket.on('message-received', function(message){
-          var newMessage = UserServices.languageFilter(message.message);
+          var newMessage;
+          if(student){
+            newMessage = UserServices.languageFilter(message.message);
+          }
+          else{
+            newMessage = UserServices.languageFilter(message.message, 'teacher');
+          }
           chatUl.append('<li>&nbsp' + message.user + ': ' + newMessage + '</li>');
+
         });
 
         socket.on('online-users', function(users){
