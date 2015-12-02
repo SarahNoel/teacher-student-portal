@@ -3,7 +3,7 @@ require('./models/student.js');
 require('./models/vocabGameModels.js');
 require('./models/hangmanGameModel.js');
 require('./models/flashcardModel.js');
-
+require('./models/chatrooms.js');
 
 // *** main dependencies *** //
 var express = require('express');
@@ -32,6 +32,7 @@ var studentRoutes = require('./routes/studentRoutes.js');
 var vocabGameRoutes = require('./routes/vocabGameRoutes.js');
 var hangmanGameRoutes = require('./routes/hangmanGameRoutes.js');
 var flashcardRoutes = require('./routes/flashcardRoutes.js');
+var chatRoutes = require('./routes/chatRoutes.js');
 
 var app = express();
 // *** config middleware *** //
@@ -47,6 +48,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use('/', routes);
 app.use('/auth/', teacherRoutes);
 app.use('/studentUsers/', studentRoutes);
+app.use('/chat/', chatRoutes);
 
 // *** mini-game routes *** //
 app.use('/vocab/', vocabGameRoutes);

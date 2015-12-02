@@ -50,6 +50,7 @@ ul{
 .sidebar-li{
   height: 50px;
   font-size: 25px;
+  margin-left: -25px;
 }
 
 .sidebar a{
@@ -451,4 +452,23 @@ input{
   margin-right: 10px;
   font-size: 20px;
   color: green;
+}
+
+.main-pic{
+  width: 100%;
+}
+
+.title-box{
+  border: thick black solid;
+  width: 100px;
+  height: 200px;
+  background-color: white;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.big-title{
+  font-size: 52px;
 }
