@@ -1,7 +1,6 @@
 body {
   padding: 50px;
   font-family: 'Annie Use Your Telescope', cursive;
-
 }
 
 a {
@@ -17,7 +16,6 @@ a:focus{
 ul{
   list-style: none;
 }
-
 
 .slackey{
   font-family: 'Slackey', cursive;
@@ -91,7 +89,7 @@ ul{
 }
 
 .chosen a,
-.consen li{
+.chosen li{
   color: white;
   font-weight: bold;
 }
@@ -183,6 +181,7 @@ ul{
 
 .login-div{
   width: 60%;
+  max-width: 425px;
   margin: auto;
   display: table;
   padding: 15px;
@@ -193,6 +192,7 @@ ul{
 
 .register-div{
   width: 60%;
+  max-width: 425px;
   margin: auto;
   display: table;
   padding: 15px;
@@ -459,6 +459,7 @@ input{
 
 .main-pic{
   width: 100%;
+  max-width: 1050px;
   border: thick black solid;
 }
 
