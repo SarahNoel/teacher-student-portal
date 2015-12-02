@@ -122,6 +122,11 @@ io.on('connection', function(socket) {
     io.emit('user left', {user:socket.user, users:users});
   });
 
+  socket.on('logout', function(){
+    socket.disconnect();
+  });
+
+
   //******  GAME SOCKET  ******\\
 
   socket.on('game-challenge', function(gameRoom){

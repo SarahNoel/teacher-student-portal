@@ -3,7 +3,7 @@ app.directive('headerInfo', function(){
       restrict: 'E',
       templateUrl: 'directives/header/header.html',
       controller: ['$scope', 'UserServices', '$http', '$location', '$auth', '$window', function($scope, UserServices, $http, $location, $auth, $window) {
-
+        var socket = io.connect();
         //highlights active navbar tab
         $scope.isActive = function (viewLocation) {
           return viewLocation === $location.path();
@@ -33,6 +33,7 @@ app.directive('headerInfo', function(){
           delete $window.localStorage.currentUser;
           UserServices.logout();
           $location.path('/');
+          socket.emit('logout');
         };
 
         $scope.getUser = function(){
