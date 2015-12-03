@@ -54,7 +54,6 @@ app.directive('chatRoom', function(){
             var sendMe = user.username + ': ' + newMessage;
             $http.post('/chat/twilio', {phone: teacherPhone, message: sendMe})
             .then(function(data){
-              console.log(data);
             });
           }
           socket.emit('message-sent', newMessage);

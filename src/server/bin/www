@@ -90,10 +90,6 @@ function onListening() {
 }
 
 //-------------- SOCKETS --------------\\
-var express = require('express');
-var router = express.Router();
-
-
 io.on('connection', function(socket) {
   console.log("connected!");
 
@@ -119,13 +115,6 @@ var users = [];
 
   socket.on('message-sent', function(message){
     io.to(socket.room).emit('message-received', {message:message, user:socket.user});
-  });
-
-  router.post('/teacher', function(req, res, next){
-    console.log("HELLOOOOO");
-    console.log(req.body);
-    console.log(req.body.Body);
-    io.emit('teacher text', req.body.Body);
   });
 
   socket.on('teacher text', function(message){
