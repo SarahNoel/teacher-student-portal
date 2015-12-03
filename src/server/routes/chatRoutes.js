@@ -7,15 +7,12 @@ var User = mongoose.model('teachers');
 
 //------------ TWILIO ROUTES ---------------//
 
-
-var io = require('socket.io');
 //twilio stuff
 var config = require('../../../_config.js');
 var client = require('twilio')(config.accountSid, config.authToken);
 
 router.post('/teacher', function(req, res, next){
-  console.log(req.body.Body);
-  io.emit("teacher text", req.body.Body);
+  console.log('what do i do with this???', req.body.Body);
 });
 
 
