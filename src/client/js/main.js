@@ -1,14 +1,14 @@
 var app = angular.module('studentApp', ['ngRoute', 'satellizer', 'luegg.directives']);
 
-// // restrict pages to logged in users
-// app.run(['$rootScope', '$location', '$route', 'UserServices', function ($rootScope, $location, $route, UserServices) {
-//   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-//     if (next.access.restricted && UserServices.isLoggedIn() === false) {
-//       $route.reload();
-//       $location.path('/');
-//     }
-//   });
-// }]);
+// restrict pages to logged in users
+app.run(['$rootScope', '$location', '$route', 'UserServices', function ($rootScope, $location, $route, UserServices) {
+  $rootScope.$on('$routeChangeStart', function (event, next, current) {
+    if (next.access.restricted && UserServices.isLoggedIn() === false) {
+      $route.reload();
+      $location.path('/');
+    }
+  });
+}]);
 
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider

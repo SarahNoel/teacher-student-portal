@@ -57,10 +57,10 @@ app.directive('chatRoom', function(){
           var newMessage = $scope.chatInput;
           if(newMessage.indexOf(teacher) != -1){
             var sendMe = user.username + ': ' + newMessage;
-            $http.post('/chat/twilio', {phone: teacherPhone, message: sendMe, id:teacherID})
+            $http.post('/chat/twilio', {phone: teacherPhone, message: sendMe, id:teacherID, name:teacherName})
             .then(function(data){
               socket.emit('message-sent', newMessage);
-              $http.post('/chat/message', {user:user.username, message:newMessage, id:teacherID})
+              $http.post('/chat/message', {user:user.username, message:newMessage, id:teacherID, name:teacherName})
               .then(function(data){
                 populateChat();
 

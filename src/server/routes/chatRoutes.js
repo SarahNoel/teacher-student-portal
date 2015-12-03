@@ -13,11 +13,10 @@ var client = require('twilio')(config.accountSid, config.authToken);
 
 
 var teacherID;
+var teacherName;
 
 router.post('/teacher', function(req, res, next){
-  console.log('what do i do with this???', req.body.Body);
-  console.log('teacherID', teacherID);
-  var newMessage = new ChatMessage({user:'Teacher', message:req.body.Body});
+  var newMessage = new ChatMessage({user:teacherName, message:req.body.Body});
   newMessage.save(function(err, message){
      if(err){
       res.json(err);
@@ -39,6 +38,7 @@ router.post('/teacher', function(req, res, next){
 // sends alert to teacher when @teacher is used
 router.post('/twilio', function(req, res, next){
   teacherID = req.body.id;
+  teacherName= req.body.name;
   var client = require('twilio')(config.accountSid, config.authToken);
 
   //send alert to teacher
@@ -69,6 +69,7 @@ router.post('/message', function(req, res, next) {
     var update = {$push:{chatMessages : newMessage}};
     var options = {new:true};
     teacherID = req.body.id;
+    teacherName= req.body.name;
     User.findByIdAndUpdate(teacherID, update, options, function(err, data){
       if (err){
         res.json(err);
