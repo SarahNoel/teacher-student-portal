@@ -8,11 +8,14 @@ app.directive('teacherRegister', function(){
 
         //register teacher
         $scope.signup = function() {
+
+
           var user = {
-            email: $scope.teacherForm.email,
-            password: $scope.teacherForm.password,
-            keyword: $scope.teacherForm.keyword,
-            username: $scope.teacherForm.username
+            email: $scope.teacherForm.email.trim(),
+            password: $scope.teacherForm.password.trim(),
+            keyword: $scope.teacherForm.keyword.trim(),
+            username: $scope.teacherForm.username.trim(),
+            phone: $scope.teacherForm.phone.replace(/\D/g,'')
           };
           $auth.signup(user)
             .then(function(response){
@@ -28,7 +31,6 @@ app.directive('teacherRegister', function(){
             .catch(function(response) {
               $scope.errorMessage = response.data.message;
             });
-
         };
 
     }]

@@ -1,7 +1,7 @@
 
 //--------------USER FACTORY-------------------//
 
-app.factory('UserServices', [function(){
+app.factory('UserServices', ['$http', function($http){
   var username = '';
   var game = '';
   var teacher = false;

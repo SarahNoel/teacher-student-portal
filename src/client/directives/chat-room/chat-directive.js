@@ -8,11 +8,19 @@ app.directive('chatRoom', function(){
         var user = UserServices.getUser();
         var teacherID = UserServices.checkforTeacher();
         var student = UserServices.isStudent();
+        var teacherName;
+        var teacher;
+        var teacherPhone;
+
         //get user, add to online users
         function userEntered(){
           socket.emit('entered', user);
           $http.get('/chat/messages/' + teacherID)
           .then(function(data){
+            teacherName = data.data.username;
+            teacher = '@' + teacherName;
+            teacherPhone = data.data.phone;
+            $scope.teacherName = teacher;
             var messages = data.data.chatMessages;
             for (var i = 0; i < 100; i++) {
               if(messages[i]){
@@ -29,6 +37,7 @@ app.directive('chatRoom', function(){
           });
         }
 
+        //displays filter message to teachers
         $scope.isTeacher = function(){
           return UserServices.isTeacher();
         };
@@ -39,8 +48,16 @@ app.directive('chatRoom', function(){
 
         //send message
         $scope.sendMessage = function(){
-          socket.emit('message-sent', $scope.chatInput);
-          $http.post('/chat/message', {user:user.username, message:$scope.chatInput, id:teacherID});
+          var newMessage = $scope.chatInput;
+          if(newMessage.indexOf(teacher) != -1){
+            var sendMe = user.username + ': ' + newMessage;
+            $http.post('/chat/twilio', {phone: teacherPhone, message: sendMe})
+            .then(function(data){
+              console.log(data);
+            });
+          }
+          socket.emit('message-sent', newMessage);
+          $http.post('/chat/message', {user:user.username, message:newMessage, id:teacherID});
           $scope.chatInput = '';
         };
 
@@ -57,6 +74,7 @@ app.directive('chatRoom', function(){
 
         });
 
+        //updates Users Online box when people enter
         socket.on('online-users', function(users){
           onlineUsers.empty();
           for (var i = 0; i < users.length; i++) {
@@ -64,6 +82,7 @@ app.directive('chatRoom', function(){
           }
         });
 
+        //updates Users Online box when one leaves
         socket.on('user left', function(obj){
           onlineUsers.empty();
           for (var i = 0; i < obj.users.length; i++) {
@@ -71,6 +90,7 @@ app.directive('chatRoom', function(){
           }
         });
 
+        //add user to chat room
         userEntered();
     }]
   };

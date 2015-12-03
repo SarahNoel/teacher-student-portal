@@ -6,8 +6,34 @@ var ChatMessage = mongoose.model('chatMessages');
 var User = mongoose.model('teachers');
 
 
-//------------ CHAT MESSAGE ROUTES ---------------//
+//------------ TWILIO ROUTES ---------------//
 
+//twilio stuff
+var config = require('../../../_config.js');
+var client = require('twilio')(config.accountSid, config.authToken);
+
+// sends alert to teacher when @teacher is used
+router.post('/twilio', function(req, res, next){
+  console.log(req.body);
+  var client = require('twilio')(config.accountSid, config.authToken);
+
+  //send alert to teacher
+    client.messages.create({
+      to: "3035200766",
+      from: "+18164488136",
+      body: req.body.message
+    }, function(err, message) {
+      if(err){
+        res.json(err);
+      }
+      else{
+        res.json(message);
+      }
+    });
+});
+
+
+//------------ CHAT MESSAGE ROUTES ---------------//
 
 //post save message to teacher
 router.post('/message', function(req, res, next) {
