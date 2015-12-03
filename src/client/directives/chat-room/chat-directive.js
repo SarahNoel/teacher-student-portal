@@ -27,11 +27,12 @@ app.directive('chatRoom', function(){
                 var append;
                 if(student){
                   append = UserServices.languageFilter(messages[i].message);
+                  chatUl.append('<li>&nbsp' + messages[i].user + ': ' + append + '</li>');
                 }
                 else{
                   append = UserServices.languageFilter(messages[i].message, 'teacher');
+                  chatUl.append('<li>&nbsp' + messages[i].user + ': ' + append + '</li>');
                 }
-              chatUl.append('<li>&nbsp' + messages[i].user + ': ' + append + '</li>');
               }
             }
           });

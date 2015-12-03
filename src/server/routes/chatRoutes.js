@@ -5,16 +5,20 @@ var deepPopulate = require("mongoose-deep-populate")(mongoose);
 var ChatMessage = mongoose.model('chatMessages');
 var User = mongoose.model('teachers');
 
-
 //------------ TWILIO ROUTES ---------------//
 
 //twilio stuff
 var config = require('../../../_config.js');
 var client = require('twilio')(config.accountSid, config.authToken);
 
+
+router.post('/teacher', function(req, res, next){
+  console.log(req.body);
+});
+
+
 // sends alert to teacher when @teacher is used
 router.post('/twilio', function(req, res, next){
-  console.log(req.body);
   var client = require('twilio')(config.accountSid, config.authToken);
 
   //send alert to teacher
@@ -31,7 +35,6 @@ router.post('/twilio', function(req, res, next){
       }
     });
 });
-
 
 //------------ CHAT MESSAGE ROUTES ---------------//
 
