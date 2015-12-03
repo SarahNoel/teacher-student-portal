@@ -118,11 +118,17 @@ var users = [];
     io.to(socket.room).emit('message-received', {message:message, user:socket.user});
   });
 
-  app.post('/teacher', function(req, res, next){
+  app.post('/chat/teacher', function(req, res, next){
+    console.log("HELLOOOOO");
+    console.log(req.body);
     console.log(req.body.Body);
     io.emit('teacher text', req.body.Body);
+  });
+
+  socket.on('teacher text', function(message){
     io.to(socket.room).emit('message-received', {message:message, user:'Teacher'});
   });
+
 
   socket.on('disconnect', function(){
     var index = users.indexOf(socket.user);
