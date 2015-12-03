@@ -91,11 +91,13 @@ function onListening() {
 
 //-------------- SOCKETS --------------\\
 
+io.on('connection', function(socket) {
+  console.log("connected!");
+
+
 
 var users = [];
 
-io.on('connection', function(socket) {
-  console.log("connected!");
 
   //******  CHAT SOCKET  ******\\
 
@@ -116,6 +118,12 @@ io.on('connection', function(socket) {
     io.to(socket.room).emit('message-received', {message:message, user:socket.user});
   });
 
+  app.post('/teacher', function(req, res, next){
+    console.log(req.body.Body);
+    io.emit('teacher text', req.body.Body);
+    io.to(socket.room).emit('message-received', {message:message, user:'Teacher'});
+  });
+
   socket.on('disconnect', function(){
     var index = users.indexOf(socket.user);
     users.splice(index, 1);
@@ -133,9 +141,6 @@ io.on('connection', function(socket) {
     socket.join(gameRoom);
     io.to(gameRoom).emit('game-challenge-received', gameRoom);
   });
-
-
-
 
 });
 

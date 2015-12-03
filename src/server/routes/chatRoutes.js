@@ -12,9 +12,9 @@ var config = require('../../../_config.js');
 var client = require('twilio')(config.accountSid, config.authToken);
 
 
-router.post('/teacher', function(req, res, next){
-  console.log(req.body);
-});
+// router.post('/teacher', function(req, res, next){
+//   console.log(req.body.Body);
+// });
 
 
 // sends alert to teacher when @teacher is used
