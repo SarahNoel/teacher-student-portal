@@ -16,14 +16,27 @@ a:focus{
 ul{
   list-style: none;
 }
-
 .slackey{
   font-family: 'Slackey', cursive;
 }
-.fancy-font{
-  font-family: 'Annie Use Your Telescope', cursive;
+/*.fancy-font{
+  font-family: 'Slackey', cursive;
+}*/
+
+.bottom{
+  margin-top: 84%;
 }
 
+.left-arrow{
+  margin-top: 43%;
+  margin-right: 12px;
+  float: left;
+}
+
+.right-arrow{
+  margin-top: 43%;
+  margin-left: 12px;
+}
 .navbar-default .navbar-nav>li>a {
   font-size: 20px;
   color: black;
@@ -309,29 +322,6 @@ ul{
   display: flex;
 }
 
-.flashcard-btns{
-  margin-top: 15px;
-  margin-left: 15px;
-}
-
-.flashcard-front{
-  height: 300px;
-  width: 200px;
-  border: thick black solid;
-  background-color: white;
-}
-
-.flashcard-back{
-  height: 300px;
-  width: 200px;
-  border: thick black solid;
-  background-color: gray;
-}
-
-.mid-card{
-  margin-top: 60%;
-}
-
 .chat-room{
   width: 85%;
 }
@@ -489,5 +479,29 @@ input{
 
 .nada:hover{
   color: black;
+}
+
+.higher-btn{
+  margin-top: -8px;
+}
+
+
+.flashcard-btns{
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.flashcard-front{
+  border: thick black solid;
+  background-color: #edc951;
+}
+
+.flashcard-back{
+  border: thick black solid;
+  background-color: #eb6841;
+}
+
+.mid-card{
+  margin-top: 60%;
 }
 

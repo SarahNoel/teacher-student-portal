@@ -37,7 +37,6 @@ app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
       });
     };
 
-
     //store questions pre-save
     $scope.addMoreQuestions = function(){
       var payload = {question: $scope.flashcardForm.question, answer:$scope.flashcardForm.answer, setID:setID};
@@ -57,8 +56,6 @@ app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
       $scope.flashcardTitle = '';
       $scope.flashcardForm = {};
       $location.path('/flashcards');
-
-
     };
 
     //add question to game
@@ -72,16 +69,12 @@ app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
       });
     };
 
-
-
-// <---------------------  CARD USE  ----------------->
-
     //gets all sets on page load
     $scope.getAllSets();
 
 }]);
 
-// <------------------  EDIT SET  ----------------->
+// <---------------  EDIT SET  ----------------->
 app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
     //blank objects for forms
     $scope.editGame = {};
@@ -107,6 +100,7 @@ app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
       });
     };
 
+    //update title
     $scope.updateSetTitle = function(gameID){
       var getUrl = '/flashcards/set/'+ gameID;
       $http.put(getUrl, {title:$scope.editSet.title})
@@ -117,17 +111,19 @@ app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
       });
     };
 
-    //update question
-    $scope.updateCard = function(question, answer,cardID){
+    //update single question
+    $scope.updateCard = function(cardID, question, answer){
       var payload = {question: question, answer:answer};
       $http.put('/flashcards/card/' + cardID, payload)
       .then(function(data){
         $scope.showCardUpdateMessage = true;
-        $timeout(function () { $scope.showCardUpdateMessage = false; }, 2500);
+        $timeout(function () {
+          $scope.showCardUpdateMessage = false;
+        }, 2500);
       });
     };
 
-    //delete set
+    //delete whole set
     $scope.deleteSet = function(setID){
       $http.delete('/flashcards/set/' + setID)
       .then(function(data){
@@ -136,7 +132,7 @@ app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
       });
     };
 
-    //delete card
+    //delete one card
     $scope.deleteCard = function(cardID){
       $http.delete('/flashcards/card/' + cardID)
       .then(function(data){
@@ -158,12 +154,10 @@ app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
 
 
 
-// <------------------  EDIT SET  ----------------->
-app.controller('playFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
-    //blank objects for forms
-    $scope.editGame = {};
-    $scope.editQuestionForm = {};
-    $scope.addQuestionForm = {};
+// <---------------  PLAY SET  ----------------->
+app.controller('playFlashcardCtrl', ['$scope', '$http', '$timeout' , 'UserServices', function($scope, $http, $timeout, UserServices) {
+    //set card to front
+    $scope.cardFront = "front";
     var index = 0;
     var current;
 
@@ -179,30 +173,57 @@ app.controller('playFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
       });
     };
 
-    //guess card answer
-    $scope.guessCard = function(){
-      $scope.backside = true;
-    };
-
     //move to next card
     $scope.nextCard = function(){
       if(index+1 >= current.flashcards.length){
-        console.log('last card!');
+        $scope.noMore = true;
       }
       else{
         index++;
-        $scope.current = current.flashcards[index];
-        $scope.backside = false;
+        if($scope.cardFront != 'front'){
+          $scope.cardFront = 'front';
+          $timeout(function () {
+            $scope.current = current.flashcards[index];
+          }, 2000);
+        }
+        else{
+          $scope.current = current.flashcards[index];
+        }
+        $scope.noLess = false;
       }
     };
 
-    //cancels, resets to see questions
-    $scope.cancel = function(){
-      $scope.editingQuestion = false;
-      $scope.addingQuestion = false;
-      $scope.editQuestionForm = {};
+    //move to previous card
+    $scope.previousCard = function(){
+      if(index-1 < 0){
+        $scope.noLess = true;
+      }
+      else{
+        index--;
+        if($scope.cardFront != 'front'){
+          $scope.cardFront = 'front';
+          $timeout(function () {
+            $scope.current = current.flashcards[index];
+          }, 2000);
+        }
+        else{
+          $scope.current = current.flashcards[index];
+        }
+        $scope.noMore = false;
+      }
     };
 
+    //flip card
+    $scope.toggleCard = function(){
+      if($scope.cardFront === "front"){
+        $scope.cardFront = "back";
+      }
+      else {
+        $scope.cardFront = "front";
+      }
+    };
+
+    //get current set on load
     $scope.getOneSet();
 
 }]);

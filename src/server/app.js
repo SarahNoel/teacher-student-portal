@@ -20,8 +20,6 @@ var server = require('http').Server(app);
 // *** config file *** //
 var config = require('../../_config');
 
-// *** mongoose ** //
-mongoose.connect(config.MONGO_URI);
 
 // *** express instance *** //
 
@@ -54,6 +52,15 @@ app.use('/chat/', chatRoutes);
 app.use('/vocab/', vocabGameRoutes);
 app.use('/hangman/', hangmanGameRoutes);
 app.use('/flashcards/', flashcardRoutes);
+
+// *** mongoose ** //
+mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
+  if(err) {
+    console.log('Error connecting to the database. ' + err);
+  } else {
+    console.log('Connected to Database: ' + config.mongoURI[app.settings.env]);
+  }
+});
 
 // *** error handlers *** //
 

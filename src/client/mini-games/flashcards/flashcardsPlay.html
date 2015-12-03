@@ -7,17 +7,21 @@
 
   <br>
 
-  <div class = 'centered' ng-hide='backside'>
-    <div class = 'flashcard-front' ng-click='guessCard()'>
-      <h3 class='center mid-card'>{{current.question}}</h3>
-    </div>
-  </div>
 
-  <div class = 'centered' ng-show='backside'>
-    <div class = 'flashcard-back' ng-click='nextCard()'>
-      <h3 class='center mid-card'>{{current.answer}}</h3>
-    </div>
-  </div>
+<div class = 'centered'>
+  <button ng-disabled = 'noLess' ng-click='previousCard()' class = 'btn left-arrow'><span class = 'glyphicon glyphicon-arrow-left' ></span></button>
+    <flip flip-show="{{cardFront}}">
+      <flip-panel ng-click="toggleCard()" class = 'flashcard-front'>
+        <h3 class='center mid-card'>{{current.question}}</h3>
+        <p class='center bottom'>Click to see the back</p>
+      </flip-panel>
+      <flip-panel ng-click="toggleCard()"  class = 'flashcard-back'>
+        <h3 class='center mid-card'>{{current.answer}}</h3>
+        <p class='center bottom'>Click to see the front</p>
+      </flip-panel>
+    </flip>
+  <button ng-disabled = 'noMore' ng-click='nextCard()' class = 'btn right-arrow'><span class = 'glyphicon glyphicon-arrow-right' ></span></button>
+</div>
 
 
 
