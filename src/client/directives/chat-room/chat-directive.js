@@ -11,10 +11,13 @@ app.directive('chatRoom', function(){
         var teacherName;
         var teacher;
         var teacherPhone;
+        //wrap elements in angular
+        var chatUl = angular.element(document.querySelector('#chat-ul'));
+        var onlineUsers = angular.element(document.querySelector('#user-ul'));
 
-        //get user, add to online users
-        function userEntered(){
-          socket.emit('entered', user);
+        //populate 100 chat messages
+        function populateChat(){
+          chatUl.empty();
           $http.get('/chat/messages/' + teacherID)
           .then(function(data){
             teacherName = data.data.username;
@@ -38,26 +41,35 @@ app.directive('chatRoom', function(){
           });
         }
 
+        //get user, add to online users
+        function userEntered(){
+          socket.emit('entered', user);
+          populateChat();
+        }
+
         //displays filter message to teachers
         $scope.isTeacher = function(){
           return UserServices.isTeacher();
         };
-
-        //wrap elements in angular
-        var chatUl = angular.element(document.querySelector('#chat-ul'));
-        var onlineUsers = angular.element(document.querySelector('#user-ul'));
 
         //send message
         $scope.sendMessage = function(){
           var newMessage = $scope.chatInput;
           if(newMessage.indexOf(teacher) != -1){
             var sendMe = user.username + ': ' + newMessage;
-            $http.post('/chat/twilio', {phone: teacherPhone, message: sendMe})
+            $http.post('/chat/twilio', {phone: teacherPhone, message: sendMe, id:teacherID})
             .then(function(data){
+              socket.emit('message-sent', newMessage);
+              $http.post('/chat/message', {user:user.username, message:newMessage, id:teacherID})
+              .then(function(data){
+                populateChat();
+
+              });
             });
+          }else{
+            socket.emit('message-sent', newMessage);
+            $http.post('/chat/message', {user:user.username, message:newMessage, id:teacherID});
           }
-          socket.emit('message-sent', newMessage);
-          $http.post('/chat/message', {user:user.username, message:newMessage, id:teacherID});
           $scope.chatInput = '';
         };
 

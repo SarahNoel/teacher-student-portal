@@ -8,8 +8,6 @@ app.directive('teacherRegister', function(){
 
         //register teacher
         $scope.signup = function() {
-
-
           var user = {
             email: $scope.teacherForm.email.trim(),
             password: $scope.teacherForm.password.trim(),

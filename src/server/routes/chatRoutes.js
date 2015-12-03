@@ -11,13 +11,34 @@ var User = mongoose.model('teachers');
 var config = require('../../../_config.js');
 var client = require('twilio')(config.accountSid, config.authToken);
 
+
+var teacherID;
+
 router.post('/teacher', function(req, res, next){
   console.log('what do i do with this???', req.body.Body);
+  console.log('teacherID', teacherID);
+  var newMessage = new ChatMessage({user:'Teacher', message:req.body.Body});
+  newMessage.save(function(err, message){
+     if(err){
+      res.json(err);
+    }
+    var update = {$push:{chatMessages : newMessage}};
+    var options = {new:true};
+    User.findByIdAndUpdate(teacherID, update, options, function(err, data){
+      if (err){
+        res.json(err);
+      }
+      else{
+        res.json(newMessage);
+      }
+    });
+  });
 });
 
 
 // sends alert to teacher when @teacher is used
 router.post('/twilio', function(req, res, next){
+  teacherID = req.body.id;
   var client = require('twilio')(config.accountSid, config.authToken);
 
   //send alert to teacher
@@ -47,7 +68,8 @@ router.post('/message', function(req, res, next) {
     var messageID = newMessage._id;
     var update = {$push:{chatMessages : newMessage}};
     var options = {new:true};
-    User.findByIdAndUpdate(req.body.id, update, options, function(err, data){
+    teacherID = req.body.id;
+    User.findByIdAndUpdate(teacherID, update, options, function(err, data){
       if (err){
         res.json(err);
       }
