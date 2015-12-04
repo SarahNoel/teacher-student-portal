@@ -17,6 +17,7 @@ app.directive('chatRoom', function(){
 
         //populate 100 chat messages
         function populateChat(){
+          console.log(teacherID);
           chatUl.empty();
           $http.get('/chat/messages/' + teacherID)
           .then(function(data){

@@ -21,12 +21,19 @@ router.post('/teacher', function(req, res, next){
     }
     var update = {$push:{chatMessages : newMessage}};
     var options = {new:true};
-    User.findByIdAndUpdate(teacherID, update, options, function(err, data){
+    User.findByIdAndUpdate(teacherID, update, options, function(err, user){
       if (err){
         res.json(err);
       }
       else{
-        console.log('saved', newMessage);
+        var client = require('twilio')(config.accountSid, config.authToken);
+          console.log(user.phone);
+          //send response to teacher
+          client.messages.create({
+            to: "3035200766",
+            from: "+18164488136",
+            body: "Your message has been received!"
+          });
         res.json(newMessage);
       }
     });
