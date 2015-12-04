@@ -27,7 +27,9 @@ router.post('/teacher', function(req, res, next){
       }
       else{
         var client = require('twilio')(config.accountSid, config.authToken);
-          console.log(user.phone);
+          console.log('PHONE?', user.phone);
+          console.log('USER', user);
+
           //send response to teacher
           client.messages.create({
             to: "3035200766",
