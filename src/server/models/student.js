@@ -32,7 +32,9 @@ var Student = new Schema({
     type: String
   },
   flashcardSets: [{type: Schema.Types.ObjectId,
-    ref:'flashcardSets'}]
+    ref:'flashcardSets'}],
+  conversations: [{type: Schema.Types.ObjectId,
+    ref:'conversations'}]
 });
 
 Student.plugin(deepPopulate);

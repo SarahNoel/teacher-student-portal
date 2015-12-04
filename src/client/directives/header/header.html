@@ -37,6 +37,8 @@
 
     <li ng-show= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/chat')}"><a class = 'headerA' href="/#/chat">Chat</a></li>
 
+    <li ng-show= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/messages')}"><a class = 'headerA' href="/#/messages">Messages</a></li>
+
     <li ng-show= 'isLoggedIn()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/vocab')}"><a class = 'headerA' href="/#/vocab">Games!</a></li>
 
     <li ng-show='isTeacher()' class='header-text fancy-font sidebar-li' ng-class="{'chosen': isActive('/teacherinfo')}"><a class = 'headerA' href="/#/teacherinfo">Teacher</a></li>

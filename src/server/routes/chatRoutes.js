@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var deepPopulate = require("mongoose-deep-populate")(mongoose);
 var ChatMessage = mongoose.model('chatMessages');
 var User = mongoose.model('teachers');
+var Student = mongoose.model('students');
+var Conversation = mongoose.model('conversations');
 
 //------------ TWILIO ROUTES ---------------//
 
@@ -28,8 +30,6 @@ router.post('/teacher', function(req, res, next){
       else{
         var client = require('twilio')(config.accountSid, config.authToken);
           console.log('PHONE?', user.phone);
-          console.log('USER', user);
-
           //send response to teacher
           client.messages.create({
             to: "3035200766",
@@ -102,6 +102,59 @@ router.get('/messages/:id', function(req, res, next) {
       }
   });
 });
+
+
+//------------ DIRECT MESSAGE ROUTES ---------------//
+
+//get all students to message
+router.get('/directmessages/:id', function(req, res, next) {
+  User.findById(req.params.id)
+    .deepPopulate('students students.conversations')
+    .exec(function(err, data){
+      if(err){
+        res.json(err);
+      }
+      else{
+        res.json({students:data.students, teacher:data.username});
+      }
+  });
+});
+
+
+//get one convo
+router.get('/convo/:id', function(req, res, next) {
+  Conversation.findById(req.params.id)
+    .deepPopulate('chatMessages')
+    .exec(function(err, data){
+      if(err){
+        res.json(err);
+      }
+      else{
+        res.json(data);
+      }
+  });
+});
+
+
+//post save convo to student
+router.post('/convo', function(req, res, next) {
+  var newConvo = new Conversation({users:req.body.users, room:req.body.room});
+  newConvo.save(function(err, convo){
+    if(err){
+      res.json(err);
+    }
+    else{
+      var update = {$push:{conversations : newConvo}};
+      var options = {new:true};
+      Student.findByIdAndUpdate(req.body.id1, update, options, function(err, user){
+        Student.findByIdAndUpdate(req.body.id2, update, options, function(err, user){
+          res.json(newConvo);
+        });
+      });
+    }
+  });
+});
+
 
 
 module.exports = router;

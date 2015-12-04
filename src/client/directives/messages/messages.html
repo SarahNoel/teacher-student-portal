@@ -1,0 +1,23 @@
+<div class='clear-sidebar'>
+
+<h1>Let's Message Your Classmates</h1>
+
+Have:
+<ul ng-repeat = 'student in haveRooms'>
+  <li> {{student.username}} <button ng-click='getConvo(student.room)'>Continue Chatting</button></li>
+</ul>
+Need:
+<ul ng-repeat = 'student in needRooms'>
+  <li> {{student.username}} <button ng-click=''>Start Chatting</button> </li>
+</ul>
+
+
+<button ng-click='directMessage()' class = 'btn btn-primary'>Message Bobby</button>
+
+<button ng-click='startConvo()' class = 'btn btn-primary'>Start Convo</button>
+
+
+
+
+
+</div>

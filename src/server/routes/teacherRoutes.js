@@ -64,7 +64,8 @@ router.post('/signup', function(req, res) {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      keyword: req.body.keyword
+      keyword: req.body.keyword,
+      phone: req.body.phone
     });
     user.save(function() {
       var token = createToken(user);

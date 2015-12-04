@@ -8,6 +8,7 @@ app.factory('UserServices', ['$http', function($http){
   var student = false;
   var studentTeacher;
   var playGameId;
+  var conversation;
 
   //checks for logged in user
   function isLoggedIn(){
@@ -99,6 +100,16 @@ app.factory('UserServices', ['$http', function($http){
     return playGameId;
   }
 
+  //saves conversation
+  function saveConvo(convo){
+    conversation = convo;
+  }
+
+  //gets conversation
+  function getConvo(){
+    return conversation;
+  }
+
   //enables all hangman letters
   function enableAll(picked){
     for (var i = 0; i < picked.length; i++) {
@@ -151,7 +162,9 @@ app.factory('UserServices', ['$http', function($http){
           storePlayGame: storePlayGame,
           getPlayGame: getPlayGame,
           enableAll: enableAll,
-          languageFilter: languageFilter
+          languageFilter: languageFilter,
+          saveConvo: saveConvo,
+          getConvo: getConvo
         };
 }]);
 

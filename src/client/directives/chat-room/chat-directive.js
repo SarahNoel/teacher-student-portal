@@ -17,7 +17,6 @@ app.directive('chatRoom', function(){
 
         //populate 100 chat messages
         function populateChat(){
-          console.log(teacherID);
           chatUl.empty();
           $http.get('/chat/messages/' + teacherID)
           .then(function(data){
@@ -57,7 +56,7 @@ app.directive('chatRoom', function(){
           return UserServices.isTeacher();
         };
 
-        //send message
+        //send message to whole room
         $scope.sendMessage = function(){
           var newMessage = $scope.chatInput;
           if(newMessage.indexOf(teacher) != -1){
@@ -71,7 +70,8 @@ app.directive('chatRoom', function(){
 
               });
             });
-          }else{
+          }
+          else{
             socket.emit('message-sent', newMessage);
             $http.post('/chat/message', {user:user.username, message:newMessage, id:teacherID});
           }
@@ -107,6 +107,10 @@ app.directive('chatRoom', function(){
             onlineUsers.append('<li>' + obj.users[i]+'</li>');
           }
         });
+
+
+
+
 
         //add user to chat room
         userEntered();

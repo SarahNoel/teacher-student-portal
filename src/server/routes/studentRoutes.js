@@ -24,7 +24,7 @@ router.get('/students', function(req, res, next){
 //get all students and games from a teacher
 router.get('/students/:teacherID', function(req, res, next){
   Teacher.findById(req.params.teacherID, function(err, teacher){})
-  .deepPopulate('hangmanGames vocabGames students flashcardSets')
+  .deepPopulate('hangmanGames vocabGames students flashcardSets conversations students.conversations')
   .exec(function(err, data){
     if(err){
       res.json(err);
@@ -38,7 +38,7 @@ router.get('/students/:teacherID', function(req, res, next){
 //login one student
 router.post('/login', function(req, res, next){
   var query = {email:req.body.email};
-  Student.findOne(query,{'email':1, 'password':1, 'username':1, 'vocabGamesPlayed':1, 'vocabGamesWon':1, 'vocabGamesLost':1, 'teacherID':1}, function(err, student){
+  Student.findOne(query,{'email':1, 'password':1, 'username':1, 'vocabGamesPlayed':1, 'vocabGamesWon':1, 'vocabGamesLost':1, 'teacherID':1, 'conversations':1, 'flashcardSets':1}, function(err, student){
     if(!student){
       res.json({err:"Sorry, that email isn't registered."});
     }

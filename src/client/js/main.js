@@ -41,6 +41,16 @@ app.config(['$routeProvider', function ($routeProvider) {
       access: {restricted: true}
 
     })
+    .when('/messages', {
+      templateUrl: '/partials/messages.html',
+      access: {restricted: true}
+
+    })
+    .when('/onemessage', {
+      templateUrl: '/partials/onemessage.html',
+      access: {restricted: true}
+
+    })
     .when('/vocab', {
       templateUrl: '/partials/games.html',
       access: {restricted: true}

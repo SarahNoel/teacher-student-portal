@@ -38,7 +38,9 @@ var User = new Schema({
     type: Schema.Types.ObjectId,
     ref:'chatMessages'}],
   flashcardSets: [{type: Schema.Types.ObjectId,
-    ref:'flashcardSets'}]
+    ref:'flashcardSets'}],
+  conversations: [{type: Schema.Types.ObjectId,
+    ref:'conversations'}]
 });
 
 

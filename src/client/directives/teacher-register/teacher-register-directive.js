@@ -25,6 +25,7 @@ app.directive('teacherRegister', function(){
               var socket = io.connect();
               socket.emit('login', room);
               $scope.teacherForm = {};
+              $location.path('/teacherinfo');
             })
             .catch(function(response) {
               $scope.errorMessage = response.data.message;

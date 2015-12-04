@@ -1,6 +1,6 @@
 <div class='clear-sidebar'>
 
-  <h1> Let's Chat.</h1>
+  <h1> Let's Chat With {{recipient}}.</h1>
 
   <div class = 'chat-room'>
     <div class = 'outer-chat-box'>
@@ -13,14 +13,6 @@
         <input type='text' ng-model = 'chatInput' class = 'chat-input' autocomplete="off" required>
         <button ng-disabled = 'chatSend.$invalid' class = 'chat-submit'>Send</button>
       </form>
-    <h4 ng-if='isTeacher()' class = 'center'> Note: As a teacher, you see the unedited chat.  <br>Those words you see with a line through them <br>are filtered for students.</h4>
-    <h4 ng-if='isTeacher() === false' class = 'center'> Typing {{teacherName}} will alert your teacher you need help!<br>
-    Use this power wisely.</h4>
-    </div>
-    <div class = 'online-user-box'>
-      <h4 class = 'center users-title'>Users Online</h4>
-      <ul id = 'user-ul' class = 'user-ul'>
-      </ul>
     </div>
   </div>
 
