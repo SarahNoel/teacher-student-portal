@@ -408,8 +408,6 @@ ul{
   margin-top: -31px;
 }
 
-
-
 .form-control{
   font-size: 19px;
   border: thin black solid;
@@ -425,12 +423,12 @@ ul{
 
 .game-pic-box{
   height: 200px;
-  border: thick black solid;
-
 }
 
 .game-pic{
-  height: 100%
+  height: 100%;
+  border: thick black solid;
+
 }
 
 .clear-sidebar{
@@ -583,5 +581,17 @@ ul{
   color: black;
 }
 
+.left-col{
+  float: left;
+  width: 40%
+}
 
+.right-col{
+  float: right;
+  width: 40%
+}
 
+.teacher-box{
+  width: 70%;
+  max-width: 650px;
+}

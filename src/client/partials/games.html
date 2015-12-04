@@ -1,7 +1,7 @@
 
-<div class = 'centered'>
+<div class = 'centered' ng-controller = 'GameCtrl'>
 <h1>Let's Play.</h1>
-  <div ng-controller = 'GameCtrl'>
+  <div class ='left-col'>
 
     <h3>Vocab Racer</h3>
     <ul>
@@ -12,12 +12,13 @@
     <ul>
       <li class = 'game-li' ng-repeat='hangman in games.hangmanGames'>  <a href = '/#/hangman'><span class= 'glyphicon glyphicon-play-circle play-btn' ng-click="getPlayGame(hangman._id)"></span></a>{{hangman.title}}</li>
     </ul>
-
-    <div class = 'game-pic-box centered'>
+  </div>
+  <div class = 'right-col'>
+    <div class = 'game-pic-box'>
       <img class ='game-pic' src = '../public/images/racer.png'>
     </div>
-
-    <div class = 'game-pic-box centered'>
+    <br><br>
+    <div class = 'game-pic-box'>
       <img class ='game-pic' src = '../public/images/hangman.png'>
     </div>
   </div>
