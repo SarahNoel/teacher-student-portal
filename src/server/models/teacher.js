@@ -21,7 +21,9 @@ var User = new Schema({
   keyword: {
     type: String,
   },
-  phone: String,
+  phone: {
+    type: String,
+  },
   students: [{
     type: Schema.Types.ObjectId,
     ref:'students'

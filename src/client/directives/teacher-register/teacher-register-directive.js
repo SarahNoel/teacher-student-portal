@@ -15,6 +15,7 @@ app.directive('teacherRegister', function(){
             username: $scope.teacherForm.username.trim(),
             phone: $scope.teacherForm.phone.replace(/\D/g,'')
           };
+          console.log(user);
           $auth.signup(user)
             .then(function(response){
               $auth.login(user);
@@ -24,7 +25,6 @@ app.directive('teacherRegister', function(){
               var socket = io.connect();
               socket.emit('login', room);
               $scope.teacherForm = {};
-              $location.path('/login');
             })
             .catch(function(response) {
               $scope.errorMessage = response.data.message;
