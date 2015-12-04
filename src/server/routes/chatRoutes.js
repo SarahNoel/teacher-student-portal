@@ -46,10 +46,11 @@ router.post('/teacher', function(req, res, next){
 
 // sends alert to teacher when @teacher is used
 router.post('/twilio', function(req, res, next){
+  console.log("HERE???");
   teacherID = req.body.id;
   teacherName= req.body.name;
   var client = require('twilio')(config.accountSid, config.authToken);
-  console.log('PHONE?', user.phone);
+  // console.log('PHONE?', user.phone);
   //send alert to teacher
     client.messages.create({
       to: "3035200766",
