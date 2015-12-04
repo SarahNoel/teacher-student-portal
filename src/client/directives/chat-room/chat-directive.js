@@ -25,14 +25,18 @@ app.directive('chatRoom', function(){
             teacherPhone = data.data.phone;
             $scope.teacherName = teacher;
             var messages = data.data.chatMessages;
+            //show up to 100 messages
             for (var i = 0; i < 100; i++) {
+              //if message exists
               if(messages[i]){
                 var append;
                 if(student){
+                  //returns filtered chat
                   append = UserServices.languageFilter(messages[i].message);
                   chatUl.append('<li>&nbsp' + messages[i].user + ': ' + append + '</li>');
                 }
                 else{
+                  //returns strikethrough for teacher
                   append = UserServices.languageFilter(messages[i].message, 'teacher');
                   chatUl.append('<li>&nbsp' + messages[i].user + ': ' + append + '</li>');
                 }
@@ -78,11 +82,12 @@ app.directive('chatRoom', function(){
           var newMessage;
           if(student){
             newMessage = UserServices.languageFilter(message.message);
+            chatUl.append('<li>&nbsp' + message.user + ': ' + newMessage + '</li>');
           }
           else{
             newMessage = UserServices.languageFilter(message.message, 'teacher');
+            chatUl.append('<li>&nbsp' + message.user + ': ' + newMessage + '</li>');
           }
-          chatUl.append('<li>&nbsp' + message.user + ': ' + newMessage + '</li>');
 
         });
 

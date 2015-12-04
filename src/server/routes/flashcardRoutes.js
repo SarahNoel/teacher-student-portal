@@ -5,6 +5,7 @@ var deepPopulate = require("mongoose-deep-populate")(mongoose);
 var FlashcardSet = mongoose.model('flashcardSets');
 var Flashcard = mongoose.model('flashcards');
 var User = mongoose.model('students');
+var Teacher = mongoose.model('teachers');
 
 
 //------------- FLASHCARD SET ROUTES ----------------//
@@ -23,7 +24,7 @@ router.get('/set/:id', function(req, res, next) {
   });
 });
 
-//get all sets and cards from user
+//get all sets and cards from STUDENT
 router.get('/sets/:userID', function(req, res, next) {
   User.findById(req.params.userID)
   .deepPopulate('flashcardSets flashcards')
@@ -37,7 +38,22 @@ router.get('/sets/:userID', function(req, res, next) {
     });
 });
 
-//post-add one set to user
+
+//get all sets and cards from TEACHER
+router.get('/teachersets/:userID', function(req, res, next) {
+  Teacher.findById(req.params.userID)
+  .deepPopulate('flashcardSets flashcards')
+    .exec(function(err, data){
+      if (err){
+        res.json(err);
+      }
+      else{
+        res.json(data);
+      }
+    });
+});
+
+//post-add one set to STUDENT
 router.post('/set', function(req, res, next) {
   var newSet = new FlashcardSet({title:req.body.title});
   newSet.save(function(err, set){
@@ -49,6 +65,30 @@ router.post('/set', function(req, res, next) {
     var update = {$push:{flashcardSets : newSet}};
     var options = {new:true};
     User.findByIdAndUpdate(req.body.id, update, options)
+    .deepPopulate('flashcardSets flashcards')
+    .exec(function(err, data){
+      if (err){
+        res.json(err);
+      }
+      else{
+        res.json({user:data, setID:setID, title:title});
+      }
+    });
+  });
+});
+
+//post-add one set to TEACHER
+router.post('/teacherset', function(req, res, next) {
+  var newSet = new FlashcardSet({title:req.body.title});
+  newSet.save(function(err, set){
+     if(err){
+      error = err;
+    }
+    var setID = newSet._id;
+    var title = newSet.title;
+    var update = {$push:{flashcardSets : newSet}};
+    var options = {new:true};
+    Teacher.findByIdAndUpdate(req.body.id, update, options)
     .deepPopulate('flashcardSets flashcards')
     .exec(function(err, data){
       if (err){

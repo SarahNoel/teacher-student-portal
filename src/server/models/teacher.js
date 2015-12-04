@@ -34,7 +34,9 @@ var User = new Schema({
     ref:'hangmanGames'}],
   chatMessages: [{
     type: Schema.Types.ObjectId,
-    ref:'chatMessages'}]
+    ref:'chatMessages'}],
+  flashcardSets: [{type: Schema.Types.ObjectId,
+    ref:'flashcardSets'}]
 });
 
 

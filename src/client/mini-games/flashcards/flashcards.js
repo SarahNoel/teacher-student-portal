@@ -1,14 +1,11 @@
 app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserServices', function($scope, $http, $location, $timeout, UserServices) {
-    //sets current user
+
     var user = UserServices.getUser();
-    //sets teacherID
     var teacherID =  UserServices.checkforTeacher();
-    //blank objects for forms
     var setID;
     var setTitle;
     $scope.flashcardForm = {};
-    //blank object for new set
-    $scope.newSetObject = {words:{}};
+    var isStudent = UserServices.isStudent();
 
 // <--------------- ADD SETS/ETC  --------------->
     //store current set id
@@ -16,25 +13,44 @@ app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
       UserServices.storeGame(id);
     };
 
+    //check if student (to hide teacher sets)
+    $scope.isStudent = function() {
+      return UserServices.isStudent();
+    };
+
     //get all sets from user
     $scope.getAllSets = function(){
       $http.get('/flashcards/sets/' + user._id)
       .then(function(data){
         $scope.showUser = data.data;
+        $http.get('/flashcards/teachersets/' + teacherID)
+        .then(function(data) {
+          $scope.showTeacher = data.data;
+        });
       });
     };
 
     //create a set- title only
     $scope.createSet = function(){
-      $http.post('/flashcards/set', {title:$scope.flashcardTitle.trim(), id:user._id})
-      .then(function(data){
-        setID = data.data.setID;
-        setTitle = data.data.title;
-        $scope.flashcardForm ={};
-        $scope.addingQuestions = true;
-      })
-      .catch(function(err){
-      });
+      console.log(isStudent);
+      if(!isStudent){
+          $http.post('/flashcards/teacherset', {title:$scope.flashcardTitle.trim(), id:user._id})
+        .then(function(data){
+          setID = data.data.setID;
+          setTitle = data.data.title;
+          $scope.flashcardForm ={};
+          $scope.addingQuestions = true;
+        });
+      }
+      else{
+        $http.post('/flashcards/set', {title:$scope.flashcardTitle.trim(), id:user._id})
+        .then(function(data){
+          setID = data.data.setID;
+          setTitle = data.data.title;
+          $scope.flashcardForm ={};
+          $scope.addingQuestions = true;
+        });
+      }
     };
 
     //store questions pre-save

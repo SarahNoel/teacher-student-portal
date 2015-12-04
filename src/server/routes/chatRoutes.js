@@ -10,8 +10,6 @@ var User = mongoose.model('teachers');
 //twilio stuff
 var config = require('../../../_config.js');
 var client = require('twilio')(config.accountSid, config.authToken);
-
-
 var teacherID;
 var teacherName;
 
@@ -28,6 +26,7 @@ router.post('/teacher', function(req, res, next){
         res.json(err);
       }
       else{
+        console.log('saved', newMessage);
         res.json(newMessage);
       }
     });

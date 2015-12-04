@@ -136,8 +136,6 @@ app.provider("flipConfig", function() {
     ";
 
   var _tempo = "0.5s";
-  // var _width = "100px";
-  // var _height = "100px";
 
   var _flipClassName = "flip";
 
@@ -145,11 +143,6 @@ app.provider("flipConfig", function() {
 
   this.setTempo = function(tempo) {
     _tempo = tempo;
-  };
-
-  this.setDim = function(dim) {
-  //   _width = dim.width;
-  //   _height = dim.height;
   };
 
   this.setClassName = function(className) {
@@ -164,8 +157,6 @@ app.provider("flipConfig", function() {
 
     var interCss = $interpolate(cssString);
     var config = {
-      // width: _width,
-      // height: _height,
       tempo: _tempo,
       flip: _flipClassName
     };
@@ -186,7 +177,6 @@ app.provider("flipConfig", function() {
 
 app.config(function(flipConfigProvider){
   flipConfigProvider.setClassName("flipperCosmic");
-  flipConfigProvider.setTempo("3s");
-  // flipConfigProvider.setDim({width:"300px", height:"300px"});
+  flipConfigProvider.setTempo("2s");
   flipConfigProvider.flipsOnClick(false);
 });

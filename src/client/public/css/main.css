@@ -51,7 +51,6 @@ ul{
   color: black;
 }
 
-
 .navbar{
   background-color: #00a0b0;
   border: thick black solid;
@@ -374,7 +373,6 @@ ul{
   margin-left: 10px;
   overflow-y:auto;
   background: #DCDCDC;
-
 }
 
 .users-title{
@@ -484,7 +482,6 @@ input{
 .higher-btn{
   margin-top: -8px;
 }
-
 
 .flashcard-btns{
   margin-top: 15px;
