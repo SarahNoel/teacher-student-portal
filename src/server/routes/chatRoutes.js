@@ -124,7 +124,7 @@ router.get('/directmessages/:id', function(req, res, next) {
 //get one convo
 router.get('/convo/:id', function(req, res, next) {
   Conversation.findById(req.params.id)
-    .deepPopulate('chatMessages')
+    .deepPopulate('messages')
     .exec(function(err, data){
       if(err){
         res.json(err);
@@ -155,6 +155,26 @@ router.post('/convo', function(req, res, next) {
   });
 });
 
+
+//save message to convo
+router.post('/savetoconvo', function(req, res, next) {
+  var newMessage = new ChatMessage({user:req.body.user, message:req.body.message});
+  newMessage.save(function(err, message){
+     if(err){
+      res.json(err);
+    }
+    var update = {$push:{messages : newMessage}};
+    var options = {new:true};
+    Conversation.findByIdAndUpdate(req.body.convoID, update, options, function(err, data){
+      if (err){
+        res.json(err);
+      }
+      else{
+        res.json(data);
+      }
+    });
+  });
+});
 
 
 module.exports = router;

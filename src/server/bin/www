@@ -116,21 +116,15 @@ io.on('connection', function(socket) {
     io.to(socket.room).emit('message-received', {message:message, user:socket.user});
   });
 
-  //start direct messaging chat
-  socket.on('pm', function(to, from, message) {
-    var room = to + from;
+
+  ///direct messaging
+
+  //send dm
+  socket.on('dm-sent', function(room, message) {
     console.log('room ', room);
     socket.join(room);
-    io.to(room).emit('pm received', {user:socket.user, message:message, room:room});
+    io.to(room).emit('dm-received', {user:socket.user, message:message});
   });
-
-  // //continue dm
-  // socket.on('pm', function(room, message) {
-  //   var room = to + from;
-  //   console.log('room ', room);
-  //   io.to(id).emit('pm received', {user:socket.user, message:message, room:id});
-  // });
-
 
   //working on dynamic teacher text- NOT WORKING
   socket.on('teacher text', function(message){

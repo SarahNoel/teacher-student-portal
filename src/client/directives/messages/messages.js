@@ -55,12 +55,14 @@ app.directive('messages', function(){
         }
 
         //start new conversation
-        $scope.startConvo = function(){
-          var users = ["Bobby", "Luke"];
-          var room = '5661bae698909cf6dabc836f5661c546aecef816e14fc329';
-          $http.post('/chat/convo', {users:users, room:room, id1:'5661bae698909cf6dabc836f', id2: '5661c546aecef816e14fc329' })
+        $scope.startConvo = function(recipient, repID){
+          var users = [user.username, recipient];
+          var room = user._id + repID;
+          $http.post('/chat/convo', {users:users, room:room, id1:user._id, id2: repID })
           .then(function(data) {
             console.log(data);
+            UserServices.saveConvo(data.data);
+            $location.path('/onemessage');
           });
         };
 
