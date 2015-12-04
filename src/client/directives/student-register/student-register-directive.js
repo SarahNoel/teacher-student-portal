@@ -25,6 +25,7 @@ app.directive('studentRegister', function(){
               UserServices.storeUser(data.data);
               var room = data.data.teacherID;
               var socket = io.connect();
+              scoket.connect();
               socket.emit('login', room);
               UserServices.saveStudent();
               $location.path('/chat');

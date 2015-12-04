@@ -15,6 +15,7 @@ var client = require('twilio')(config.accountSid, config.authToken);
 var teacherID;
 var teacherName;
 
+//teacher replies to text
 router.post('/teacher', function(req, res, next){
   var newMessage = new ChatMessage({user:teacherName, message:req.body.Body});
   newMessage.save(function(err, message){
@@ -48,7 +49,7 @@ router.post('/twilio', function(req, res, next){
   teacherID = req.body.id;
   teacherName= req.body.name;
   var client = require('twilio')(config.accountSid, config.authToken);
-
+  console.log('PHONE?', user.phone);
   //send alert to teacher
     client.messages.create({
       to: "3035200766",
