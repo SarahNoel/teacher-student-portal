@@ -14,10 +14,10 @@ app.directive('oneMessage', function(){
 
         $scope.sendMessage = function(){
             var newMessage = $scope.chatInput;
+            $scope.chatInput = '';
             socket.emit('dm-sent', convo.room, newMessage);
               $http.post('/chat/savetoconvo', {convoID:convo._id, user:user.username, message:newMessage})
               .then(function(data){
-                $scope.chatInput = '';
             });
         };
 

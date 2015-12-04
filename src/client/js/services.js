@@ -123,7 +123,7 @@ app.factory('UserServices', ['$http', function($http){
 
   //filters out vulgar language
   function languageFilter(str, teacher){
-    var profanities = ['shit', 'fuck', 'ass', 'bastard', 'bitch', 'cock', 'cunt', 'kunt', 'dick', 'dyke', 'dike', 'fag', 'faggit', 'faggot', 'fagit', 'fagot', 'damn', 'dammit', 'asshole', 'whore', 'homo', 'nigga', 'nigger', 'pussy', 'queer', 'slut', 'whore', 'tit', 'titty', 'twat', 'fucka', 'retard', 'scrote', 'scrotum', 'titties', 'fucker', 'penis', 'vagina', 'shithead', 'blowjob', 'cum', 'buttplug', 'buttplugs', 'dipshit', 'queef', 'bitches', 'bitchy', 'jizz', 'cocksucker', 'cocksuckers'];
+    var profanities = ['shit', 'fuck', 'ass', 'bastard', 'bitch', 'cock', 'cunt', 'kunt', 'dick', 'dyke', 'dike', 'fag', 'faggit', 'faggot', 'fagit', 'fagot', 'damn', 'dammit', 'asshole', 'whore', 'homo', 'nigga', 'nigger', 'pussy', 'queer', 'slut', 'whore', 'tit', 'titty', 'twat', 'fucka', 'retard', 'scrote', 'scrotum', 'titties', 'fucker', 'penis', 'vagina', 'shithead', 'blowjob', 'cum', 'buttplug', 'buttplugs', 'dipshit', 'queef', 'bitches', 'bitchy', 'jizz', 'cocksucker', 'cocksuckers', 'jackass', 'jackasses'];
 
     var symbols = '!@#$%^&*©æ®√∞Ω∫∆¥ƒ∂ß';
     var arr = str.split(' ');

@@ -89,8 +89,6 @@ function onListening() {
   console.log('Listening on ' + bind);
 }
 
-
-
 //-------------- SOCKETS --------------\\
 io.on('connection', function(socket) {
   console.log("connected!");
@@ -123,7 +121,6 @@ io.on('connection', function(socket) {
 
   //send dm
   socket.on('dm-sent', function(room, message) {
-    console.log('room ', room);
     socket.join(room);
     io.to(room).emit('dm-received', {user:socket.user, message:message});
   });
@@ -148,3 +145,5 @@ io.on('connection', function(socket) {
 
 });
 
+
+module.exports = io;

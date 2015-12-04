@@ -15,6 +15,17 @@ var client = require('twilio')(config.accountSid, config.authToken);
 var teacherID;
 var teacherName;
 
+var bin = require('../bin/www');
+
+console.log('BINNNNN ', bin);
+
+
+
+
+
+
+
+
 //teacher replies to text
 router.post('/teacher', function(req, res, next){
   var newMessage = new ChatMessage({user:teacherName, message:req.body.Body});
@@ -30,14 +41,17 @@ router.post('/teacher', function(req, res, next){
       }
       else{
         var client = require('twilio')(config.accountSid, config.authToken);
-          console.log('PHONE?', user.phone);
           //send response to teacher
           client.messages.create({
-            to: "3035200766",
+            to: user.phone,
             from: "+18164488136",
             body: "Your message has been received!"
           });
         res.json(newMessage);
+        //emit for socket!!! for dynamic updating
+        socket.emit("HEYYYY");
+
+
       }
     });
   });
@@ -46,14 +60,12 @@ router.post('/teacher', function(req, res, next){
 
 // sends alert to teacher when @teacher is used
 router.post('/twilio', function(req, res, next){
-  console.log("HERE???");
   teacherID = req.body.id;
   teacherName= req.body.name;
   var client = require('twilio')(config.accountSid, config.authToken);
-  // console.log('PHONE?', user.phone);
   //send alert to teacher
     client.messages.create({
-      to: "3035200766",
+      to: req.body.phone,
       from: "+18164488136",
       body: req.body.message
     }, function(err, message) {

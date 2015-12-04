@@ -10,10 +10,6 @@ var Conversation = new Schema({
     ref:'chatMessages'}]
 });
 
-
-
-
-
 //define chat messages
 var ChatMessage = new Schema({
   user: String,
