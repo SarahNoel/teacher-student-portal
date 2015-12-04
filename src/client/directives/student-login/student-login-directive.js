@@ -4,7 +4,6 @@ app.directive('studentLogin', function(){
       templateUrl: 'directives/student-login/studentLogin.html',
 
       controller: ['$scope', 'UserServices', '$http', '$location', function($scope, UserServices, $http, $location) {
-
         $scope.studentForm = {};
         //login user
         $scope.studentLogin = function() {
@@ -19,9 +18,10 @@ app.directive('studentLogin', function(){
               $scope.errorMessage = data.data.err;
             }
             else{
+            var socket = io.connect();
+            socket.connect();
             UserServices.storeUser(data.data);
             var room = data.data.teacherID;
-            var socket = io.connect();
             socket.emit('login', room);
             UserServices.saveStudent();
             $location.path('/chat');

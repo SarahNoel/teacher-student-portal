@@ -60,7 +60,6 @@ app.directive('messages', function(){
           var room = user._id + repID;
           $http.post('/chat/convo', {users:users, room:room, id1:user._id, id2: repID })
           .then(function(data) {
-            console.log(data);
             UserServices.saveConvo(data.data);
             $location.path('/onemessage');
           });

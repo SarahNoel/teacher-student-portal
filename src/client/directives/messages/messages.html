@@ -1,12 +1,18 @@
-<div class='clear-sidebar'>
-
+<div class='clear-sidebar centered'>
+<br>
 <h1>Let's Message Your Classmates</h1>
+<br>
+  <ul ng-repeat = 'student in haveRooms'>
+    <li ><button class='btn chat-btn' ng-click='getConvo(student.room)'>Chat with  {{student.username}}</button></li>
+  </ul>
+  <ul ng-repeat = 'student in needRooms'>
+    <li><button class='btn chat-btn' ng-click='startConvo(student.username, student._id)'>Chat with {{student.username}}</button></li>
+  </ul>
 
-<ul ng-repeat = 'student in haveRooms'>
-  <li> {{student.username}} <button ng-click='getConvo(student.room)'>Continue Chatting</button></li>
-
-<ul ng-repeat = 'student in needRooms'>
-  <li> {{student.username}} <button ng-click='startConvo(student.username, student._id)'>Start Chatting</button> </li>
-</ul>
-
+<div class = 'chat-bubble'>
+  <img src="../../public/images/bubble.jpeg">
 </div>
+</div>
+
+
+

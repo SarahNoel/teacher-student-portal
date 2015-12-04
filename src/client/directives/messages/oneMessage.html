@@ -3,15 +3,15 @@
   <h1> Let's Chat With {{recipient}}.</h1>
 
   <div class = 'chat-room'>
-    <div class = 'outer-chat-box'>
-      <div scroll-glue class = 'inner-chat-box' id= 'message-box'>
-        <ul id = 'dm-chat-ul' class = 'striped-ul'>
+    <div class = 'outer-message-box'>
+      <div scroll-glue class = 'inner-message-box' id= 'message-box'>
+        <ul id = 'dm-chat-ul' class = 'message-striped-ul'>
         </ul>
 
       </div>
       <form ng-submit = 'sendMessage()' name = 'chatSend'>
-        <input type='text' ng-model = 'chatInput' class = 'chat-input' autocomplete="off" required>
-        <button ng-disabled = 'chatSend.$invalid' class = 'chat-submit'>Send</button>
+        <input type='text' ng-model = 'chatInput' class = 'message-input' autocomplete="off" required>
+        <button ng-disabled = 'chatSend.$invalid' class = 'message-submit'>Send</button>
       </form>
     </div>
   </div>

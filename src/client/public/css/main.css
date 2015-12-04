@@ -9,7 +9,8 @@ a {
 
 a:active,
 a:active:focus,
-a:focus{
+a:focus,
+a:hover{
   text-decoration: none;
 }
 
@@ -230,7 +231,6 @@ ul{
 
 .hover-icon:hover{
   color: gray;
-  text-decoration: underline;
   cursor: pointer;
   cursor: hand;
 }
@@ -408,12 +408,11 @@ ul{
   margin-top: -31px;
 }
 
-input{
-  font-size: 19px;
-}
+
 
 .form-control{
   font-size: 19px;
+  border: thin black solid;
 }
 
 .less-wide{
@@ -501,4 +500,88 @@ input{
 .mid-card{
   margin-top: 60%;
 }
+
+.chat-btn{
+  width: 200px;
+  font-size: x-large;
+  background-color: #eb6841;
+  font-weight: bold;
+  border: thick black solid;
+}
+
+.btn-success{
+  border: thin black solid;
+}
+
+.btn-danger{
+  border: thin black solid;
+}
+
+.btn-warning{
+  border: thin black solid;
+}
+
+.btn-primary{
+  border: thin black solid;
+}
+
+.chat-bubble{
+  margin-left: 348px;
+  margin-top: -400px;
+}
+
+.outer-message-box{
+  height: 500px;
+  border: thick black solid;
+  width: 80%;
+  background-color: #edc951;
+  float: left;
+  border-radius: 25px;
+}
+
+.inner-message-box{
+  height: 85%;
+  border-bottom: thick black solid;
+  background-color: #bb3737;
+  overflow-y: auto;
+  border-top-left-radius: 21px;
+  border-top-right-radius: 21px;
+  padding-top: 3px;
+  color: silver;
+}
+
+.message-input{
+  height: 73px;
+  font-size: x-large;
+  width: 80%;
+  border-right: thick black solid;
+  border-bottom-left-radius: 21px;
+}
+
+.message-input:active,
+.message-input:focus{
+  outline: none;
+
+}
+
+.message-submit{
+  margin-left: 0;
+  width: 16%;
+  border: none;
+  height: 63px;
+  font-size: xx-large;
+  background-color: #edc951;
+}
+
+.message-striped-ul{
+  margin-left: -40px;
+  font-size: 20px;
+}
+
+.message-striped-ul li:nth-child(odd) {
+  background: silver;
+  color: black;
+}
+
+
 

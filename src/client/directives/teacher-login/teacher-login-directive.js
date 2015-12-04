@@ -3,6 +3,7 @@ app.directive('teacherLogin', function(){
       restrict: 'E',
       templateUrl: 'directives/teacher-login/teacherLogin.html',
       controller: ['$scope', 'UserServices', '$http', '$location', '$window', '$rootScope', '$auth', function($scope, UserServices, $http, $location, $window, $rootScope, $auth) {
+        var socket = io.connect();
 
         $scope.teacherLogin = {};
         //login user
@@ -15,6 +16,7 @@ app.directive('teacherLogin', function(){
           };
           $auth.login(user)
             .then(function(response) {
+              socket.connect();
               $window.localStorage.currentUser = JSON.stringify(response.data.user);
               $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
               UserServices.storeUser($rootScope.currentUser);
