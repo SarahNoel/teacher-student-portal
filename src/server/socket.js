@@ -1,64 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var deepPopulate = require("mongoose-deep-populate")(mongoose);
-var ChatMessage = mongoose.model('chatMessages');
-var User = mongoose.model('teachers');
-var Student = mongoose.model('students');
-var Conversation = mongoose.model('conversations');
-
-//------------ TWILIO ROUTES ---------------//
-
-//twilio stuff
-var config = require('../../_config.js');
-var client = require('twilio')(config.accountSid, config.authToken);
-var teacherID;
-var teacherName;
-
-
 module.exports = function(io) {
+
   //-------------- SOCKETS --------------\\
   io.on('connection', function(socket) {
     console.log("connected!");
 
     //******  CHAT SOCKET  ******\\
     var users = [];
-
-  //teacher replies to text
-  router.post('/teacher', function(req, res, next){
-    var newMessage = new ChatMessage({user:teacherName, message:req.body.Body});
-    newMessage.save(function(err, message){
-       if(err){
-        res.json(err);
-      }
-      var update = {$push:{chatMessages : newMessage}};
-      var options = {new:true};
-      User.findByIdAndUpdate(teacherID, update, options, function(err, user){
-        if (err){
-          res.json(err);
-        }
-        else{
-          var client = require('twilio')(config.accountSid, config.authToken);
-            //send response to teacher
-            client.messages.create({
-              to: user.phone,
-              from: "+18164488136",
-              body: "Your message has been received!"
-            });
-          res.json(newMessage);
-          //emit for socket!!! for dynamic updating
-          socket.emit("teacher text");
-
-        }
-      });
-    });
-  });
-
-
-
-
-
-
 
     //enters teacher specific room on login
     socket.on('login', function(room){
@@ -109,6 +56,5 @@ module.exports = function(io) {
 
   });
 
-module.exports = router;
 };
 

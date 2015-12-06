@@ -2,6 +2,20 @@
 
 app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$http', 'UserServices', function($scope, $location, $window, $auth, $http, UserServices){
 
+  $scope.socketTest = function(){
+    console.log('here');
+      $http.post('/socket/test')
+      .then(function (data) {
+        console.log(data, 'then');
+        // body...
+      })
+      .catch(function(err) {
+        console.log(err, 'err');
+        // body...
+      });
+  };
+
+
 }]);
 
 //--------------TEACHER CONTROLLER-------------------//

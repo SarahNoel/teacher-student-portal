@@ -15,36 +15,36 @@ var client = require('twilio')(config.accountSid, config.authToken);
 var teacherID;
 var teacherName;
 
-// //teacher replies to text
-// router.post('/teacher', function(req, res, next){
-//   var newMessage = new ChatMessage({user:teacherName, message:req.body.Body});
-//   newMessage.save(function(err, message){
-//      if(err){
-//       res.json(err);
-//     }
-//     var update = {$push:{chatMessages : newMessage}};
-//     var options = {new:true};
-//     User.findByIdAndUpdate(teacherID, update, options, function(err, user){
-//       if (err){
-//         res.json(err);
-//       }
-//       else{
-//         var client = require('twilio')(config.accountSid, config.authToken);
-//           //send response to teacher
-//           client.messages.create({
-//             to: user.phone,
-//             from: "+18164488136",
-//             body: "Your message has been received!"
-//           });
-//         res.json(newMessage);
-//         //emit for socket!!! for dynamic updating
-//         socket.emit("HEYYYY");
+//teacher replies to text
+router.post('/teacher', function(req, res, next){
+  var newMessage = new ChatMessage({user:teacherName, message:req.body.Body});
+  newMessage.save(function(err, message){
+     if(err){
+      res.json(err);
+    }
+    var update = {$push:{chatMessages : newMessage}};
+    var options = {new:true};
+    User.findByIdAndUpdate(teacherID, update, options, function(err, user){
+      if (err){
+        res.json(err);
+      }
+      else{
+        var client = require('twilio')(config.accountSid, config.authToken);
+          //send response to teacher
+          client.messages.create({
+            to: user.phone,
+            from: "+18164488136",
+            body: "Your message has been received!"
+          });
+        res.json(newMessage);
+        //emit for socket!!! for dynamic updating
+        socket.emit("HEYYYY");
 
 
-//       }
-//     });
-//   });
-// });
+      }
+    });
+  });
+});
 
 
 // sends alert to teacher when @teacher is used
