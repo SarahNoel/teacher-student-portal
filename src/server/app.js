@@ -31,8 +31,16 @@ var vocabGameRoutes = require('./routes/vocabGameRoutes.js');
 var hangmanGameRoutes = require('./routes/hangmanGameRoutes.js');
 var flashcardRoutes = require('./routes/flashcardRoutes.js');
 var chatRoutes = require('./routes/chatRoutes.js');
+var socketRoutes = require('./socket.js');
 
 var app = express();
+
+/** attach socket.io to the app */
+var io = require('socket.io')();
+app.io = io;
+require('./socket.js')(io);
+
+
 // *** config middleware *** //
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -47,6 +55,7 @@ app.use('/', routes);
 app.use('/auth/', teacherRoutes);
 app.use('/studentUsers/', studentRoutes);
 app.use('/chat/', chatRoutes);
+app.use('/socket/', socketRoutes);
 
 // *** mini-game routes *** //
 app.use('/vocab/', vocabGameRoutes);
