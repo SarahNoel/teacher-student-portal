@@ -1,0 +1,24 @@
+<br><br>
+<h1 class="text-center slackey">Let's Learn More.</h1>
+<br>
+
+<div class = 'clear-left' ng-controller = 'resourceCtrl'>
+  <ul> <a href = '/#/createResource'><button class = 'btn btn-purple' ng-if='isTeacher()'>Add New Resource</button></a></ul>
+
+  <ul ng-repeat='site in showUser.resources'>
+    <li class='underline'>
+      <a href = '{{site.url}}'><h3 class= 'resource-url'>{{site.title}}</h3></a>
+    </li>
+    <li class='resource-desc'>
+      <h4>{{site.description}}</h4>
+    </li>
+    <li>
+      <div class= 'teacher-only' ng-if='isTeacher()'>
+        <a ng-click='storeResource(site._id)' href= '/#/editResource'><button class = 'btn btn-warning pad'>Edit</button>
+        </a>
+        <a ng-click='deleteResource(site._id)'  href= '/#/resources'><button class = 'btn btn-danger pad'>Delete</button>
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>

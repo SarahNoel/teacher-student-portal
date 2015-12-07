@@ -1,4 +1,42 @@
+app.factory('SeedServices', ['$http', function($http){
 
+  //seed new teacher with resources
+  function seedResources(user){
+    for (var i = 0; i < resourceSeed.length; i++) {
+      $http.post('/resources/' + user._id, resourceSeed[i])
+      .then(function(data){
+      });
+    }
+  }
+
+  var resourceSeed = [
+    {
+    title: '100 Great Resources for Middleschool Students',
+    url: 'http://www.middleschool.net/resources-middleschool-students.htm',
+    description: 'Great resource to help in all subjects'
+    },
+    {
+    title: 'Quizlet',
+    url: 'https://quizlet.com/',
+    description: 'Simple tools that let you study anything, for free.'
+    },
+    {
+    title: 'Vocabulary Spelling City',
+    url: 'http://www.spellingcity.com/word-study-games.html',
+    description: 'Learning to read and write fluently requires mastery of a distinct skill set.'
+    },
+    {
+    title: '60 Education Games',
+    url: 'http://edtechideas.com/2009/12/21/60-educational-game-sites-that-you%E2%80%99ve-probably-never-seen/',
+    description: '60 games for all subjects'
+    }
+  ];
+
+    return {
+    seedResources:seedResources
+  };
+
+}]);
 //--------------USER FACTORY-------------------//
 
 app.factory('UserServices', ['$http', function($http){
@@ -9,6 +47,7 @@ app.factory('UserServices', ['$http', function($http){
   var studentTeacher;
   var playGameId;
   var conversation;
+  var resourceID;
 
   //checks for logged in user
   function isLoggedIn(){
@@ -100,6 +139,16 @@ app.factory('UserServices', ['$http', function($http){
     return playGameId;
   }
 
+  //store resource
+  function storeResource(id){
+    resourceID = id;
+  }
+
+  //retrieve resource
+  function getResource(){
+    return resourceID;
+  }
+
   //saves conversation
   function saveConvo(convo){
     conversation = convo;
@@ -164,7 +213,9 @@ app.factory('UserServices', ['$http', function($http){
           enableAll: enableAll,
           languageFilter: languageFilter,
           saveConvo: saveConvo,
-          getConvo: getConvo
+          getConvo: getConvo,
+          storeResource: storeResource,
+          getResource: getResource
         };
 }]);
 

@@ -40,7 +40,9 @@ var User = new Schema({
   flashcardSets: [{type: Schema.Types.ObjectId,
     ref:'flashcardSets'}],
   conversations: [{type: Schema.Types.ObjectId,
-    ref:'conversations'}]
+    ref:'conversations'}],
+  resources: [{type: Schema.Types.ObjectId,
+    ref:'resources'}]
 });
 
 

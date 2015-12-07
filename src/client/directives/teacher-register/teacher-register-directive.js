@@ -2,7 +2,7 @@ app.directive('teacherRegister', function(){
     return {
       restrict: 'E',
       templateUrl: 'directives/teacher-register/teacherRegister.html',
-      controller: ['$scope', 'UserServices', '$http', '$location', '$auth', function($scope, UserServices, $http, $location, $auth) {
+      controller: ['$scope', 'UserServices', '$http', '$location', '$auth', 'SeedServices', function($scope, UserServices, $http, $location, $auth, SeedServices) {
 
         $scope.teacherForm = {};
 
@@ -15,24 +15,23 @@ app.directive('teacherRegister', function(){
             username: $scope.teacherForm.username.trim(),
             phone: $scope.teacherForm.phone.replace(/\D/g,'')
           };
-          console.log(user);
           $auth.signup(user)
-            .then(function(response){
+            .then(function(data){
               $auth.login(user);
-              UserServices.storeUser(user);
+              UserServices.storeUser(data.data.user);
               UserServices.saveTeacher();
-              var room = user._id;
+              var room = data.data.user._id;
               var socket = io.connect();
               socket.connect();
               socket.emit('login', room);
               $scope.teacherForm = {};
+              SeedServices.seedResources(data.data.user);
               $location.path('/teacherinfo');
             })
-            .catch(function(response) {
-              $scope.errorMessage = response.data.message;
+            .catch(function(data) {
+              $scope.errorMessage = data.data.message;
             });
         };
-
     }]
   };
 

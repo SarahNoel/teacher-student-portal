@@ -1,0 +1,28 @@
+<br><br>
+<h1 class="text-center slackey">Edit this Resource</h1>
+<br>
+
+<div class = 'clear-sidebar' ng-controller = 'editResourceCtrl'>
+     <form>
+        <label>Title:</label>
+        <input class = 'form-control' ng-model= 'resource.title'>
+        <label>URL:</label>
+        <input class = 'form-control' ng-model= 'resource.url'>
+        <label>Description:</label>
+        <input class = 'form-control' ng-model= 'resource.description'>
+        <br>
+
+        <div class = 'button-box centered'>
+          <button ng-click = 'updateResource(resource._id)' class='centered btn btn-primary'>Update</button>
+
+          <button ng-click = 'deleteResource(resource._id)' class='centered btn btn-danger'>Delete</button>
+        </div>
+      </form>
+    </div>
+    <br>
+  <div class = 'centered'>
+    <a href = '/#/resources'>
+      <button class = 'btn btn-purple'>Cancel</button>
+    </a>
+  </div>
+</div>

@@ -478,6 +478,10 @@ ul{
   font-weight: bold;
 }
 
+.underline{
+  text-decoration: underline;
+}
+
 .big-title{
   font-size: 52px;
 }
@@ -542,9 +546,9 @@ ul{
   border: thin black solid;
 }
 
-.chat-bubble{
-  margin-left: 348px;
-  margin-top: -400px;
+.word-bubble{
+  margin-top: 15px;
+  margin-left: 40px;
 }
 
 .outer-message-box{
@@ -621,4 +625,70 @@ ul{
 
 .game-page{
   margin-top: 10px;
+  width: 70%;
+  max-width: 500px;
+}
+
+.clear-left{
+  margin-left: 100px;
+}
+
+.top-pic{
+  margin-left: -35px;
+}
+
+.bottom-pic{
+  margin-left: -20px;
+}
+
+.btn-purple{
+  background-color: #7a4d8b;
+  padding: 8px;
+  color: white;
+  border: thin black solid;
+}
+
+.btn-purple:hover,
+.btn-purple:disabled,
+.btn-purple:active,
+.btn-purple:disabled:hover,
+.btn-purple:active:focus,
+.btn-purple:focus{
+  background-color: #613d6f;
+  padding: 8px;
+  color: white;
+}
+
+.btn-orange{
+  background-color: #eb6841;
+  border: thin black solid;
+  color: white;
+}
+
+.btn-orange:hover,
+.btn-orange:disabled,
+.btn-orange:active,
+.btn-orange:disabled:hover,
+.btn-orange:active:focus,
+.btn-orange:focus{
+  background-color: #eb6841;
+  color: white;
+}
+
+.teacher-only{
+  display: flex;
+}
+
+.pad{
+  margin-left: 3px;
+}
+
+.resource-url{
+  color: #0048b0;
+}
+
+.cancel-btn{
+  width: 56px;
+  margin-left: 10px;
+
 }

@@ -4,6 +4,7 @@ require('./models/vocabGameModels.js');
 require('./models/hangmanGameModel.js');
 require('./models/flashcardModel.js');
 require('./models/chatrooms.js');
+require('./models/resourceModel.js');
 
 // *** main dependencies *** //
 var express = require('express');
@@ -32,7 +33,7 @@ var hangmanGameRoutes = require('./routes/hangmanGameRoutes.js');
 var flashcardRoutes = require('./routes/flashcardRoutes.js');
 var chatRoutes = require('./routes/chatRoutes.js');
 var socketRoutes = require('./socket.js');
-
+var resourceRoutes = require('./routes/resourceRoutes.js');
 var app = express();
 
 /** attach socket.io to the app */
@@ -55,6 +56,7 @@ app.use('/', routes);
 app.use('/auth/', teacherRoutes);
 app.use('/studentUsers/', studentRoutes);
 app.use('/chat/', chatRoutes);
+app.use('/resources/', resourceRoutes);
 app.use('/socket/', socketRoutes);
 
 // *** mini-game routes *** //

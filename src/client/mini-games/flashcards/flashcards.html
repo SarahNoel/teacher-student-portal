@@ -1,34 +1,50 @@
 <br>
-<div ng-controller = 'flashcardCtrl' class='less-wide'>
-  <div>
-    <ul><h1 class ='center slackey'>Flashcards</h1></ul>
+<h1 class ='center slackey'>Let's Study.</h1>
+<br>
+<div ng-controller = 'flashcardCtrl' class='centered game-page'>
+    <div>
 
-    <ul class='centered'><h2 class = 'center'>Your Flashcard Sets</h2>
-      <li class = 'center flex' ng-repeat = 'set in showUser.flashcardSets'><h3>{{set.title}}</h3>
-        <div class='flashcard-btns'>
-          <a href = '/#/editflashcards' ng-click='storeSetId(set._id)'><button class = 'btn btn-warning'><span class='glyphicon glyphicon-pencil'></span></button></a>
 
-          <a href = '/#/playflashcards' ng-click='storeSetId(set._id)'><button class = 'btn btn-success'><span class='glyphicon glyphicon-play'></span></button></a>
-        </div>
-      </li>
-    </ul>
-
-    <br>
-    <ul>
-      <a href = '/#/createflashcards'>
-        <button class = 'centered btn btn-primary'>Create new Set </button>
-      </a>
-    </ul>
-
-    <div ng-if = 'isStudent()'>
-      <ul class='centered'><h2 class = 'center'>Your Teacher's Flashcard Sets</h2>
-        <li class = 'center flex push-right' ng-repeat = 'set in showTeacher.flashcardSets'><h3>{{set.title}}</h3>
+    <div class = 'left-col'>
+      <ul class='centered'><h2 class = 'bold center'>Your Flashcard Sets</h2>
+        <li class = 'center flex' ng-repeat = 'set in showUser.flashcardSets'><h3>{{set.title}}</h3>
           <div class='flashcard-btns'>
+            <a href = '/#/editflashcards' ng-click='storeSetId(set._id)'><button class = 'btn btn-orange'><span class='glyphicon glyphicon-pencil'></span></button></a>
+
             <a href = '/#/playflashcards' ng-click='storeSetId(set._id)'><button class = 'btn btn-success'><span class='glyphicon glyphicon-play'></span></button></a>
           </div>
         </li>
       </ul>
+
+      <br>
+      <ul>
+        <a href = '/#/createflashcards'>
+          <button class = 'centered btn btn-purple'>Create new Set </button>
+        </a>
+      </ul>
+
+      <div ng-if = 'isStudent()'>
+        <ul class='centered'><h2 class = 'bold center'>Your Teacher's Flashcard Sets</h2>
+          <li class = 'center flex' ng-repeat = 'set in showTeacher.flashcardSets'><h3>{{set.title}}</h3>
+            <div class='flashcard-btns'>
+              <a href = '/#/playflashcards' ng-click='storeSetId(set._id)'><button class = 'btn btn-success'><span class='glyphicon glyphicon-play'></span></button></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class = 'right-col'>
+    <br>
+      <div class = 'game-pic-box'>
+        <img class ='game-pic' src = '../public/images/flashFront.png'>
+      </div>
+      <br><br>
+      <div class = 'game-pic-box'>
+        <img class ='game-pic' src = '../public/images/flashBack.png'>
+      </div>
     </div>
   </div>
+
 </div> <!-- end flashcardCtrl -->
 

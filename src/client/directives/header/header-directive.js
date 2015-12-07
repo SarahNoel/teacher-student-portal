@@ -28,7 +28,6 @@ app.directive('headerInfo', function(){
 
         //logs out user
         $scope.logout = function() {
-          console.log('gone!');
           $auth.logout();
           delete $window.localStorage.currentUser;
           UserServices.logout();

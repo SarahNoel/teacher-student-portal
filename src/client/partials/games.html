@@ -1,25 +1,26 @@
-
+<br>
+<h1 class= 'slackey center'>Let's Play.</h1>
+<br>
 <div class = 'centered game-page' ng-controller = 'GameCtrl'>
-<h1 class= 'slackey'>Let's Play.</h1>
   <div class ='left-col'>
 
-    <h3>Vocab Racer</h3>
+    <h2 class = 'bold underline'>Vocab Racer</h2>
     <ul>
       <li class='game-li' ng-repeat='game in games.vocabGames'><a href = '/#/vocabRace'><span ng-click="getPlayGame(game._id)" class = 'glyphicon glyphicon-play-circle play-btn'></span></a>{{game.title}}</li>
     </ul>
 
-    <h3>Hangman</h3>
+    <h2 class = 'bold underline'>Hangman</h2>
     <ul>
       <li class = 'game-li' ng-repeat='hangman in games.hangmanGames'>  <a href = '/#/hangman'><span class= 'glyphicon glyphicon-play-circle play-btn' ng-click="getPlayGame(hangman._id)"></span></a>{{hangman.title}}</li>
     </ul>
   </div>
   <div class = 'right-col'>
     <div class = 'game-pic-box'>
-      <img class ='game-pic' src = '../public/images/racer.png'>
+      <img class ='game-pic top-pic' src = '../public/images/racer.png'>
     </div>
     <br><br>
     <div class = 'game-pic-box'>
-      <img class ='game-pic' src = '../public/images/hangman.png'>
+      <img class ='game-pic bottom-pic' src = '../public/images/hangman.png'>
     </div>
   </div>
 </div>

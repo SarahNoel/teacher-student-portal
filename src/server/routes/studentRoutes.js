@@ -7,8 +7,6 @@ var Student = mongoose.model('students');
 var Teacher = mongoose.model('teachers');
 var HangmanGame = mongoose.model('hangmanGames');
 
-
-
 //get all students
 router.get('/students', function(req, res, next){
   Student.find(function(err, students){
@@ -24,7 +22,7 @@ router.get('/students', function(req, res, next){
 //get all students and games from a teacher
 router.get('/students/:teacherID', function(req, res, next){
   Teacher.findById(req.params.teacherID, function(err, teacher){})
-  .deepPopulate('hangmanGames vocabGames students flashcardSets conversations students.conversations')
+  .deepPopulate('hangmanGames vocabGames students flashcardSets conversations students.conversations resources')
   .exec(function(err, data){
     if(err){
       res.json(err);
@@ -90,11 +88,7 @@ router.post('/register', function(req, res, next){
       });
     }
   });
-
-
 });
-
-
 
 
 module.exports = router;

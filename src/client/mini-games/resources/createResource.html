@@ -1,0 +1,23 @@
+<br><br>
+<h1 class="text-center slackey">Create a New Resource</h1>
+<br>
+
+<div class = 'clear-sidebar' ng-controller = 'createResourceCtrl'>
+   <form>
+      <label>Title:</label>
+      <input class = 'form-control' ng-model= 'resource.title'>
+      <label>URL:</label>
+      <input class = 'form-control' ng-model= 'resource.url'>
+      <label>Description:</label>
+      <input class = 'form-control' ng-model= 'resource.description'>
+      <br>
+
+      <div class = 'button-box'>
+        <button ng-click = 'createResource(resource._id)' class='btn btn-primary'>Create</button>
+        <a href = '/#/resources'>
+          <button class = 'btn btn-purple cancel-btn'>Cancel</button>
+        </a>
+      </div>
+    </form>
+</div>
+
