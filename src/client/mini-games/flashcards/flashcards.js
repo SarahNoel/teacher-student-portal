@@ -20,19 +20,25 @@ app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
 
     //get all sets from user
     $scope.getAllSets = function(){
+    if(isStudent){
       $http.get('/flashcards/sets/' + user._id)
       .then(function(data){
         $scope.showUser = data.data;
-        $http.get('/flashcards/teachersets/' + teacherID)
-        .then(function(data) {
-          $scope.showTeacher = data.data;
-        });
+      });
+    }
+    $http.get('/flashcards/teachersets/' + teacherID)
+      .then(function(data) {
+        if(isStudent){
+            $scope.showTeacher = data.data;
+          }
+        else if(!isStudent){
+          $scope.showUser = data.data;
+        }
       });
     };
 
     //create a set- title only
     $scope.createSet = function(){
-      console.log(isStudent);
       if(!isStudent){
           $http.post('/flashcards/teacherset', {title:$scope.flashcardTitle.trim(), id:user._id})
         .then(function(data){

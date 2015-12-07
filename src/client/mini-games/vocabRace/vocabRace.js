@@ -15,7 +15,7 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
     $scope.showUser = user;
 
 
-// <--------------------- ADD GAMES/ETC  ----------------->
+// <----------------- ADD GAMES/ETC  -------------->
 
     //get all vocab games from teacher
     $scope.getAllGames = function(){
@@ -48,24 +48,24 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
     };
 
 
-// <---------------------  LIVE GAME PLAY  ----------------->
-    $scope.challengeGame = function(roomID){
-      socket.emit('game-challenge', roomID);
-    };
+// // <--------------  LIVE GAME PLAY  ------------->
+//     $scope.challengeGame = function(roomID){
+//       socket.emit('game-challenge', roomID);
+//     };
 
 
-    //socket listeners
-    socket.on('game-challenge-received', function(roomID){
-      console.log(roomID);
-    });
-
-
-
+//     //socket listeners
+//     socket.on('game-challenge-received', function(roomID){
+//       console.log(roomID);
+//     });
 
 
 
-// <---------------------  SOLO GAME PLAY  ----------------->
 
+
+
+// <----------------  SOLO GAME PLAY  --------------->
+// UserServices.storeGame('56620a1a6cf8de1300a6ffb1');
 
     //gameplay variables
     var guess;
@@ -73,6 +73,8 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
     var currentQuestion;
     var game = UserServices.getGame();
     var counter = 10;
+
+
 
 
     //countdown function
@@ -111,6 +113,7 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
         //displays first hint
         currentQuestion = data.data.questions[index];
         $scope.hint = currentQuestion.question;
+        $scope.currentAnswer = currentQuestion.answer;
         //starts countdown
         countDowner();
       })
@@ -161,8 +164,10 @@ app.controller('vocabCtrl', ['$scope', '$http', '$location', '$timeout' , 'UserS
 
         // finds next question in array
         currentQuestion = $scope.currentGame.questions[index];
+
         //displays next hint
         $scope.hint = currentQuestion.question;
+        $scope.currentAnswer = currentQuestion.answer;
         countDown = counter;
         //starts countdown
         countDowner();

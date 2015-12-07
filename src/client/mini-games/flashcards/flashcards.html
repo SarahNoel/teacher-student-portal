@@ -3,7 +3,7 @@
   <div>
     <ul><h1 class ='center slackey'>Flashcards</h1></ul>
 
-    <ul class='centered'><h3 class = 'center'>Your Flashcard Sets</h3>
+    <ul class='centered'><h2 class = 'center'>Your Flashcard Sets</h2>
       <li class = 'center flex' ng-repeat = 'set in showUser.flashcardSets'><h3>{{set.title}}</h3>
         <div class='flashcard-btns'>
           <a href = '/#/editflashcards' ng-click='storeSetId(set._id)'><button class = 'btn btn-warning'><span class='glyphicon glyphicon-pencil'></span></button></a>
@@ -21,11 +21,9 @@
     </ul>
 
     <div ng-if = 'isStudent()'>
-      <ul class='centered'><h3 class = 'center'>Your Teacher's Flashcard Sets</h3>
-        <li class = 'center flex' ng-repeat = 'set in showTeacher.flashcardSets'><h3>{{set.title}}</h3>
+      <ul class='centered'><h2 class = 'center'>Your Teacher's Flashcard Sets</h2>
+        <li class = 'center flex push-right' ng-repeat = 'set in showTeacher.flashcardSets'><h3>{{set.title}}</h3>
           <div class='flashcard-btns'>
-            <a href = '/#/editflashcards' ng-click='storeSetId(set._id)'><button class = 'btn btn-warning'><span class='glyphicon glyphicon-pencil'></span></button></a>
-
             <a href = '/#/playflashcards' ng-click='storeSetId(set._id)'><button class = 'btn btn-success'><span class='glyphicon glyphicon-play'></span></button></a>
           </div>
         </li>

@@ -6,7 +6,7 @@
   <form name='addflashcardForm'>
     <div class="form-group">
 
-      <label>Flashcard Set Name/Theme</label>
+      <label><h4>Flashcard Set Name/Theme</h4></label>
       <input ng-model='flashcardTitle' type="text" class="form-control" placeholder="Bio Vocab"required>
 
     </div>
@@ -17,12 +17,12 @@
   <div ng-show = 'addingQuestions'>
     <form>
       <div class="form-group">
-        <label>Question</label>
+        <label><h4>Question</h4></label>
         <input ng-model='flashcardForm.question' type="text" class="form-control" placeholder="What is the powerhouse of a cell?" >
       </div>
 
       <div class="form-group">
-        <label for="hint">Answer</label>
+        <label for="hint"><h4>Answer</h4></label>
         <input ng-model='flashcardForm.answer' type="text" class="form-control" placeholder="Mitochondria" >
       </div>
 
@@ -37,7 +37,7 @@
 
 <div>
   <br>
-  <h5>Current questions for this set: </h5>
+  <h4>Current questions for this set: </h4>
 
   <ul ng-repeat='flashcard in allFlashcards'>
     <li> Question: {{flashcard.question}}</li>

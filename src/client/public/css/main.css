@@ -20,6 +20,7 @@ ul{
 .slackey{
   font-family: 'Slackey', cursive;
 }
+
 /*.fancy-font{
   font-family: 'Slackey', cursive;
 }*/
@@ -132,6 +133,8 @@ ul{
   margin: auto;
   background-image: url('../images/race.jpg');
   background-size: cover;
+  border: thick black solid;
+
 }
 
 .user-input-box{
@@ -176,13 +179,14 @@ ul{
   border: thick #c11e1e solid;
   width: 250px;
   height: 100px;
+  margin-bottom: -20px;
 }
 
 .endgame-box{
   text-align: center;
   background-color:#F5F5DC;
   border: thick purple solid;
-  width: 250px;
+  width: 300px;
   height: 100px;
 }
 
@@ -242,6 +246,7 @@ ul{
   margin: auto;
   background-image: url('../images/west.png');
   background-size: cover;
+  border: thick black solid;
 }
 
 .gallows{
@@ -307,6 +312,20 @@ ul{
   height: 115px;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.end-hangman-box{
+  background: #F5F5DC;
+  float: right;
+  clear: both;
+  margin-right: 37px;
+  border: thick purple solid;
+  margin-top: 10px;
+  height: 130px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 206px;
+  text-align: center;
 }
 
 .edit-div{
@@ -594,4 +613,9 @@ ul{
 .teacher-box{
   width: 70%;
   max-width: 650px;
+}
+
+
+.push-right{
+  margin-left: 50px;
 }

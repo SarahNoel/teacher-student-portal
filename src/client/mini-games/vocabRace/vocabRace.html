@@ -4,9 +4,8 @@
   <div ng-hide='playing' class='center'>
     <h1>Vocab Race</h1>
 
-    <h3>You will have a timer to guess the right word and
-    spell it correctly.
-    <br>It will get faster as you get more right.  Good luck!</h3>
+    <h3>You will have a timer counting down to guess the right word and spell it correctly.
+    <br>Good luck!</h3>
 
     <button ng-click= 'startGame()' class='btn btn-success'>Start!</button>
   </div>
@@ -36,34 +35,44 @@
         </div>
 
         <div ng-show = 'showCorrect' class='centered correct-box'>
-            <br>
-            YOU ARE RIGHT.
-            <br>
+            <h4>Correct! {{hint}} is {{currentAnswer}}.</h4>
+
             <button ng-disabled='timesUp === false' ng-click='nextQuestion()' class="btn btn-warning" type="submit">Next Question!</button>
+            <br>
         </div>
 
          <div ng-show = 'showWrong' class='centered wrong-vocab-box'>
+            <h3>Nope!  Keep trying!</h3>
             <br>
-            YOU ARE WRONG.
-            <br><br>
         </div>
 
         <div ng-show = 'showWrongNext' class='centered wrong-vocab-box'>
+            <h4>You ran out of time!
             <br>
-            YOU RAN OUT OF TIME.
-            <br>
+            {{hint}} is {{currentAnswer}}.</h4>
+
           <button ng-disabled='timesUp === false' ng-click='nextQuestion()' class="btn btn-warning" type="submit">Next Question!</button>
+          <br><br>
         </div>
 
-        <div ng-show = 'endVocabGame === true' class='centered endgame-box'>
+        <div ng-show = 'endVocabGame === true' class='centered endgame-box center'>
 
-          <h4>Score: <br>
-          Right: {{questionsRight}}     Wrong: {{questionsWrong}}</h4>
-         <button ng-click='endGame()' class="btn btn-primary" type="button">End the Game!</button>
+          <h3> You got {{questionsRight}}
+          <ng-pluralize count="questionsRight" when="
+              {'1': 'question',
+              'other': 'questions'}"></ng-pluralize>
+              right.</h3>
+          <h3>You got {{questionsWrong}}
+          <ng-pluralize count="questionsWrong" when="
+              {'1': 'question',
+              'other': 'questions'}"></ng-pluralize>
+              wrong.</h3>
+         <a href = '/#/vocab'><button class="btn btn-success" type="button">Return to Games</button></a>
+         <br><br>
 
         </div>
 
-        <form class='form-inline'  ng-submit = 'guessVocab()'>
+        <form class='form-inline' ng-hide='endVocabGame === true' ng-submit = 'guessVocab()'>
           <div class="input-group user-input-box">
             <input ng-model='vocabGameInput'class='vocabGame-input form-control'>
             <span class="input-group-btn">

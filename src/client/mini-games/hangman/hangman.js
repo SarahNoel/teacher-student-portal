@@ -196,7 +196,10 @@ app.controller('hangmanCtrl', ['$scope', '$http', '$location', '$timeout' , 'Use
 
     //ends game
     $scope.endGame = function(){
-      console.log('GAME OVER');
+      $scope.endHangman = true;
+      $scope.wrongWord = false;
+      $scope.rightWord = false;
+      $scope.gameOver = false;
     };
 
     //start game on page load

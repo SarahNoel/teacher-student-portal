@@ -40,6 +40,20 @@
           <br><br>
         </div>
 
+        <div ng-show = 'endHangman' class = 'end-hangman-box'>
+          <h4> You got {{questionsRight}}
+          <ng-pluralize count="questionsRight" when="
+              {'1': 'word',
+              'other': 'words'}"></ng-pluralize>
+              right.</h4>
+          <h4> You got {{questionsWrong}}
+          <ng-pluralize count="questionsWrong" when="
+              {'1': 'word',
+              'other': 'words'}"></ng-pluralize>
+              wrong.</h4>
+          <a href = '/#/vocab'><button class = 'btn btn-warning centered'>Return to Games</button></a>
+          <br><br>
+        </div>
 
 
     </div><!-- end inner box -->
