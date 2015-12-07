@@ -51,7 +51,7 @@ app.config(['$routeProvider', function ($routeProvider) {
       access: {restricted: true}
 
     })
-    .when('/vocab', {
+    .when('/games', {
       templateUrl: '/partials/games.html',
       access: {restricted: true}
 

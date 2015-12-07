@@ -615,7 +615,10 @@ ul{
   max-width: 650px;
 }
 
-
 .push-right{
   margin-left: 50px;
+}
+
+.game-page{
+  margin-top: 10px;
 }
