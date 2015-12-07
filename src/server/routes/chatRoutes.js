@@ -37,10 +37,6 @@ router.post('/teacher', function(req, res, next){
             body: "Your message has been received!"
           });
         res.json(newMessage);
-        //emit for socket!!! for dynamic updating
-        socket.emit("HEYYYY");
-
-
       }
     });
   });
