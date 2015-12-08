@@ -7,8 +7,9 @@
 
     <div class = 'left-col'>
       <ul class='centered'><h2 class = 'bold center'>Your Flashcard Sets</h2>
-        <li class = 'center flex' ng-repeat = 'set in showUser.flashcardSets'><h3>{{set.title}}</h3>
-          <div class='flashcard-btns'>
+        <li class = 'center' ng-repeat = 'set in showUser.flashcardSets'><h3>{{set.title}}</h3>
+
+          <div>
             <a href = '/#/editflashcards' ng-click='storeSetId(set._id)'><button class = 'btn btn-orange'><span class='glyphicon glyphicon-pencil'></span></button></a>
 
             <a href = '/#/playflashcards' ng-click='storeSetId(set._id)'><button class = 'btn btn-success'><span class='glyphicon glyphicon-play'></span></button></a>
