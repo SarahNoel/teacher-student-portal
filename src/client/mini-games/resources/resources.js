@@ -3,11 +3,13 @@ app.controller('resourceCtrl', ['$scope', '$http', '$location', '$timeout' , 'Us
     //non-populated user
     var user = UserServices.getUser();
     var teacherID = UserServices.checkforTeacher();
+    $scope.doneLoading = false;
 
     function allInfo(){
       $http.get('/studentUsers/students/'+ teacherID)
       .then(function(data){
         $scope.showUser = data.data;
+        $scope.doneLoading = true;
       });
     }
 

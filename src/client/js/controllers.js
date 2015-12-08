@@ -93,15 +93,19 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
 app.controller('GameCtrl', ['$scope', '$http', 'UserServices',function($scope, $http, UserServices) {
   var user = UserServices.getUser();
   var teacherID = UserServices.checkforTeacher();
+  $scope.doneLoading = false;
 
   //get all game info for playing
   $scope.allInfo = function(){
       $http.get('/studentUsers/students/'+ teacherID)
       .then(function(data){
         $scope.games = data.data;
+        $scope.doneLoading = true;
+
       })
       .catch(function(data){
         console.log('catch ', data);
+        $scope.doneLoading = true;
       });
     };
 

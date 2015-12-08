@@ -3,6 +3,8 @@
 <br>
 
 <div class = 'clear-left' ng-controller = 'resourceCtrl'>
+
+<div ng-show = 'doneLoading'>
   <ul> <a href = '/#/createResource'><button class = 'btn btn-purple' ng-if='isTeacher()'>Add New Resource</button></a></ul>
 
   <ul ng-repeat='site in showUser.resources'>
@@ -21,4 +23,7 @@
       </div>
     </li>
   </ul>
+  </div>
+
+<img ng-hide = 'doneLoading' class='loading-spinner' src="./public/images/loading.gif">
 </div>

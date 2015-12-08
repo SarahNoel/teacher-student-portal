@@ -4,7 +4,7 @@
 <div ng-controller = 'flashcardCtrl' class='centered game-page'>
     <div>
 
-
+<div ng-show = 'doneLoading'>
     <div class = 'left-col'>
       <ul class='centered'><h2 class = 'bold center'>Your Flashcard Sets</h2>
         <li class = 'center' ng-repeat = 'set in showUser.flashcardSets'><h3>{{set.title}}</h3>
@@ -46,6 +46,7 @@
       </div>
     </div>
   </div>
-
+</div>
+<img ng-hide = 'doneLoading' class='loading-spinner' src="./public/images/loading.gif">
 </div> <!-- end flashcardCtrl -->
 

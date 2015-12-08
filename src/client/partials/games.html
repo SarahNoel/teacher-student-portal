@@ -2,6 +2,8 @@
 <h1 class= 'slackey center'>Let's Play.</h1>
 <br>
 <div class = 'centered game-page' ng-controller = 'GameCtrl'>
+
+<div ng-show = 'doneLoading'>
   <div class ='left-col'>
 
     <h2 class = 'bold underline'>Vocab Racer</h2>
@@ -23,4 +25,6 @@
       <img class ='game-pic bottom-pic' src = '../public/images/hangman.png'>
     </div>
   </div>
+</div>
+<img ng-hide = 'doneLoading' class='loading-spinner' src="./public/images/loading.gif">
 </div>
