@@ -5,9 +5,9 @@ app.directive('studentLogin', function(){
 
       controller: ['$scope', 'UserServices', '$http', '$location', function($scope, UserServices, $http, $location) {
         $scope.studentForm = {};
-        //login user
-        $scope.studentForm.email = 'bobby@gmail.com';
-        $scope.studentForm.password = '123';
+        // //login user
+        // $scope.studentForm.email = 'bobby@gmail.com';
+        // $scope.studentForm.password = '123';
 
         $scope.studentLogin = function() {
           $scope.errorMessage = '';

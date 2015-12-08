@@ -7,8 +7,8 @@ app.directive('teacherLogin', function(){
 
         $scope.teacherLogin = {};
         //login user
-        $scope.teacherLogin.email = 'hi@gmail.com';
-        $scope.teacherLogin.password = '123';
+        // $scope.teacherLogin.email = 'hi@gmail.com';
+        // $scope.teacherLogin.password = '123';
 
         $scope.login = function() {
           $scope.errorMessage = '';
