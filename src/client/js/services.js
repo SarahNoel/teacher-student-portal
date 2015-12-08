@@ -178,7 +178,7 @@ app.factory('UserServices', ['$http', function($http){
     var symbols = '!@#$%^&*©æ®√∞Ω∫∆¥ƒ∂ß';
     var arr = str.split(' ');
     for (var i = 0; i < arr.length; i++) {
-      var word = arr[i].toLowerCase();
+      var word = arr[i].toLowerCase().replace(/\W/g, '');
       if(profanities.indexOf(word) != -1){
         var replace = '';
         if(teacher){
