@@ -61,7 +61,6 @@ app.factory('UserServices', ['$http', function($http){
 
   //stores user to access from all controllers
   function storeUser(user){
-    console.log(user);
     username = user;
   }
 

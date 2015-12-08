@@ -8,6 +8,7 @@ app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$h
 
 app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope, $http, UserServices) {
 
+  $scope.doneLoading = false;
   var socket = io.connect();
   //non-populated user
   var user = UserServices.getUser();
@@ -27,6 +28,7 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
     $http.get('/studentUsers/students/'+ user._id)
     .then(function(data){
       $scope.showUser = data.data;
+      $scope.doneLoading = true;
     });
   };
 

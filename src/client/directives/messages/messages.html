@@ -4,6 +4,7 @@
   <br>
   <div class = 'centered'>
     <div class = 'left-col'>
+    <img ng-hide = 'doneLoading' class='loading-spinner' src="./public/images/loading.gif">
       <ul ng-repeat = 'student in haveRooms'>
         <li ><button class='btn chat-btn' ng-click='getConvo(student.room)'>Chat with  {{student.username}}</button></li>
       </ul>

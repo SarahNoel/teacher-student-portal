@@ -58,6 +58,11 @@ ul{
   border: thick black solid;
 }
 
+.navbar-teacher{
+  background-color: #edc951;
+  border: thick black solid;
+}
+
 .headerA a:hover{
   color: white;
 }
@@ -765,4 +770,11 @@ ul{
 
 .tomato{
   background-color: #FF6347;
+}
+
+
+.loading-spinner{
+  height: 99px;
+  margin-top: 48px;
+}
 }

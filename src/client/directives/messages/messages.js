@@ -11,6 +11,7 @@ app.directive('messages', function(){
         var teacherName;
         var teacher;
         var teacherPhone;
+        $scope.doneLoading = false;
         //wrap elements in angular
         var chatUl = angular.element(document.querySelector('#chat-ul'));
         var onlineUsers = angular.element(document.querySelector('#user-ul'));
@@ -51,6 +52,7 @@ app.directive('messages', function(){
             }
             $scope.haveRooms = haveRooms;
             $scope.needRooms = needRooms;
+            $scope.doneLoading = true;
           });
         }
 

@@ -2,6 +2,7 @@
   <br>
   <ul><h1 class = 'slackey'> Welcome, {{showUser.username}} </h1></ul>
 
+<div ng-show='doneLoading'>
     <div class = 'left-col'>
 
       <ul><h2>Vocab Race Games</h2>
@@ -48,4 +49,9 @@
       </button>
       <h4 ng-if ='showUser.disabledAlerts ===false'>Students currently CAN send alerts to your phone.</h4>
     </div>
+  </div>
+
+<img ng-hide = 'doneLoading' class='loading-spinner' src="./public/images/loading.gif">
+
+
 </div>
