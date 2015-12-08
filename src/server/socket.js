@@ -1,11 +1,11 @@
 module.exports = function(io) {
+    var users = [];
 
   //-------------- SOCKETS --------------\\
   io.on('connection', function(socket) {
     console.log("connected!");
 
     //******  CHAT SOCKET  ******\\
-    var users = [];
 
     //enters teacher specific room on login
     socket.on('login', function(room){
@@ -15,15 +15,17 @@ module.exports = function(io) {
 
     //when user enters chat room
     socket.on('entered', function(user){
+      socket.user = user.username;
       if(users.indexOf(user.username) === -1 && user !== false){
         users.push(user.username);
       }
-      socket.user = user.username;
+      console.log(users, 'users')
       io.to(socket.room).emit('online-users', users);
     });
 
     //message sent to whole room
     socket.on('message-sent', function(message){
+      console.log(users, 'users')
       io.to(socket.room).emit('message-received', {message:message, user:socket.user});
     });
 
