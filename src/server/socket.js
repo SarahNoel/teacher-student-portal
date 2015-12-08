@@ -27,10 +27,7 @@ module.exports = function(io) {
       io.to(socket.room).emit('message-received', {message:message, user:socket.user});
     });
 
-
     ///direct messaging
-
-    //send dm
     socket.on('dm-sent', function(room, message) {
       socket.join(room);
       io.to(room).emit('dm-received', {user:socket.user, message:message});
