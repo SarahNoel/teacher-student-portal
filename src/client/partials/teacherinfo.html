@@ -27,10 +27,25 @@
     </div>
     <div class = 'right-col'>
       <ul><h2>Your Students</h2>
+      <h4 ng-if ='showUser.disabledAlerts ===false'>Green buttons CAN alert you.<br>  Red buttons CANNOT alert you.</h4>
+
         <li class ='game-li' ng-repeat='student in showUser.students'>
-          <span class = 'hover-icon' ng-click='getOneStudent(student._id)'>
-          {{student.username}} </span>
+          {{student.username}}
+
+          <button ng-if ='student.disabledAlerts ===true && showUser.disabledAlerts ===false'  class = 'btn btn-danger' ng-click='enableStudent(student._id)'>Enable Alerts?
+           </button>
+
+          <button ng-if ='student.disabledAlerts ===false && showUser.disabledAlerts ===false'  class = 'btn btn-success' ng-click='disableStudent(student._id)'>Disable Alerts?
+          </button>
+
         </li>
       </ul>
+      <br> <br>
+      <button ng-if ='showUser.disabledAlerts ===true'  class = 'btn btn-danger' ng-click='enableAll()'>Enable ALL Alerts?</button>
+      <h4 ng-if ='showUser.disabledAlerts ===true'>Students currently CANNOT send alerts to your phone.</h4>
+
+      <button ng-if ='showUser.disabledAlerts ===false'  class = 'btn btn-success' ng-click='disableAll()'>Disable ALL Alerts?
+      </button>
+      <h4 ng-if ='showUser.disabledAlerts ===false'>Students currently CAN send alerts to your phone.</h4>
     </div>
 </div>

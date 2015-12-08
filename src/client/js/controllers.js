@@ -2,37 +2,27 @@
 
 app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$http', 'UserServices', function($scope, $location, $window, $auth, $http, UserServices){
 
-  $scope.socketTest = function(){
-    console.log('here');
-      $http.post('/socket/test')
-      .then(function (data) {
-        console.log(data, 'then');
-        // body...
-      })
-      .catch(function(err) {
-        console.log(err, 'err');
-        // body...
-      });
-  };
-
-
 }]);
 
 //--------------TEACHER CONTROLLER-------------------//
 
 app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope, $http, UserServices) {
 
+  var socket = io.connect();
   //non-populated user
   var user = UserServices.getUser();
 
+  //save one vocab game
   $scope.getVocabGame = function(id){
     UserServices.storeGame(id);
   };
 
+  //save one hangman game
   $scope.getHangmanGame = function(id){
     UserServices.storeGame(id);
   };
 
+  //get all info from teacher
   $scope.allInfo = function(){
     $http.get('/studentUsers/students/'+ user._id)
     .then(function(data){
@@ -40,11 +30,7 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
     });
   };
 
-  $scope.getOneStudent = function(id){
-    console.log(id);
-  };
-
-  //delete vocab game
+  //delete one vocab game
   $scope.deleteVocabGame = function(gameID){
     $http.delete('/vocab/game/' + gameID)
     .then(function(){
@@ -52,6 +38,7 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
     });
   };
 
+  //delete one hangman game
   $scope.deleteHangmanGame = function(gameID){
     $http.delete('/hangman/game/' + gameID)
     .then(function(){
@@ -59,12 +46,46 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
     });
   };
 
+  //disable one student
+  $scope.disableStudent = function(id){
+    $http.put('/chat/disable/' + id)
+    .then(function(data){
+      $scope.allInfo();
+      socket.emit('alert-change');
+    });
+  };
+
+  //enable one student
+  $scope.enableStudent = function(id){
+    $http.put('/chat/enable/' + id)
+    .then(function(data){
+      $scope.allInfo();
+      socket.emit('alert-change');
+    });
+  };
+
+  //disable all alerts
+  $scope.disableAll = function(){
+    $http.put('/chat/disableAll/' + user._id)
+    .then(function(data){
+      $scope.allInfo();
+      socket.emit('alert-change');
+    });
+  };
+
+  //enable all alerts
+  $scope.enableAll = function(){
+    $http.put('/chat/enableAll/' + user._id)
+    .then(function(data){
+      $scope.allInfo();
+      socket.emit('alert-change');
+    });
+  };
+
+  //get all info on load
   $scope.allInfo();
 
 }]);
-
-
-
 
 
 app.controller('GameCtrl', ['$scope', '$http', 'UserServices',function($scope, $http, UserServices) {

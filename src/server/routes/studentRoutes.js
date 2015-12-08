@@ -36,7 +36,7 @@ router.get('/students/:teacherID', function(req, res, next){
 //login one student
 router.post('/login', function(req, res, next){
   var query = {email:req.body.email};
-  Student.findOne(query,{'email':1, 'password':1, 'username':1, 'vocabGamesPlayed':1, 'vocabGamesWon':1, 'vocabGamesLost':1, 'teacherID':1, 'conversations':1, 'flashcardSets':1}, function(err, student){
+  Student.findOne(query,{'email':1, 'password':1, 'username':1, 'vocabGamesPlayed':1, 'vocabGamesWon':1, 'vocabGamesLost':1, 'teacherID':1, 'conversations':1, 'flashcardSets':1, 'disabledAlerts':1}, function(err, student){
     if(!student){
       res.json({err:"Sorry, that email isn't registered."});
     }

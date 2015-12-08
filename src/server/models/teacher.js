@@ -24,6 +24,10 @@ var User = new Schema({
   phone: {
     type: String,
   },
+  disabledAlerts: {
+    type: Boolean,
+    default: false
+  },
   students: [{
     type: Schema.Types.ObjectId,
     ref:'students'

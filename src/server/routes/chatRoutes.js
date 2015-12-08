@@ -63,6 +63,64 @@ router.post('/twilio', function(req, res, next){
     });
 });
 
+//disable a student from alerting teacher
+router.put('/disable/:id', function(req, res, next){
+  var update = {disabledAlerts : true};
+  var options = {new:true};
+  Student.findByIdAndUpdate(req.params.id, update, options, function(err, data){
+      if (err){
+        res.json(err);
+      }
+      else{
+        res.json(data);
+      }
+  });
+});
+
+//enable a student from alerting teacher
+router.put('/enable/:id', function(req, res, next){
+  var update = {disabledAlerts : false};
+  var options = {new:true};
+  Student.findByIdAndUpdate(req.params.id, update, options, function(err, data){
+      if (err){
+        res.json(err);
+      }
+      else{
+        res.json(data);
+      }
+  });
+});
+
+//disable all alerts from teacher
+router.put('/disableAll/:id', function(req, res, next){
+  var update = {disabledAlerts : true};
+  var options = {new:true};
+  User.findByIdAndUpdate(req.params.id, update, options, function(err, data){
+      if (err){
+        res.json(err);
+      }
+      else{
+        res.json(data);
+      }
+  });
+});
+
+//enable all alerts from teacher
+router.put('/enableAll/:id', function(req, res, next){
+  var update = {disabledAlerts : false};
+  var options = {new:true};
+  User.findByIdAndUpdate(req.params.id, update, options, function(err, data){
+      if (err){
+        res.json(err);
+      }
+      else{
+        res.json(data);
+      }
+  });
+});
+
+
+
 //------------ CHAT MESSAGE ROUTES ---------------//
 
 //post save message to teacher

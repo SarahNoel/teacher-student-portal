@@ -39,9 +39,6 @@ app.directive('headerInfo', function(){
           $scope.showUser = UserServices.getUser();
         };
 
-        //get user
-        $scope.getUser();
-
     }]
   };
 

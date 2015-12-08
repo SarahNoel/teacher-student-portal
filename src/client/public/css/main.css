@@ -582,7 +582,6 @@ ul{
 .message-input:active,
 .message-input:focus{
   outline: none;
-
 }
 
 .message-submit{
@@ -690,5 +689,78 @@ ul{
 .cancel-btn{
   width: 56px;
   margin-left: 10px;
+}
 
+.feature-row{
+  margin: auto;
+  border: thick black solid;
+  min-height: 280px;
+  margin-bottom: 10px;
+  max-width: 1050px;
+  display: table;
+  color: black;
+}
+
+.feature-title-left{
+  margin-left: 10px
+}
+
+.feature-title-right{
+  float: right;
+  margin-right: 10px
+}
+
+.feature-text-left{
+  width: 100%;
+}
+
+.feature-text-right{
+  margin-right: 10px;
+  float: right;
+  clear: both;
+}
+
+.feature-pic-right{
+  margin-left: 30px;
+  width: 105%;
+  max-width: 300px;
+}
+
+.feature-pic-left{
+  margin-right: 30px;
+  float: right;
+  width: 105%;
+  max-width: 300px;
+}
+
+.flash-pic{
+  margin-top: 17px;
+  max-width: 224px;
+}
+
+.hang-pic{
+  margin-top: 35px
+}
+
+.reg-pic{
+  margin-top: 10px;
+  max-width: 200px;
+}
+
+.games-pic{
+  margin-top: 13px;
+  max-width: 300px;
+}
+
+.chat-pic{
+  margin-top: 10px;
+  max-width: 250px;
+}
+
+.brown{
+  background-color: #DEB887;
+}
+
+.tomato{
+  background-color: #FF6347;
 }

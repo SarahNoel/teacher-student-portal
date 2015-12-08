@@ -11,6 +11,7 @@ app.directive('chatRoom', function(){
         var teacherName;
         var teacher;
         var teacherPhone;
+        var teacherDisableStatus;
         //wrap elements in angular
         var chatUl = angular.element(document.querySelector('#chat-ul'));
         var onlineUsers = angular.element(document.querySelector('#user-ul'));
@@ -23,6 +24,7 @@ app.directive('chatRoom', function(){
             teacherName = data.data.username;
             teacher = '@' + teacherName;
             teacherPhone = data.data.phone;
+            teacherDisableStatus = data.data.disabledAlerts;
             $scope.teacherName = teacher;
             var messages = data.data.chatMessages;
             //show up to 100 messages
@@ -51,6 +53,19 @@ app.directive('chatRoom', function(){
           populateChat();
         }
 
+        //checks for disabled alerts
+        $scope.isDisabled = function(){
+          if(teacherDisableStatus){
+            return true;
+          }
+          if(user.disabledAlerts){
+            return true;
+          }
+          else{
+            return false;
+          }
+        };
+
         //displays filter message to teachers
         $scope.isTeacher = function(){
           return UserServices.isTeacher();
@@ -59,32 +74,44 @@ app.directive('chatRoom', function(){
         //send message to whole room
         $scope.sendMessage = function(){
           var newMessage = $scope.chatInput;
-          if(newMessage.indexOf(teacher) != -1){
-            var sendMe = user.username + ': ' + newMessage;
-            $http.post('/chat/twilio', {phone: teacherPhone, message: sendMe, id:teacherID, name:teacherName})
-            .then(function(data){
-              socket.emit('message-sent', newMessage);
-              $http.post('/chat/message', {user:user.username, message:newMessage, id:teacherID, name:teacherName})
+          //checks if teacher and user are disabled
+          if(!teacherDisableStatus && !user.disabledAlerts){
+            //if clear and @teacher, send twilio
+            if(newMessage.indexOf(teacher) != -1){
+              var sendMe = user.username + ': ' + newMessage;
+              $http.post('/chat/twilio', {phone: teacherPhone, message: sendMe, id:teacherID, name:teacherName})
               .then(function(data){
-                populateChat();
-
+                socket.emit('message-sent', newMessage);
+                $http.post('/chat/message', {user:user.username, message:newMessage, id:teacherID, name:teacherName})
+                .then(function(data){
+                  populateChat();
+                });
               });
-            });
+            }
+            //if no @teacher, send normal message
+            else{
+            socket.emit('message-sent', newMessage);
+            $http.post('/chat/message', {user:user.username, message:newMessage, id:teacherID});
+            }
           }
+          //if disabled, send normal message
           else{
             socket.emit('message-sent', newMessage);
             $http.post('/chat/message', {user:user.username, message:newMessage, id:teacherID});
           }
+          //clear chat box
           $scope.chatInput = '';
         };
 
         //append message after hitting socket
         socket.on('message-received', function(message){
           var newMessage;
+          //filter for student
           if(student){
             newMessage = UserServices.languageFilter(message.message);
             chatUl.append('<li>&nbsp' + message.user + ': ' + newMessage + '</li>');
           }
+          //filter with strikethrough for teacher
           else{
             newMessage = UserServices.languageFilter(message.message, 'teacher');
             chatUl.append('<li>&nbsp' + message.user + ': ' + newMessage + '</li>');
@@ -108,9 +135,11 @@ app.directive('chatRoom', function(){
           }
         });
 
-
-
-
+        //re-gets chat info when alert status changed
+        socket.on('alert-change', function(){
+          console.log('changed!');
+          populateChat();
+        });
 
         //add user to chat room
         userEntered();

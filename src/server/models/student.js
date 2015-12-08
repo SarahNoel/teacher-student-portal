@@ -31,6 +31,10 @@ var Student = new Schema({
   teacherID:{
     type: String
   },
+  disabledAlerts: {
+    type: Boolean,
+    default: false
+  },
   flashcardSets: [{type: Schema.Types.ObjectId,
     ref:'flashcardSets'}],
   conversations: [{type: Schema.Types.ObjectId,
