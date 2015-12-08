@@ -103,7 +103,6 @@ app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
     $scope.editQuestionForm = {};
     $scope.addQuestionForm = {};
 
-
     //get one set by id
     $scope.getOneSet = function(){
       var id = UserServices.getGame();
@@ -189,15 +188,15 @@ app.controller('playFlashcardCtrl', ['$scope', '$http', '$timeout' , 'UserServic
       var id = UserServices.getGame();
       $http.get('/flashcards/set/' + id)
       .then(function(data){
-        current = data.data;
-        $scope.editSet = current;
-        $scope.current = current.flashcards[index];
+        $scope.title = data.data.title;
+        current = data.data.flashcards;
+        $scope.current = current[index];
       });
     };
 
     //move to next card
     $scope.nextCard = function(){
-      if(index+1 >= current.flashcards.length){
+      if(index+1 >= current.length){
         $scope.noMore = true;
       }
       else{
@@ -205,11 +204,11 @@ app.controller('playFlashcardCtrl', ['$scope', '$http', '$timeout' , 'UserServic
         if($scope.cardFront != 'front'){
           $scope.cardFront = 'front';
           $timeout(function () {
-            $scope.current = current.flashcards[index];
+            $scope.current = current[index];
           }, 2000);
         }
         else{
-          $scope.current = current.flashcards[index];
+          $scope.current = current[index];
         }
         $scope.noLess = false;
       }
@@ -225,15 +224,42 @@ app.controller('playFlashcardCtrl', ['$scope', '$http', '$timeout' , 'UserServic
         if($scope.cardFront != 'front'){
           $scope.cardFront = 'front';
           $timeout(function () {
-            $scope.current = current.flashcards[index];
+            $scope.current = current[index];
           }, 2000);
         }
         else{
-          $scope.current = current.flashcards[index];
+          $scope.current = current[index];
         }
         $scope.noMore = false;
       }
     };
+
+    //shuffles cards
+    $scope.shuffleCards = function(){
+      index = 0;
+      $scope.noMore = false;
+      $scope.noLess = false;
+      var shuffled = [];
+      var id = UserServices.getGame();
+      $http.get('/flashcards/set/' + id)
+      .then(function(data){
+        var cards = data.data.flashcards;
+        while(cards.length) {
+          var newIndex = Math.floor(Math.random() * cards.length);
+          shuffled.push(cards[newIndex]);
+          cards.splice(newIndex, 1);
+        }
+        current = shuffled;
+        $scope.current = current[index];
+      });
+    };
+
+
+    //reverses side to study from
+    $scope.reverseSide = function(){
+
+    };
+
 
     //flip card
     $scope.toggleCard = function(){
