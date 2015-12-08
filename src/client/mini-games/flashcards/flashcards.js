@@ -6,6 +6,7 @@ app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
     var setTitle;
     $scope.flashcardForm = {};
     var isStudent = UserServices.isStudent();
+    $scope.doneLoading = false;
 
 // <--------------- ADD SETS/ETC  --------------->
     //store current set id
@@ -33,6 +34,7 @@ app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
           }
         else if(!isStudent){
           $scope.showUser = data.data;
+          $scope.doneLoading = true;
         }
       });
     };
@@ -109,6 +111,7 @@ app.controller('editFlashcardCtrl', ['$scope', '$http', '$location', '$timeout' 
       $http.get('/flashcards/set/' + id)
       .then(function(data){
         $scope.editSet = data.data;
+        $scope.doneLoading = true;
       });
     };
 
