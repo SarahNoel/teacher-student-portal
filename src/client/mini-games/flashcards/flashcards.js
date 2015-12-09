@@ -185,16 +185,18 @@ app.controller('playFlashcardCtrl', ['$scope', '$http', '$timeout' , 'UserServic
     $scope.cardFront = "front";
     var index = 0;
     var current;
-
+    $scope.nowLoading = false;
 
     //get one set by id
     $scope.getOneSet = function(){
+      $scope.nowLoading = true;
       var id = UserServices.getGame();
       $http.get('/flashcards/set/' + id)
       .then(function(data){
         $scope.title = data.data.title;
         current = data.data.flashcards;
         $scope.current = current[index];
+        $scope.nowLoading = false;
       });
     };
 
@@ -240,6 +242,7 @@ app.controller('playFlashcardCtrl', ['$scope', '$http', '$timeout' , 'UserServic
 
     //shuffles cards
     $scope.shuffleCards = function(){
+      $scope.nowLoading = true;
       index = 0;
       $scope.noMore = false;
       $scope.noLess = false;
@@ -255,6 +258,7 @@ app.controller('playFlashcardCtrl', ['$scope', '$http', '$timeout' , 'UserServic
         }
         current = shuffled;
         $scope.current = current[index];
+        $scope.nowLoading = false;
       });
     };
 

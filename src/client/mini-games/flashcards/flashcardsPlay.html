@@ -8,7 +8,7 @@
   <br>
 
 
-  <div class = 'centered'>
+  <div ng-hide='nowLoading' class = 'centered'>
     <button ng-disabled = 'noLess' ng-click='previousCard()' class = 'btn left-arrow'><span class = 'glyphicon glyphicon-arrow-left' ></span></button>
       <flip flip-show="{{cardFront}}">
         <flip-panel ng-click="toggleCard()" class = 'flashcard-front'>
@@ -25,6 +25,7 @@
 
 
 </div>
+<img ng-show = 'nowLoading' class='centered loading-spinner' src="./public/images/loading.gif">
 
 <br><br><br>
 <button class = 'centered btn btn-purple' ng-click='shuffleCards()'>Shuffle Set</button>
