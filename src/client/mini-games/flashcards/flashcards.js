@@ -25,6 +25,7 @@ app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
       $http.get('/flashcards/sets/' + user._id)
       .then(function(data){
         $scope.showUser = data.data;
+        $scope.doneLoading = true;
       });
     }
     $http.get('/flashcards/teachersets/' + teacherID)
@@ -34,8 +35,8 @@ app.controller('flashcardCtrl', ['$scope', '$http', '$location', '$timeout' , 'U
           }
         else if(!isStudent){
           $scope.showUser = data.data;
-          $scope.doneLoading = true;
         }
+        $scope.doneLoading = true;
       });
     };
 
