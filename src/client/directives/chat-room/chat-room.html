@@ -2,7 +2,7 @@
 <div class='clear-left'>
 
   <h1 class = 'slackey'> Let's Chat.</h1>
-
+<div ng-show = 'doneLoading'>
   <div class = 'chat-room'>
     <div class = 'outer-chat-box'>
       <div scroll-glue class = 'inner-chat-box' id= 'message-box'>
@@ -24,5 +24,6 @@
       </ul>
     </div>
   </div>
-
+</div>
+<img ng-hide = 'doneLoading' class='centered loading-spinner' src="./public/images/loading.gif">
 </div>

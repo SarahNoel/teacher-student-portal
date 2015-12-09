@@ -12,6 +12,7 @@ app.directive('chatRoom', function(){
         var teacher;
         var teacherPhone;
         var teacherDisableStatus;
+        $scope.doneLoading = false;
         //wrap elements in angular
         var chatUl = angular.element(document.querySelector('#chat-ul'));
         var onlineUsers = angular.element(document.querySelector('#user-ul'));
@@ -44,6 +45,7 @@ app.directive('chatRoom', function(){
                 }
               }
             }
+            $scope.doneLoading = true;
           });
         }
 
