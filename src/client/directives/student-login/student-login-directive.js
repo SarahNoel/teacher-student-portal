@@ -5,11 +5,13 @@ app.directive('studentLogin', function(){
 
       controller: ['$scope', 'UserServices', '$http', '$location', function($scope, UserServices, $http, $location) {
         $scope.studentForm = {};
+        $scope.nowLoading = false;
         // //login user
         $scope.studentForm.email = 'bobby@gmail.com';
         $scope.studentForm.password = '123';
 
         $scope.studentLogin = function() {
+          $scope.nowLoading = true;
           $scope.errorMessage = '';
           var payload= {
             email: $scope.studentForm.email,
