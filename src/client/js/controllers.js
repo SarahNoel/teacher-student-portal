@@ -8,6 +8,7 @@ app.controller('MainController', ['$scope', '$location', '$window', '$auth', '$h
 
 app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope, $http, UserServices) {
 
+  $scope.processing = false;
   $scope.doneLoading = false;
   var socket = io.connect();
   //non-populated user
@@ -50,37 +51,47 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
 
   //disable one student
   $scope.disableStudent = function(id){
+    $scope.processing = true;
     $http.put('/chat/disable/' + id)
     .then(function(data){
       $scope.allInfo();
       socket.emit('alert-change');
+      $scope.processing = false;
     });
   };
 
   //enable one student
   $scope.enableStudent = function(id){
+    $scope.processing = true;
     $http.put('/chat/enable/' + id)
     .then(function(data){
       $scope.allInfo();
       socket.emit('alert-change');
+      $scope.processing = false;
     });
   };
 
   //disable all alerts
   $scope.disableAll = function(){
+    $scope.processing = true;
     $http.put('/chat/disableAll/' + user._id)
     .then(function(data){
       $scope.allInfo();
       socket.emit('alert-change');
+      $scope.processing = false;
+
     });
   };
 
   //enable all alerts
   $scope.enableAll = function(){
+    $scope.processing = true;
     $http.put('/chat/enableAll/' + user._id)
     .then(function(data){
       $scope.allInfo();
       socket.emit('alert-change');
+      $scope.processing = false;
+
     });
   };
 
