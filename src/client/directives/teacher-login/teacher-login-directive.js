@@ -4,13 +4,14 @@ app.directive('teacherLogin', function(){
       templateUrl: 'directives/teacher-login/teacherLogin.html',
       controller: ['$scope', 'UserServices', '$http', '$location', '$window', '$rootScope', '$auth', function($scope, UserServices, $http, $location, $window, $rootScope, $auth) {
         var socket = io.connect();
-
+        $scope.nowLoading = false;
         $scope.teacherLogin = {};
         //login user
         $scope.teacherLogin.email = 'hi@gmail.com';
         $scope.teacherLogin.password = '123';
 
         $scope.login = function() {
+          $scope.nowLoading = true;
           $scope.errorMessage = '';
           $scope.secondErrorMessage = '';
           var user = {

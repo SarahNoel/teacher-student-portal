@@ -5,9 +5,11 @@ app.directive('teacherRegister', function(){
       controller: ['$scope', 'UserServices', '$http', '$location', '$auth', 'SeedServices', function($scope, UserServices, $http, $location, $auth, SeedServices) {
 
         $scope.teacherForm = {};
+        $scope.nowLoading = false;
 
         //register teacher
         $scope.signup = function() {
+          $scope.nowLoading = true;
           var user = {
             email: $scope.teacherForm.email.trim(),
             password: $scope.teacherForm.password.trim(),

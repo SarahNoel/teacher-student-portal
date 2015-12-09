@@ -4,9 +4,10 @@ app.directive('studentRegister', function(){
       templateUrl: 'directives/student-register/studentRegister.html',
       controller: ['$scope', 'UserServices', '$http', '$location', function($scope, UserServices, $http, $location) {
         $scope.studentRegister = {};
-
+        $scope.nowLoading = false;
         //register student
         $scope.studentSignup = function() {
+          $scope.nowLoading = true;
           var room;
           $scope.errorMessage = '';
           var payload= {
