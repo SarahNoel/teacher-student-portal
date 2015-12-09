@@ -132,7 +132,8 @@ ul{
 }
 
 .vocabGame-box{
-  width: 730px;
+  max-width: 730px;
+  min-width: 640px;
   height: 455px;
   display: table;
   margin: auto;
@@ -245,7 +246,8 @@ ul{
 }
 
 .hangman-game-box{
-  width: 730px;
+  max-width: 730px;
+  min-width: 640px;
   height: 455px;
   display: table;
   margin: auto;
