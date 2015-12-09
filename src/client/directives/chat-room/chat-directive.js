@@ -73,6 +73,8 @@ app.directive('chatRoom', function(){
           return UserServices.isTeacher();
         };
 
+        $scope.chatInput = '@Miss Teacher HELP! what was the math homework?';
+
         //send message to whole room
         $scope.sendMessage = function(){
           var newMessage = $scope.chatInput;
