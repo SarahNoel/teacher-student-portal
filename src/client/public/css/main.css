@@ -772,9 +772,7 @@ ul{
   background-color: #FF6347;
 }
 
-
 .loading-spinner{
-  height: 99px;
+  height: 200px;
   margin-top: 48px;
-}
 }
