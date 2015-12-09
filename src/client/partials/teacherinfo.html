@@ -29,16 +29,16 @@
     <div class = 'right-col'>
       <ul><h2>Your Students</h2>
       <h4 ng-if ='showUser.disabledAlerts ===false'>Green buttons CAN alert you.<br>  Red buttons CANNOT alert you.</h4>
-
         <li class ='game-li' ng-repeat='student in showUser.students'>
-          {{student.username}}
+          <div class = 'student-set'>
+            {{student.username}}
 
-          <button ng-if ='student.disabledAlerts ===true && showUser.disabledAlerts ===false'  class = 'btn btn-danger' ng-click='enableStudent(student._id)'>Enable Alerts?
-           </button>
+            <button ng-if ='student.disabledAlerts ===true && showUser.disabledAlerts ===false'  class = 'btn btn-danger' ng-click='enableStudent(student._id)'>Enable Alerts?
+             </button>
 
-          <button ng-if ='student.disabledAlerts ===false && showUser.disabledAlerts ===false'  class = 'btn btn-success' ng-click='disableStudent(student._id)'>Disable Alerts?
-          </button>
-
+            <button ng-if ='student.disabledAlerts ===false && showUser.disabledAlerts ===false'  class = 'btn btn-success' ng-click='disableStudent(student._id)'>Disable Alerts?
+            </button>
+          </div>
         </li>
       </ul>
       <br> <br>
