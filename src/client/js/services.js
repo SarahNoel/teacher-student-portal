@@ -170,9 +170,14 @@ app.factory('UserServices', ['$http', function($http){
   }
 
 
+  //add words to filter
+  function addWord(word){
+    profanities.push(word);
+  }
+
+
   //filters out vulgar language
   function languageFilter(str, teacher){
-    var profanities = ['shit', 'fuck', 'ass', 'bastard', 'bitch', 'cock', 'cunt', 'kunt', 'dick', 'dyke', 'dike', 'fag', 'faggit', 'faggot', 'fagit', 'fagot', 'damn', 'dammit', 'asshole', 'whore', 'homo', 'nigga', 'nigger', 'pussy', 'queer', 'slut', 'whore', 'tit', 'titty', 'twat', 'fucka', 'retard', 'scrote', 'scrotum', 'titties', 'fucker', 'penis', 'vagina', 'shithead', 'blowjob', 'cum', 'buttplug', 'buttplugs', 'dipshit', 'queef', 'bitches', 'bitchy', 'jizz', 'cocksucker', 'cocksuckers', 'jackass', 'jackasses', 'bumface'];
 
     var symbols = '!@#$%^&*©æ®√∞Ω∫∆¥ƒ∂ß';
     var arr = str.split(' ');
@@ -195,6 +200,7 @@ app.factory('UserServices', ['$http', function($http){
     }
     return arr.join(' ');
   }
+ var profanities = ['shit', 'fuck', 'ass', 'bastard', 'bitch', 'cock', 'cunt', 'kunt', 'dick', 'dyke', 'dike', 'fag', 'faggit', 'faggot', 'fagit', 'fagot', 'damn', 'dammit', 'asshole', 'whore', 'homo', 'nigga', 'nigger', 'pussy', 'queer', 'slut', 'whore', 'tit', 'titty', 'twat', 'fucka', 'retard', 'scrote', 'scrotum', 'titties', 'fucker', 'penis', 'vagina', 'shithead', 'blowjob', 'cum', 'buttplug', 'buttplugs', 'dipshit', 'queef', 'bitches', 'bitchy', 'jizz', 'cocksucker', 'cocksuckers', 'jackass', 'jackasses', 'bumface'];
 
   return{
           isLoggedIn: isLoggedIn,
@@ -215,7 +221,8 @@ app.factory('UserServices', ['$http', function($http){
           saveConvo: saveConvo,
           getConvo: getConvo,
           storeResource: storeResource,
-          getResource: getResource
+          getResource: getResource,
+          addWord: addWord
         };
 }]);
 
