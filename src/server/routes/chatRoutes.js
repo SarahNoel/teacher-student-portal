@@ -234,5 +234,34 @@ router.post('/savetoconvo', function(req, res, next) {
   });
 });
 
+//------------ FILTER ROUTES ---------------//
+
+//add word to profanity filter
+router.put('/addword/:id', function(req, res, next){
+  var update = {$push:{filteredWords : req.body.word}};
+  var options = {new:true};
+  User.findByIdAndUpdate(req.params.id, update, options, function(err, data){
+      if (err){
+        res.status(500).json(err);
+      }
+      else{
+        res.status(200).json(data);
+      }
+  });
+});
+
+//remove word to profanity filter
+router.put('/removeword/:id', function(req, res, next){
+  var update = {$pull:{filteredWords : req.body.word}};
+  var options = {new:true};
+  User.findByIdAndUpdate(req.params.id, update, options, function(err, data){
+      if (err){
+        res.status(500).json(err);
+      }
+      else{
+        res.status(200).json(data);
+      }
+  });
+});
 
 module.exports = router;

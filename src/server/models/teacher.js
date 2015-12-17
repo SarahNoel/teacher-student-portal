@@ -28,6 +28,9 @@ var User = new Schema({
     type: Boolean,
     default: false
   },
+  filteredWords: {
+    type: Array,
+  },
   students: [{
     type: Schema.Types.ObjectId,
     ref:'students'

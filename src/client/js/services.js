@@ -48,6 +48,7 @@ app.factory('UserServices', ['$http', function($http){
   var playGameId;
   var conversation;
   var resourceID;
+  var teacherWords;
 
   //checks for logged in user
   function isLoggedIn(){
@@ -62,6 +63,15 @@ app.factory('UserServices', ['$http', function($http){
   //stores user to access from all controllers
   function storeUser(user){
     username = user;
+    if(user.filteredWords){
+      teacherWords = user.filteredWords;
+    }
+    else{
+      $http.get('/auth/teacher/'+user.teacherID)
+      .then(function(data){
+      teacherWords = data.data.filteredWords;
+      });
+    }
   }
 
   //gets user
@@ -169,21 +179,18 @@ app.factory('UserServices', ['$http', function($http){
     picked = [];
   }
 
-
-  //add words to filter
-  function addWord(word){
-    profanities.push(word);
+  //shows all filtered words
+  function showWords(){
+    return profanities;
   }
-
 
   //filters out vulgar language
   function languageFilter(str, teacher){
-
     var symbols = '!@#$%^&*©æ®√∞Ω∫∆¥ƒ∂ß';
     var arr = str.split(' ');
     for (var i = 0; i < arr.length; i++) {
       var word = arr[i].toLowerCase().replace(/\W/g, '');
-      if(profanities.indexOf(word) != -1){
+      if(profanities.indexOf(word) != -1 || teacherWords.indexOf(word) != -1){
         var replace = '';
         if(teacher){
           replace = word.strike();
@@ -222,7 +229,7 @@ app.factory('UserServices', ['$http', function($http){
           getConvo: getConvo,
           storeResource: storeResource,
           getResource: getResource,
-          addWord: addWord
+          showWords: showWords
         };
 }]);
 

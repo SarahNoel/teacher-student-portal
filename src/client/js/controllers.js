@@ -16,7 +16,34 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
 
   //add word to filter
   $scope.addWord = function(){
-    UserServices.addWord($scope.addWordForm);
+    $http.put('/chat/addword/' + user._id, {word:$scope.addWordForm})
+    .then(function(data){
+      console.log(data);
+      user = data.data;
+      UserServices.storeUser(data.data);
+      $scope.showUser = data.data;
+
+
+    })
+    .catch(function(data){
+      console.log('catch ', data);
+    });
+    $scope.addWordForm = '';
+  };
+
+  //remove word to filter
+  $scope.removeWord = function(word){
+    $http.put('/chat/removeword/' + user._id, {word:word})
+    .then(function(data){
+      console.log(data);
+      user = data.data;
+      UserServices.storeUser(data.data);
+      $scope.showUser = data.data;
+    })
+    .catch(function(data){
+      console.log('catch ', data);
+    });
+    $scope.addWordForm = '';
   };
 
   //save one vocab game

@@ -25,6 +25,26 @@
       </ul>
 
       <ul><a href= '/#/createHangman'><button class = 'btn btn-purple'>Make New Hangman Game</button></a></ul>
+
+      <br><br>
+
+      <ul><h2>Language Filter</h2>
+      <input type='text' class='form-control' ng-model = 'addWordForm' placeholder = 'Add new word to be filtered' autocomplete="off" required>
+      <br>
+      <button ng-click ='addWord()' class = 'btn btn-purple'>Add Word</button>
+      <br><br>
+      <button ng-click='showAllWords = !showAllWords' class = 'btn btn-danger'>See All Filtered Words</button>
+      <p>Warning: Profanity ahead</p>
+
+      <div ng-show = 'showAllWords'>
+        <div ng-repeat = 'word in showUser.filteredWords track by $index'>
+        <p>{{word}} <span ng-click='removeWord(word)' class = 'glyphicon glyphicon-remove'></span></p>
+        </div>
+
+      </div>
+      </ul>
+
+
     </div>
     <div class = 'right-col'>
       <ul><h2>Your Students</h2>
