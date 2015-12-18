@@ -14,6 +14,7 @@ app.controller('TeacherCtrl', ['$scope', '$http', 'UserServices',function($scope
   //non-populated user
   var user = UserServices.getUser();
 
+
   //add word to filter
   $scope.addWord = function(){
     $http.put('/chat/addword/' + user._id, {word:$scope.addWordForm})

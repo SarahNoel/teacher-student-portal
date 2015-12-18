@@ -105,6 +105,7 @@ router.post('/login', function(req, res) {
   });
 });
 
+
 // *** get one teacher by id *** \\
 router.get('/teacher/:id', function(req, res, next) {
   User.findById(req.params.id, function(err, data){
