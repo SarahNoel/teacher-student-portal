@@ -33,10 +33,12 @@
       <br>
       <button ng-click ='addWord()' class = 'btn btn-purple'>Add Word</button>
       <br><br>
-      <button ng-click='showAllWords = !showAllWords' class = 'btn btn-danger'>See All Filtered Words</button>
+      <button ng-click='showAllWords = !showAllWords' class = 'btn btn-danger'>See Your Filtered Words</button>
       <p>Warning: Profanity ahead</p>
 
+
       <div ng-show = 'showAllWords'>
+        <p>Note - You can only edit words <br> that you have added.</p>
         <div ng-repeat = 'word in showUser.filteredWords track by $index'>
         <p>{{word}} <span ng-click='removeWord(word)' class = 'glyphicon glyphicon-remove'></span></p>
         </div>
