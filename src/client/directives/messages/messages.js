@@ -16,7 +16,7 @@ app.directive('messages', function(){
         var chatUl = angular.element(document.querySelector('#chat-ul'));
         var onlineUsers = angular.element(document.querySelector('#user-ul'));
 
-
+        //gets classmates for direct messages
         function getStudents(){
           $http.get('/chat/directmessages/' + teacherID)
           .then(function(data){
@@ -40,6 +40,7 @@ app.directive('messages', function(){
                   started = true;
                 }
               }
+              //sorts classmates based on chatroom history
               if(started){
                 var student = {};
                 student.username = studentArr[j].username;

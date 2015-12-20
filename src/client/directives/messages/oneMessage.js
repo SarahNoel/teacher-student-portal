@@ -11,7 +11,7 @@ app.directive('oneMessage', function(){
         //wrap elements in angular
         var chatUl = angular.element(document.querySelector('#dm-chat-ul'));
 
-
+        //send direct message
         $scope.sendMessage = function(){
             var newMessage = $scope.chatInput;
             $scope.chatInput = '';
@@ -26,15 +26,7 @@ app.directive('oneMessage', function(){
             chatUl.append('<li>&nbsp' + message.user + ': ' + UserServices.languageFilter(message.message) + '</li>');
         });
 
-
-
-
-
-
-
-
-
-
+        //gets conversation history
         function getConvo(){
             convo = UserServices.getConvo();
             for (var i = 0; i < 100; i++) {
