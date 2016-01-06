@@ -791,3 +791,9 @@ ul{
   margin-bottom: 10px;
   margin-top: -40px;
 }
+
+.info-btn{
+  border: none;
+  background-color: white;
+  font-size: 23px;
+}

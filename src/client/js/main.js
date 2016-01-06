@@ -1,4 +1,4 @@
-var app = angular.module('studentApp', ['ngRoute', 'satellizer', 'luegg.directives']);
+var app = angular.module('studentApp', ['ngRoute', 'satellizer', 'luegg.directives', 'ui.bootstrap']);
 
 // restrict pages to logged in users
 app.run(['$rootScope', '$location', '$route', 'UserServices', function ($rootScope, $location, $route, UserServices) {
